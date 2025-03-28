@@ -2,6 +2,7 @@ const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const KintonePlugin = require('@kintone/webpack-plugin-kintone-plugin');
 
@@ -34,7 +35,8 @@ module.exports = {
         loader: 'ts-loader',
       },
       {
-        test: /src\/desktop\/.*\.css$/,
+        test: /\.css$/,
+        include: path.resolve(__dirname, 'src', 'desktop'),
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
@@ -49,7 +51,8 @@ module.exports = {
         ],
       },
       {
-        test: /src\/config\/.*\.css$/,
+        test: /\.css$/,
+        include: path.resolve(__dirname, 'src', 'config'),
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
@@ -67,6 +70,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
     }),

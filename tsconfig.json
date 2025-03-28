@@ -14,7 +14,7 @@
     "moduleResolution": "node", // バンドラーに最適なモジュール解決方法を使用
     "allowImportingTsExtensions": true, // 拡張子付きインポートを許可
     "resolveJsonModule": true, // Jsonの型検証
-    "noEmit": true, // エクスポートを行わない
+    "noEmit": true, // TypeScriptのコンパイル結果を出力しない
     "jsx": "react-jsx", // JSXを有効
 
     /* Linting */
