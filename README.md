@@ -1,0 +1,1 @@
+# Kintone Plugin Template
