@@ -1,0 +1,59 @@
+{
+  "name": "kintone-plugin-template",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Sunohara Masanobu",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "init": "node scripts/dotenv.js && node scripts/genkey.js",
+    "build": "",
+    "upload": "",
+    "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
+    "fix": "npm run lint -- --fix",
+    "format": "prettier \"src/**/*.{js,ts,tsx}\" --write",
+    "husky": "husky init && echo lint-staged> .husky/pre-commit",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "npm run fix",
+      "npm run format"
+    ]
+  },
+  "dependencies": {
+    "@kintone/rest-api-client": "^5.7.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@clack/prompts": "^0.10.0",
+    "@cybozu/eslint-config": "^24.0.0",
+    "@eslint/js": "^9.21.0",
+    "@kintone/dts-gen": "^8.1.1",
+    "@kintone/plugin-uploader": "^9.1.4",
+    "@kintone/webpack-plugin-kintone-plugin": "^8.0.10",
+    "@tailwindcss/postcss": "^4.0.16",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^13.0.0",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "fs-extra": "^11.3.0",
+    "globals": "^15.15.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "mini-css-extract-plugin": "^2.9.2",
+    "postcss": "^8.5.3",
+    "postcss-loader": "^8.1.1",
+    "prettier": "^3.5.3",
+    "tailwindcss": "^4.0.15",
+    "terser-webpack-plugin": "^5.3.14",
+    "tsconfig-paths-webpack-plugin": "^4.2.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.24.1",
+    "webpack-merge": "^6.0.1"
+  }
+}

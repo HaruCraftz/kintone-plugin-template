@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // コンパイル後のJavaScriptのバージョンを設定
+    "useDefineForClassFields": true, // クラスのフィールド宣言において、define（ECMAScript標準）スタイルで出力
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext", // モジュールシステムとして ESModules を使用
+    "allowJs": true, // JavaScriptファイルを有効
+    "skipLibCheck": true, // 外部ライブラリの型チェックをスキップ
+    "allowSyntheticDefaultImports": true, // 名前付きエクスポートをデフォルトエクスポートとして使用できる
+    "forceConsistentCasingInFileNames": true, // 大文字・小文字の違いによるファイル名の不一致をエラーにする
+
+    /* Bundler mode */
+    "esModuleInterop": true, // CommonJS 形式のモジュールを ESModules のように扱えるようにする
+    "moduleResolution": "node", // バンドラーに最適なモジュール解決方法を使用
+    "allowImportingTsExtensions": true, // 拡張子付きインポートを許可
+    "resolveJsonModule": true, // Jsonの型検証
+    "noEmit": true, // エクスポートを行わない
+    "jsx": "react-jsx", // JSXを有効
+
+    /* Linting */
+    "strict": true,
+
+    /* Alias */
+    "baseUrl": ".",
+    "paths": { "@/*": ["./src/*"] }
+  },
+  "files": ["node_modules/@kintone/dts-gen/kintone.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,22 @@
+# build
+dist/
+build/
+.plugin/
+
+# Node modules
+node_modules/
+package-lock.json
+
+# environment
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.envrc
+
+# Compiled files
+logs/
+*.log
+*.lock
+*.tsbuildinfo
