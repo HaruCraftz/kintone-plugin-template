@@ -36,36 +36,24 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: path.resolve(__dirname, 'src', 'desktop'),
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                config: path.resolve(__dirname, 'postcss.config.desktop.js'),
-              },
-            },
-          },
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
-      {
-        test: /\.css$/,
-        include: path.resolve(__dirname, 'src', 'config'),
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                config: path.resolve(__dirname, 'postcss.config.config.js'),
-              },
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.css$/,
+      //   include: path.resolve(__dirname, 'src', 'config'),
+      //   use: [
+      //     MiniCssExtractPlugin.loader,
+      //     'css-loader',
+      //     {
+      //       loader: 'postcss-loader',
+      //       options: {
+      //         postcssOptions: {
+      //           config: path.resolve(__dirname, 'postcss.config.config.js'),
+      //         },
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
   plugins: [
