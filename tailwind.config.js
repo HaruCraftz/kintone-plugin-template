@@ -1,2 +1,2 @@
-/** @type { Omit<import('tailwindcss').Config, 'content'> } */
+/** @type { import('tailwindcss').Config } */
 export default {};

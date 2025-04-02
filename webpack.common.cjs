@@ -6,6 +6,26 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const KintonePlugin = require('@kintone/webpack-plugin-kintone-plugin');
 
+const postcssOpts = {
+  postcssOptions: (env) => {
+    // モジュールのコンテキストパスを取得
+    const modulePath = env._module.context;
+
+    let configFile;
+    if (modulePath.includes(path.join('src', 'config'))) {
+      configFile = './config/tailwind-config.config.js';
+    } else if (modulePath.includes(path.join('src', 'desktop'))) {
+      configFile = './config/tailwind-desktop.config.js';
+    } else {
+      configFile = './config/tailwind.config.js';
+    }
+
+    return {
+      plugins: [['tailwindcss', { config: configFile }]],
+    };
+  },
+};
+
 module.exports = {
   target: ['web', 'es2023'],
   entry: {
@@ -13,7 +33,7 @@ module.exports = {
     config: path.join('src', 'config', 'index.ts'),
   },
   output: {
-    path: path.resolve('plugin'),
+    path: path.resolve(__dirname, 'plugin'),
     filename: 'js/[name].js',
   },
   cache: {
@@ -36,24 +56,28 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        include: path.resolve(__dirname, 'src', 'config'),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: postcssOpts,
+          },
+        ],
       },
-      // {
-      //   test: /\.css$/,
-      //   include: path.resolve(__dirname, 'src', 'config'),
-      //   use: [
-      //     MiniCssExtractPlugin.loader,
-      //     'css-loader',
-      //     {
-      //       loader: 'postcss-loader',
-      //       options: {
-      //         postcssOptions: {
-      //           config: path.resolve(__dirname, 'postcss.config.config.js'),
-      //         },
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        test: /\.css$/,
+        include: path.resolve(__dirname, 'src', 'desktop'),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: postcssOpts,
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -68,10 +92,10 @@ module.exports = {
         { from: 'src/contents/icon.png', to: 'img' },
       ],
     }),
-    new KintonePlugin({
-      manifestJSONPath: './manifest.json',
-      privateKeyPath: './plugin/private.ppk',
-      pluginZipPath: './plugin/plugin.zip',
-    }),
+    // new KintonePlugin({
+    //   manifestJSONPath: './manifest.json',
+    //   privateKeyPath: './plugin/private.ppk',
+    //   pluginZipPath: './plugin/plugin.zip',
+    // }),
   ],
 };
