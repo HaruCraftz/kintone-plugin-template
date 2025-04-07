@@ -1,1 +1,5 @@
-@import 'tailwindcss';
+@layer plugin {
+  .system-renovate-plugin {
+    @import 'tailwindcss';
+  }
+}
