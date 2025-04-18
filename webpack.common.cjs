@@ -2,7 +2,6 @@ const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const KintonePlugin = require('@kintone/webpack-plugin-kintone-plugin');
 
@@ -38,19 +37,23 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
+
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name][ext]',
+        },
+      },
     ],
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new ForkTsCheckerWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
     }),
     new CopyPlugin({
-      patterns: [
-        { from: 'src/contents/config.html', to: 'html' },
-        { from: 'src/contents/icon.png', to: 'img' },
-      ],
+      patterns: [{ from: './src/contents', to: 'contents' }],
     }),
     // new KintonePlugin({
     //   manifestJSONPath: './manifest.json',

@@ -1,9 +1,14 @@
-import React, { Suspense } from 'react';
+import { FC, Suspense } from 'react';
+import { Provider } from 'jotai';
+import { store } from '@/lib/global';
 
-function Config() {
-  <div className='system-renovate-plugin'>
-    <Suspense fallback={<div>読み込み中</div>}></Suspense>
-  </div>;
+function ConfigContent(): FC {
+  return <></>;
 }
 
-export default Config;
+export default function Config(): FC {
+  return <Suspense fallback={<LoaderWithLabel label='Loading...' />}>
+    <Provider store={store}>
+
+  </Suspense>;
+}

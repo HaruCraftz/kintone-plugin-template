@@ -11,7 +11,7 @@
     "en": "",
     "ja": ""
   },
-  "icon": "icon.png",
+  "icon": "dist/image/icon.png",
   "config": {
     "html": "dist/html/config.html",
     "js": ["dist/js/config.js"],
