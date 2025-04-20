@@ -1,11 +1,12 @@
-<section id="settings" class="🐸">
+<section id="settings">
   <div class="before-load">
     <div class="loader">
-      <div>
-        <div></div>
-      </div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
     </div>
-    <p>プラグインを読み込んでいます</p>
+    <p>読み込み中</p>
   </div>
 </section>
 <style>
@@ -22,40 +23,35 @@
     margin: 0;
   }
   .loader {
-    font-size: 60px;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 1px #3b82f633;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
   }
-  .loader > div {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 0.5em;
-    height: 1em;
-    margin-left: -0.5em;
-    margin-top: -0.5em;
-    overflow: hidden;
-    transform-origin: 0.5em 0.5em;
-    mask-image: linear-gradient(top, #000f, #0000);
-    -webkit-mask-image: -webkit-linear-gradient(top, #000f, #0000);
-    animation: rotate 1.2s infinite linear;
+  .wave {
+    width: 5px;
+    height: 40px;
+    background: linear-gradient(45deg, #3498db, #1abc9c);
+    margin: 0 5px;
+    animation: wave 1.2s infinite ease-in-out;
+    border-radius: 2px;
   }
-  .loader > div > div {
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 1px #3b82f6;
+  .wave:nth-child(2) {
+    animation-delay: 0.1s;
   }
-
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
+  .wave:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .wave:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  @keyframes wave {
+    0%,
     100% {
-      transform: rotate(360deg);
+      transform: scaleY(0.5);
+    }
+    50% {
+      transform: scaleY(1);
     }
   }
 </style>
