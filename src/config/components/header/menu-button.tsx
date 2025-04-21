@@ -53,11 +53,7 @@ export const MenuButton: FC<MenuButtonProps> = ({ items, disabled = false }) => 
         }}
       >
         {items.map((item, index) => (
-          <MenuItem
-            key={index}
-            onClick={() => handleMenuItemClick(item.onClick)}
-            disabled={item.disabled}
-          >
+          <MenuItem key={index} onClick={() => handleMenuItemClick(item.onClick)} disabled={item.disabled}>
             {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
             <ListItemText>{item.label}</ListItemText>
           </MenuItem>

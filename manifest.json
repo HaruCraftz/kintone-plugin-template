@@ -4,16 +4,16 @@
   "version": "0.0.1",
   "type": "APP",
   "name": {
-    "en": "",
-    "ja": ""
+    "en": "plugin-template",
+    "ja": "plugin-template"
   },
   "description": {
-    "en": "",
-    "ja": ""
+    "en": "plugin-template",
+    "ja": "plugin-template"
   },
-  "icon": "dist/image/icon.png",
+  "icon": "dist/contents/icon.png",
   "config": {
-    "html": "dist/html/config.html",
+    "html": "dist/contents/config.html",
     "js": ["dist/js/config.js"],
     "css": ["dist/css/config.css"],
     "required_params": []
@@ -23,7 +23,7 @@
     "css": ["dist/css/desktop.css"]
   },
   "mobile": {
-    "js": ["dist/js/mobile.js"],
-    "css": ["dist/css/mobile.css"]
+    "js": [],
+    "css": []
   }
 }

@@ -12,10 +12,7 @@ export type UpdatedTime = FieldLayoutWith<'UPDATED_TIME'>;
 export type SingleLineText = FieldLayoutWith<'SINGLE_LINE_TEXT'>;
 export type Number = FieldLayoutWith<'NUMBER'>;
 export type Calc = FieldLayoutWith<'CALC'>;
-export type MultiLineText = FieldLayoutWith<
-  'MULTI_LINE_TEXT',
-  { width: string; innerHeight: string }
->;
+export type MultiLineText = FieldLayoutWith<'MULTI_LINE_TEXT', { width: string; innerHeight: string }>;
 export type RichText = FieldLayoutWith<'RICH_TEXT', { width: string; innerHeight: string }>;
 export type Link = FieldLayoutWith<'LINK'>;
 export type CheckBox = FieldLayoutWith<'CHECK_BOX'>;
@@ -87,13 +84,5 @@ export type OneOf =
 
 export type InSubtable = Exclude<
   OneOf,
-  | RecordNumber
-  | Creator
-  | CreatedTime
-  | Modifier
-  | UpdatedTime
-  | ReferenceTable
-  | Label
-  | HR
-  | Spacer
+  RecordNumber | Creator | CreatedTime | Modifier | UpdatedTime | ReferenceTable | Label | HR | Spacer
 >;

@@ -1,7 +1,7 @@
 # build
 dist/
 build/
-.plugin/
+plugin/
 
 # Node modules
 node_modules/

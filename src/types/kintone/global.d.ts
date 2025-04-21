@@ -10,10 +10,7 @@ declare global {
       type KintoneEvent<T extends KintoneEventTypes> = kintoneAPI.event.EventTypeMap<any>[T];
 
       // イベントハンドラの登録関数
-      function on<T extends KintoneEventTypes>(
-        type: T | T[],
-        handler: (event: KintoneEvent<T>) => unknown
-      ): void;
+      function on<T extends KintoneEventTypes>(type: T | T[], handler: (event: KintoneEvent<T>) => unknown): void;
 
       // フィールド変更イベント用
       function on(
@@ -22,10 +19,7 @@ declare global {
       ): void;
 
       // イベントハンドラの登録関数
-      function off<T extends KintoneEventTypes>(
-        type: T | T[],
-        handler: (event: KintoneEvent<T>) => unknown
-      ): boolean;
+      function off<T extends KintoneEventTypes>(type: T | T[], handler: (event: KintoneEvent<T>) => unknown): boolean;
 
       // フィールド変更イベント用
       function off(

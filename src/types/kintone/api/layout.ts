@@ -18,7 +18,4 @@ export type Group<T extends Array<Row<Field.OneOf[]>>> = {
   layout: T;
 };
 
-export type OneOf =
-  | Row<Field.OneOf[]>
-  | Subtable<Field.InSubtable[]>
-  | Group<Array<Row<Field.OneOf[]>>>;
+export type OneOf = Row<Field.OneOf[]> | Subtable<Field.InSubtable[]> | Group<Array<Row<Field.OneOf[]>>>;

@@ -15,12 +15,10 @@ export const appFieldsAtom = atom<Promise<kintoneAPI.FieldProperty[]>>(async () 
   return values.sort((a, b) => a.label.localeCompare(b.label, 'ja'));
 });
 
-export const appSingleLineTextFieldsAtom = atom<Promise<kintoneAPI.FieldProperty[]>>(
-  async (get) => {
-    const fields = await get(appFieldsAtom);
-    return fields.filter((field) => field.type === 'SINGLE_LINE_TEXT');
-  }
-);
+export const appSingleLineTextFieldsAtom = atom<Promise<kintoneAPI.FieldProperty[]>>(async (get) => {
+  const fields = await get(appFieldsAtom);
+  return fields.filter((field) => field.type === 'SINGLE_LINE_TEXT');
+});
 
 export const appDateFieldsAtom = atom<Promise<kintoneAPI.FieldProperty[]>>(async (get) => {
   const fields = await get(appFieldsAtom);
