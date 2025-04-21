@@ -16,26 +16,29 @@ export const Component: FC<Props> = ({ loading }) => {
   const onBackButtonClick = useCallback(() => history.back(), []);
 
   const onSaveButtonClick = useAtomCallback(
-    useCallback(async (get, set) => {
-      try {
-        set(loadingAtom, true);
-        const pluginConfig = get(pluginConfigAtom);
-        storePluginConfig(pluginConfig, {
-          callback: () => true,
-          debug: true,
-        });
-        enqueueSnackbar('設定を保存しました', {
-          variant: 'success',
-          action: (
-            <Button color='inherit' size='small' variant='outlined' onClick={onBackButtonClick}>
-              プラグイン一覧に戻る
-            </Button>
-          ),
-        });
-      } finally {
-        set(loadingAtom, false);
-      }
-    }, [])
+    useCallback(
+      async (get, set) => {
+        try {
+          set(loadingAtom, true);
+          const pluginConfig = get(pluginConfigAtom);
+          storePluginConfig(pluginConfig, {
+            callback: () => true,
+            debug: true,
+          });
+          enqueueSnackbar('設定を保存しました', {
+            variant: 'success',
+            action: (
+              <Button color='inherit' size='small' variant='outlined' onClick={onBackButtonClick}>
+                プラグイン一覧に戻る
+              </Button>
+            ),
+          });
+        } finally {
+          set(loadingAtom, false);
+        }
+      },
+      [enqueueSnackbar, onBackButtonClick]
+    )
   );
 
   return (

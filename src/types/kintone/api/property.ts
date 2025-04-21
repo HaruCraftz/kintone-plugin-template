@@ -92,14 +92,7 @@ export type Calc = {
   required: boolean;
   expression: string;
   hideExpression: boolean;
-  format:
-    | 'NUMBER'
-    | 'NUMBER_DIGIT'
-    | 'DATETIME'
-    | 'DATE'
-    | 'TIME'
-    | 'HOUR_MINUTE'
-    | 'DAY_HOUR_MINUTE';
+  format: 'NUMBER' | 'NUMBER_DIGIT' | 'DATETIME' | 'DATE' | 'TIME' | 'HOUR_MINUTE' | 'DAY_HOUR_MINUTE';
   displayScale: string;
   unit: string;
   unitPosition: 'BEFORE' | 'AFTER';
@@ -248,9 +241,7 @@ export type OrganizationSelect = {
   label: string;
   noLabel: boolean;
   required: boolean;
-  defaultValue: Array<
-    { code: string; type: 'ORGANIZATION' } | { code: 'PRIMARY_ORGANIZATION()'; type: 'FUNCTION' }
-  >;
+  defaultValue: Array<{ code: string; type: 'ORGANIZATION' } | { code: 'PRIMARY_ORGANIZATION()'; type: 'FUNCTION' }>;
   entities: Array<{ code: string; type: 'ORGANIZATION' }>;
 };
 
@@ -314,8 +305,7 @@ export type Lookup = {
 
 export type InSubtable =
   | SingleLineText
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  | Number // Although ESLint recognizes it as primitive type, this type is defined above in this file.
+  | Number
   | Calc
   | MultiLineText
   | RichText

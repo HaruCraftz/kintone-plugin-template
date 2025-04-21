@@ -1,9 +1,9 @@
 import { Provider } from 'jotai';
 import { SnackbarProvider } from 'notistack';
 import { FC, Suspense } from 'react';
-import { PluginErrorBoundary } from '@/components/error-boundary';
-import { ThemeProvider } from '@/components/theme-provider';
 import { LoaderWithLabel } from '@/components/loader/withLabel';
+import { ThemeProvider } from '@/components/theme-provider';
+import { PluginErrorBoundary } from '@/components/error-boundary';
 import { store } from '@/lib/store';
 import { PluginLayout, HeaderArea, ContentArea } from './model/layout';
 import { PluginHeader } from './model/header';

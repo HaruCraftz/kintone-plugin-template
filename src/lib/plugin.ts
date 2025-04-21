@@ -42,11 +42,11 @@ export const storePluginConfig = (
 ): void => {
   const { callback, debug = false } = options || {};
   const convertedConfig = Object.entries(config)
-    .filter(([_, v]) => v !== undefined)
+    .filter(([, v]) => v !== undefined)
     .reduce((acc, [key, value]) => ({ ...acc, [key]: JSON.stringify(value) }), {});
 
   kintone.plugin.app.setConfig(convertedConfig, callback);
-  debug && console.log('[plugin] config stored');
+  if (debug) console.log('[plugin] config stored');
 };
 
 /**
@@ -58,7 +58,7 @@ export const validatePluginCondition = (condition: unknown): boolean => {
   try {
     const result = latestPluginConditionSchema.parse(condition);
     return result !== undefined;
-  } catch (e) {
+  } catch {
     return false;
   }
 };
@@ -75,10 +75,10 @@ export const migrateConfig = (anyConfig: AnyPluginConfig): PluginConfig => {
     case undefined:
       return migrateConfig({ ...anyConfig, version: latestPluginConfigVersion });
     case 1:
-    // `default` -> `config.js`と`desktop.js`のバージョンが一致していない場合に通る可能性があるため必要
-    // もし新しいバージョンを追加したらここに追加する
-    // return migrateConfig({ version: 2, ...anyConfig });
     default:
+      // `default` -> `config.js`と`desktop.js`のバージョンが一致していない場合に通る可能性があるため必要
+      // もし新しいバージョンを追加したらここに追加する
+      // return migrateConfig({ version: 2, ...anyConfig });
       return anyConfig;
   }
 };
@@ -92,7 +92,7 @@ export const migrateConfig = (anyConfig: AnyPluginConfig): PluginConfig => {
 export const restorePluginConfig = (options?: { debug: boolean }): PluginConfig => {
   const { debug = false } = options || {};
   const config: Record<string, string> = kintone.plugin.app.getConfig(PLUGIN_ID);
-  debug && console.log('[plugin] config restored');
+  if (debug) console.log('[plugin] config restored');
   if (!Object.keys(config).length) {
     return createConfig();
   }

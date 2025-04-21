@@ -15,7 +15,7 @@ type ContainerProps = {
 type Props = Omit<ContainerProps, 'fieldPropertiesAtom' | 'onChange' | 'fieldCode'> & {
   value: kintoneAPI.FieldProperty | null;
   fieldProperties: kintoneAPI.FieldProperty[];
-  onFieldChange: (_: any, field: kintoneAPI.FieldProperty | null) => void;
+  onFieldChange: (_: unknown, field: kintoneAPI.FieldProperty | null) => void;
 };
 
 const JotaiFieldAutocomplete: FC<Props> = ({
@@ -58,40 +58,27 @@ const JotaiFieldAutocomplete: FC<Props> = ({
       );
     }}
     renderInput={(params) => (
-      <TextField
-        {...params}
-        label={label}
-        placeholder={placeholder}
-        variant='outlined'
-        color='primary'
-      />
+      <TextField {...params} label={label} placeholder={placeholder} variant='outlined' color='primary' />
     )}
     disabled={autocompleteProps.disabled}
   />
 );
 
-const JotaiFieldSelectComponent: FC<ContainerProps> = ({
-  fieldPropertiesAtom,
-  onChange,
-  fieldCode,
-  ...rest
-}) => {
+const JotaiFieldSelectComponent: FC<ContainerProps> = ({ fieldPropertiesAtom, onChange, fieldCode, ...rest }) => {
+  // フィールド情報を取得
   const fieldProperties = useAtomValue(fieldPropertiesAtom);
+  // 指定されたフィールドの情報を取得
   const value = fieldProperties.find((field) => field.code === fieldCode) ?? null;
 
   const onFieldChange = useCallback(
-    (_: any, field: kintoneAPI.FieldProperty | null) => onChange(field?.code ?? ''),
+    (_: unknown, field: kintoneAPI.FieldProperty | null) => onChange(field?.code ?? ''),
     [onChange]
   );
 
   return <JotaiFieldAutocomplete {...{ onFieldChange, value, fieldProperties, ...rest }} />;
 };
 
-const JotaiFieldSelectPlaceHolder: FC<ContainerProps> = ({
-  label,
-  placeholder,
-  ...autocompleteProps
-}) => (
+const JotaiFieldSelectPlaceHolder: FC<ContainerProps> = ({ label, placeholder, ...autocompleteProps }) => (
   <TextField label={label} placeholder={placeholder} value='' sx={autocompleteProps.sx} disabled />
 );
 

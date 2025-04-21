@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 
-type Props = {};
-
-export const PluginFormTitle = styled.h2<Props>`
+export const PluginFormTitle = styled.h2`
   font-weight: 600;
   font-size: 18px;
   margin: 0;

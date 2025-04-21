@@ -26,22 +26,13 @@ import { useArray } from '@/config/hooks/use-array';
 import { getConditionPropertyAtom } from '@/config/states/plugin';
 import { appSingleLineTextFieldsAtom, appDateFieldsAtom } from '@/config/states/kintone';
 
-// 明示的に型を指定
-const fieldsAtom = getConditionPropertyAtom('fieldMapping');
-
 // ドラッグ可能な行コンポーネント
 interface SortableFieldRowProps {
   id: number;
   field: { srcFieldCode: string; destFieldCode: string };
-  updateItem: (params: {
-    index: number;
-    newItem: { srcFieldCode: string; destFieldCode: string };
-  }) => void;
+  updateItem: (params: { index: number; newItem: { srcFieldCode: string; destFieldCode: string } }) => void;
   deleteItem: (index: number) => void;
-  addItem: (params: {
-    newItem: { srcFieldCode: string; destFieldCode: string };
-    index?: number;
-  }) => void;
+  addItem: (params: { newItem: { srcFieldCode: string; destFieldCode: string }; index?: number }) => void;
   isDeleteEnabled: boolean;
 }
 
@@ -67,7 +58,7 @@ const SortableFieldRow: FC<SortableFieldRowProps> = ({
     <div
       ref={setNodeRef}
       style={style}
-      className='flex items-center gap-2 p-2 bg-white rounded border border-transparent hover:border-gray-200'
+      className='flex items-center gap-2 p-2 bg-white border border-transparent rounded hover:border-gray-200'
     >
       <div {...attributes} {...listeners} className='cursor-grab'>
         <DragIndicatorIcon fontSize='small' />
@@ -125,6 +116,7 @@ const SortableFieldRow: FC<SortableFieldRowProps> = ({
 };
 
 const Component: FC = () => {
+  const fieldsAtom = getConditionPropertyAtom('fieldMapping');
   const fields = useAtomValue(fieldsAtom);
   const { addItem, deleteItem, updateItem } = useArray(fieldsAtom);
 

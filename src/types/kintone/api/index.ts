@@ -118,10 +118,8 @@ export declare namespace kintoneAPI {
   type EntityType = 'USER' | 'GROUP' | 'ORGANIZATION';
   type IDToRequest = string | number;
 
-  namespace view {
-    type Response = ViewForResponse;
-    type Parameter = ViewForParameter;
-  }
+  export type ViewResponse = ViewForResponse;
+  export type ViewParameter = ViewForParameter;
 
   type Field = OneOfField;
 
@@ -155,8 +153,7 @@ export declare namespace kintoneAPI {
     type SingleLineText = SingleLineTextField;
     type Status = StatusField;
     type StatusAssignee = StatusAssigneeField;
-    type Subtable<T extends Record<string, InSubtable> = Record<string, InSubtable>> =
-      SubtableField<T>;
+    type Subtable<T extends Record<string, InSubtable> = Record<string, InSubtable>> = SubtableField<T>;
     type Time = TimeField;
     type UpdatedTime = UpdatedTimeField;
     type UserSelect = UserSelectField;
@@ -195,8 +192,7 @@ export declare namespace kintoneAPI {
     type SingleLineText = SingleLineTextProperty;
     type Status = StatusProperty;
     type StatusAssignee = StatusAssigneeProperty;
-    type Subtable<T extends Record<string, InSubtable> = Record<string, InSubtable>> =
-      SubtableProperty<T>;
+    type Subtable<T extends Record<string, InSubtable> = Record<string, InSubtable>> = SubtableProperty<T>;
     type Time = TimeProperty;
     type UpdatedTime = UpdatedTimeProperty;
     type UserSelect = UserSelectProperty;
@@ -253,17 +249,7 @@ export declare namespace kintoneAPI {
           type: 'PRESET';
           key: string;
         };
-    theme:
-      | 'WHITE'
-      | 'CLIPBOARD'
-      | 'BINDER'
-      | 'PENCIL'
-      | 'CLIPS'
-      | 'RED'
-      | 'BLUE'
-      | 'GREEN'
-      | 'YELLOW'
-      | 'BLACK';
+    theme: 'WHITE' | 'CLIPBOARD' | 'BINDER' | 'PENCIL' | 'CLIPS' | 'RED' | 'BLUE' | 'GREEN' | 'YELLOW' | 'BLACK';
     revision: string;
   };
 
@@ -436,16 +422,7 @@ export declare namespace kintoneAPI {
       )[];
     };
 
-    type ChartType =
-      | 'BAR'
-      | 'COLUMN'
-      | 'PIE'
-      | 'LINE'
-      | 'PIVOT_TABLE'
-      | 'TABLE'
-      | 'AREA'
-      | 'SPLINE'
-      | 'SPLINE_AREA';
+    type ChartType = 'BAR' | 'COLUMN' | 'PIE' | 'LINE' | 'PIVOT_TABLE' | 'TABLE' | 'AREA' | 'SPLINE' | 'SPLINE_AREA';
     type ChartMode = 'NORMAL' | 'STACKED' | 'PERCENTAGE';
     type ChartPeriod = 'YEAR' | 'QUARTER' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR' | 'MINUTE';
     type ChartAggregationType = 'COUNT' | 'SUM' | 'AVERAGE' | 'MAX' | 'MIN';
@@ -480,14 +457,7 @@ export declare namespace kintoneAPI {
               time: string;
               pattern: 'JAN_APR_JUL_OCT' | 'FEB_MAY_AUG_NOV' | 'MAR_JUN_SEP_DEC';
               dayOfMonth: string;
-              dayOfWeek:
-                | 'SUNDAY'
-                | 'MONDAY'
-                | 'TUESDAY'
-                | 'WEDNESDAY'
-                | 'THURSDAY'
-                | 'FRIDAY'
-                | 'SATURDAY';
+              dayOfWeek: 'SUNDAY' | 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY';
               minute: '0' | '10' | '20' | '30' | '40' | '50';
             };
           } | null;

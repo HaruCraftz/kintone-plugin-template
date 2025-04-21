@@ -23,7 +23,7 @@ const JotaiSwitchComponent: FC<Props> = ({ atom, label, ...switchProps }) => {
   );
 };
 
-const JotaiSwitchPlaceHolder: FC<Props> = ({ label, atom, ...switchProps }) => (
+const JotaiSwitchPlaceHolder: FC<Props> = ({ label, ...switchProps }) => (
   <FormControlLabel control={<Switch {...switchProps} disabled defaultChecked />} label={label} />
 );
 

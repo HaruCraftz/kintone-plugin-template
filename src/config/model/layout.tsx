@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 const buildGridTemplate = (areas: string[][]) => {
   const areaNames = areas.map(([name]) => name).join(' ');
-  const columnSizes = areas.map(([_, size]) => size).join(' ');
+  const columnSizes = areas.map(([, size]) => size).join(' ');
 
   return css`
     grid-template:
