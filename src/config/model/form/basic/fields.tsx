@@ -66,6 +66,7 @@ const SortableFieldRow: FC<SortableFieldRowProps> = ({
       <JotaiFieldSelect
         label='生年月日フィールド'
         fieldPropertiesAtom={appDateFieldsAtom}
+        fieldCode={field.srcFieldCode}
         onChange={(srcFieldCode) =>
           updateItem({
             index: id,
@@ -75,11 +76,11 @@ const SortableFieldRow: FC<SortableFieldRowProps> = ({
             },
           })
         }
-        fieldCode={field.srcFieldCode}
       />
       <JotaiFieldSelect
         label='年齢フィールド'
         fieldPropertiesAtom={appSingleLineTextFieldsAtom}
+        fieldCode={field.destFieldCode}
         onChange={(destFieldCode) =>
           updateItem({
             index: id,
@@ -89,7 +90,6 @@ const SortableFieldRow: FC<SortableFieldRowProps> = ({
             },
           })
         }
-        fieldCode={field.destFieldCode}
       />
       <Tooltip title='フィールドを追加する'>
         <IconButton

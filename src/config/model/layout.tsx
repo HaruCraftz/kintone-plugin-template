@@ -26,20 +26,3 @@ export const PluginLayout = styled.div`
     `;
   }}
 `;
-
-// ヘッダーエリア用のスタイル
-export const HeaderArea = styled.div`
-  grid-area: header;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
-`;
-
-// コンテンツエリア用のスタイル
-export const ContentArea = styled.div`
-  grid-area: content;
-  overflow-y: auto;
-  padding: 16px;
-`;

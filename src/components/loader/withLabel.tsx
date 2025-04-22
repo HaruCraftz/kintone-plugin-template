@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import { Loader } from './animation';
+import { Loader } from './loader';
 
 type WithClassName<T> = T & { className?: string };
 type Props = Readonly<{ label: string; size?: number }>;

@@ -2,13 +2,13 @@ import { type FC } from 'react';
 import { useAtomValue } from 'jotai';
 import styled from '@emotion/styled';
 import { loadingAtom } from '@/config/states/plugin';
-import { TabNavigation, type TabItem } from '../components/header/tab-navigation';
-import SaveButton from '../components/header/save-button';
-import BackButton from '../components/header/back-button';
-import Menu from '../components/header/menu';
-import { PluginForm } from './form/basic';
+import { TabNavigation } from '@/config/components/header/tab-navigation';
+import SaveButton from '@/config/components/header/save-button';
+import BackButton from '@/config/components/header/back-button';
+import Menu from '@/config/components/header/menu';
 
-const HeaderContent = styled.div`
+// ヘッダーエリア用のスタイル
+export const HeaderArea = styled.div`
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
@@ -20,27 +20,15 @@ const HeaderContent = styled.div`
   z-index: 30;
 `;
 
-type Props = {
+type ComponentProps = {
   loading: boolean;
 };
 
-const Component: FC<Props> = ({ loading }) => {
-  // タブの設定
-  const tabs: TabItem[] = [
-    {
-      label: '基本設定',
-      content: <PluginForm />,
-    },
-    {
-      label: '詳細設定',
-      content: <div>詳細設定の内容（未実装）</div>,
-    },
-  ];
-
+const HeaderComponent: FC<ComponentProps> = ({ loading }) => {
   return (
     <>
       <div className='flex items-center gap-4'>
-        <TabNavigation tabs={tabs} />
+        <TabNavigation />
       </div>
       <div className='flex items-center gap-4'>
         <SaveButton loading={loading} />
@@ -55,8 +43,8 @@ export const PluginHeader: FC = () => {
   const loading = useAtomValue(loadingAtom);
 
   return (
-    <HeaderContent className='py-2'>
-      <Component loading={loading} />
-    </HeaderContent>
+    <HeaderArea className='py-2'>
+      <HeaderComponent loading={loading} />
+    </HeaderArea>
   );
 };

@@ -4,12 +4,12 @@
   "version": "0.0.1",
   "type": "APP",
   "name": {
-    "en": "plugin-template",
-    "ja": "plugin-template"
+    "en": "Age Calculation Plugin",
+    "ja": "年齢計算プラグイン"
   },
   "description": {
-    "en": "plugin-template",
-    "ja": "plugin-template"
+    "en": "This plugin calculates age from date of birth.",
+    "ja": "生年月日から年齢を計算するプラグインです。"
   },
   "icon": "dist/contents/icon.png",
   "config": {

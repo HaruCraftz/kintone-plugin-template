@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -9,13 +9,14 @@ const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
+/** Environment */
 const environment = process.env.NODE_ENV || 'production';
-
 console.log('🔧 Environment:', environment);
 
+/** Entry point */
 const srcDir = path.join(__dirname, 'src');
-const desktopEntryPath = path.join(srcDir, 'desktop', 'index.ts');
-const mobileEntryPath = path.join(srcDir, 'mobile', 'index.ts');
+const desktopEntryPath = path.join(srcDir, 'app', 'desktop', 'index.ts');
+const mobileEntryPath = path.join(srcDir, 'app', 'mobile', 'index.ts');
 
 // エントリーポイントを動的に構築するオブジェクト
 const dynamicEntries = {
@@ -23,23 +24,24 @@ const dynamicEntries = {
 };
 
 // desktopエントリファイルが存在するかチェックし、存在すれば追加
-if (fs.existsSync(desktopEntryPath)) {
+if (fs.pathExistsSync(desktopEntryPath)) {
   dynamicEntries.desktop = desktopEntryPath;
-  console.log('✅ Including desktop entry point.');
+  console.log('✅ Desktop entry point > included.');
 } else {
-  console.log('❎ Desktop entry point not found > skipping.');
+  console.log('❎ Desktop entry point > skipping.');
 }
 
 // mobileエントリファイルが存在するかチェックし、存在すれば追加
-if (fs.existsSync(mobileEntryPath)) {
+if (fs.pathExistsSync(mobileEntryPath)) {
   dynamicEntries.mobile = mobileEntryPath;
-  console.log('✅ Including mobile entry point.');
+  console.log('✅ Mobile entry point > included.');
 } else {
-  console.log('❎ Mobile entry point not found > skipping.');
+  console.log('❎ Mobile entry point > skipping.');
 }
 
 console.log('\n📦 Webpack building...\n');
 
+/** Webpack config */
 const config = {
   mode: environment,
   target: ['web', 'es2023'],

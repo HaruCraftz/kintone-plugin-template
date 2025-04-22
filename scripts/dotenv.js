@@ -45,9 +45,6 @@ async function main() {
       KINTONE_BASE_URL: baseUrl,
       KINTONE_USERNAME: username,
       KINTONE_PASSWORD: password,
-      KINTONE_BASIC_AUTH_USERNAME: '',
-      KINTONE_BASIC_AUTH_PASSWORD: '',
-      HTTP_PROXY: 'https://localhost:8000',
     };
 
     const envContent = Object.entries(envVariables)

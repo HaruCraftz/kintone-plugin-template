@@ -3,13 +3,16 @@ import { atom, type SetStateAction, type PrimitiveAtom } from 'jotai';
 import { restorePluginConfig } from '@/lib/plugin';
 import type { PluginCondition, PluginConfig } from '@/schema/plugin-config';
 
-// ローディングのstate
+// ローディングの状態を保持するatom
 export const loadingAtom = atom(false);
+
+// アクティブなタブのインデックスを保持するatom
+export const activeTabIndexAtom = atom(0);
 
 // プラグイン設定のstate
 export const pluginConfigAtom = atom<PluginConfig>(restorePluginConfig());
 
-// conditionプロパティのstate
+// conditionプロパティを持つatom
 export const pluginConditionAtom = atom(
   (get) => get(pluginConfigAtom).condition,
   (_, set, newValue: SetStateAction<PluginCondition>) => {
@@ -21,7 +24,7 @@ export const pluginConditionAtom = atom(
   }
 );
 
-// conditionプロパティ内のプロパティのstate
+// conditionプロパティ内のプロパティを取得するatom
 export const getConditionPropertyAtom = <T extends keyof PluginCondition>(
   property: T
 ): PrimitiveAtom<PluginCondition[T]> =>

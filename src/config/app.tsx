@@ -1,25 +1,28 @@
 import { Provider } from 'jotai';
 import { SnackbarProvider } from 'notistack';
 import { FC, Suspense } from 'react';
+import { Box } from '@mui/material';
 import { LoaderWithLabel } from '@/components/loader/withLabel';
 import { ThemeProvider } from '@/components/theme-provider';
 import { PluginErrorBoundary } from '@/components/error-boundary';
 import { store } from '@/lib/store';
-import { PluginLayout, HeaderArea, ContentArea } from './model/layout';
+import { PluginLayout } from './model/layout';
 import { PluginHeader } from './model/header';
+import { PluginForm } from './model/form';
 
 const App: FC = () => (
   <Suspense fallback={<LoaderWithLabel label='画面の描画を待機しています' />}>
+    {/* Provider が jotai atom の状態をコンポーネントツリー全体で共有可能にする */}
     <Provider store={store}>
       <ThemeProvider>
         <PluginErrorBoundary>
           <SnackbarProvider maxSnack={1}>
             <Suspense fallback={<LoaderWithLabel label='設定情報を取得しています' />}>
               <PluginLayout>
-                <HeaderArea>
+                <Box sx={{ width: '100%' }}>
                   <PluginHeader />
-                </HeaderArea>
-                <ContentArea />
+                  <PluginForm />
+                </Box>
               </PluginLayout>
             </Suspense>
           </SnackbarProvider>
