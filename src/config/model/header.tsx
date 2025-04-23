@@ -2,10 +2,10 @@ import { type FC } from 'react';
 import { useAtomValue } from 'jotai';
 import styled from '@emotion/styled';
 import { loadingAtom } from '@/config/states/plugin';
-import { TabNavigation } from '@/config/components/header/tab-navigation';
-import SaveButton from '@/config/components/header/save-button';
-import BackButton from '@/config/components/header/back-button';
-import Menu from '@/config/components/header/menu';
+import { TabNavigation } from '@/config/components/header/TabNavigation';
+import SaveButton from '@/config/components/header/SaveButton';
+import BackButton from '@/config/components/header/BackButton';
+import Menu from '@/config/components/header/Menu';
 
 // ヘッダーエリア用のスタイル
 export const HeaderArea = styled.div`

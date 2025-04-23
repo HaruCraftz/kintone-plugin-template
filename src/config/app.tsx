@@ -3,11 +3,11 @@ import { SnackbarProvider } from 'notistack';
 import { FC, Suspense } from 'react';
 import { Box } from '@mui/material';
 import { LoaderWithLabel } from '@/components/loader/withLabel';
-import { ThemeProvider } from '@/components/theme-provider';
-import { PluginErrorBoundary } from '@/components/error-boundary';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { PluginErrorBoundary } from '@/components/ErrorBoundary';
 import { store } from '@/lib/store';
 import { PluginLayout } from './model/layout';
-import { PluginHeader } from './model/header';
+import { PluginHeader } from './model/Header';
 import { PluginForm } from './model/form';
 
 const App: FC = () => (

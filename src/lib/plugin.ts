@@ -4,7 +4,7 @@ import {
   type AnyPluginConfig,
   type PluginConfig,
   type PluginCondition,
-} from '@/schema/plugin-config';
+} from '@/schema/pluginConfig';
 import { PLUGIN_ID } from './global';
 
 /**

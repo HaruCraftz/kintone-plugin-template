@@ -2,10 +2,10 @@
 import { type FC } from 'react';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
-import { PluginErrorBoundary } from '@/components/error-boundary';
+import { PluginErrorBoundary } from '@/components/ErrorBoundary';
 import { activeTabIndexAtom } from '@/config/states/plugin';
 import { pluginTabs } from '@/config/model/tabs';
-import { TabPanel } from '@/config/components/common/tab-pannel';
+import { TabPanel } from '@/config/components/common/TabPannel';
 
 // フォームエリア用のスタイル
 export const FormArea = styled.div`

@@ -22,7 +22,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { JotaiFieldSelect } from '@/components/jotai';
-import { useArray } from '@/config/hooks/use-array';
+import { useArray } from '@/config/hooks/useArray';
 import { getConditionPropertyAtom } from '@/config/states/plugin';
 import { appSingleLineTextFieldsAtom, appDateFieldsAtom } from '@/config/states/kintone';
 

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { RestartAlt } from '@mui/icons-material';
-import { MenuButton, type MenuItemConfig } from './menu-button';
+import { MenuButton, type MenuItemConfig } from './MenuButton';
 
 interface MenuProps {
   loading?: boolean;

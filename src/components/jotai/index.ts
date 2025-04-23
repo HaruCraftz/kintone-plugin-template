@@ -1,3 +1,3 @@
-export * from './select';
-export * from './switch';
-export * from './text';
+export * from './JotaiFieldSelect';
+export * from './JotaiSwitch';
+export * from './JotaiText';

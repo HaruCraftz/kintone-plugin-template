@@ -1,3 +1,3 @@
-export { PluginFormDescription } from './description';
-export { PluginFormTitle } from './title';
-export { PluginFormSection } from './section';
+export { PluginFormDescription } from './FormDescription';
+export { PluginFormTitle } from './FormTitle';
+export { PluginFormSection } from './FormSection';

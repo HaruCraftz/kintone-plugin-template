@@ -1,7 +1,7 @@
 import { produce } from 'immer';
 import { atom, type SetStateAction, type PrimitiveAtom } from 'jotai';
 import { restorePluginConfig } from '@/lib/plugin';
-import type { PluginCondition, PluginConfig } from '@/schema/plugin-config';
+import type { PluginCondition, PluginConfig } from '@/schema/pluginConfig';
 
 // ローディングの状態を保持するatom
 export const loadingAtom = atom(false);
