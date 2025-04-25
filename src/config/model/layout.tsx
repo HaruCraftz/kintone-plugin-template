@@ -8,7 +8,7 @@ const buildGridTemplate = (areas: string[][]) => {
   return css`
     grid-template:
       'header' auto
-      '${areaNames}' minmax(600px, 1fr) /
+      '${areaNames}' minmax(400px, 1fr) /
       ${columnSizes};
   `;
 };

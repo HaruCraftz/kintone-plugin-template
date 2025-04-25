@@ -1,7 +1,6 @@
-// src/config/tabs.ts
 import { type ReactNode } from 'react';
-import { PluginFormBasic } from './form/basic'; // パスは適切に修正してください
-import { PluginFormDetail } from './form/detail'; // パスは適切に修正してください
+import { PluginFormBasic } from '../form/basic';
+import { PluginFormDetail } from '../form/detail';
 
 export interface TabItem {
   label: string;

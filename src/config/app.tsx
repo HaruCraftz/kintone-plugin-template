@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { PluginErrorBoundary } from '@/components/ErrorBoundary';
 import { store } from '@/lib/store';
 import { PluginLayout } from './model/layout';
-import { PluginHeader } from './model/Header';
+import { PluginHeader } from './model/header';
 import { PluginForm } from './model/form';
 
 const App: FC = () => (

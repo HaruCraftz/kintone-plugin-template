@@ -1,17 +1,12 @@
-import { type FC } from 'react';
+import { type FC, memo, Suspense } from 'react';
 import { Skeleton } from '@mui/material';
+import { FieldMappingEditor } from './FieldMappingEditor';
 
-/**
- * FieldMappingEditorのローディング中に表示されるプレースホルダー。
- */
 export const FieldMappingEditorPlaceholder: FC = () => (
   <div className='flex flex-col gap-1'>
-    {' '}
     {/* FieldMappingEditorとgapを合わせる */}
-    {/* プレースホルダー行をいくつか表示 */}
     {[...Array(3)].map((_, i) => (
       <div key={i} className='flex items-center gap-2 p-2'>
-        {' '}
         {/* SortableFieldRowとスタイルを合わせる */}
         {/* ドラッグハンドル */}
         <Skeleton variant='circular' width={24} height={24} sx={{ flexShrink: 0 }} />
@@ -27,3 +22,11 @@ export const FieldMappingEditorPlaceholder: FC = () => (
     ))}
   </div>
 );
+
+const FieldMappingEditorContainer: FC = () => (
+  <Suspense fallback={<FieldMappingEditorPlaceholder />}>
+    <FieldMappingEditor />
+  </Suspense>
+);
+
+export default memo(FieldMappingEditorContainer);

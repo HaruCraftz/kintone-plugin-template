@@ -5,7 +5,7 @@ import { loadingAtom } from '@/config/states/plugin';
 import { TabNavigation } from '@/config/components/header/TabNavigation';
 import SaveButton from '@/config/components/header/SaveButton';
 import BackButton from '@/config/components/header/BackButton';
-import Menu from '@/config/components/header/Menu';
+import MenuButton from '@/config/components/header/MenuButton';
 
 // ヘッダーエリア用のスタイル
 export const HeaderArea = styled.div`
@@ -33,7 +33,7 @@ const HeaderComponent: FC<ComponentProps> = ({ loading }) => {
       <div className='flex items-center gap-4'>
         <SaveButton loading={loading} />
         <BackButton loading={loading} />
-        <Menu loading={loading} />
+        <MenuButton loading={loading} />
       </div>
     </>
   );

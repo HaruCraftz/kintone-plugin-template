@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { PluginErrorBoundary } from '@/components/ErrorBoundary';
 import { activeTabIndexAtom } from '@/config/states/plugin';
-import { pluginTabs } from '@/config/model/tabs';
+import { pluginTabs } from '@/config/model/header/tabs';
 import { TabPanel } from '@/config/components/common/TabPannel';
 
 // フォームエリア用のスタイル

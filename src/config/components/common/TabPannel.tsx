@@ -1,4 +1,3 @@
-// src/config/components/common/tab-pannel.tsx
 import { type FC, type ReactNode } from 'react';
 import Box from '@mui/material/Box';
 
@@ -6,7 +5,7 @@ import Box from '@mui/material/Box';
 export interface TabPanelProps {
   children?: ReactNode;
   index: number; // このパネルが担当するタブのインデックス
-  value: number; // 現在アクティブなタブのインデックス (Jotaiから来る値)
+  value: number; // 現在アクティブなタブのインデックス
   [key: string]: any;
 }
 
@@ -20,7 +19,7 @@ export const TabPanel: FC<TabPanelProps> = ({ children, value, index, ...other }
       aria-labelledby={`plugin-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ pt: 2 }}>{children}</Box>}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 };

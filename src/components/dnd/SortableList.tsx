@@ -9,6 +9,7 @@ import {
   type DragEndEvent,
 } from '@dnd-kit/core';
 import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { SortableItemWrapper, type SortableItemRenderProps } from './SortableItemWrapper';
 
 interface SortableListProps<T> {
@@ -47,7 +48,7 @@ export function SortableList<T>({ items, onSortEnd, renderItem, getItemId, class
         return id;
       }
     }
-    // id がない、またはgetItemIdが提供されない場合のフォールバック（警告付き）
+    // id がない、またはgetItemIdが提供されない場合警告
     console.warn(
       'SortableList: Item does not have a valid "id" property and getItemId prop was not provided. Using index as key, which might cause issues if items are not stable.',
       item
@@ -77,7 +78,12 @@ export function SortableList<T>({ items, onSortEnd, renderItem, getItemId, class
   const itemIds = items.map(resolveItemId);
 
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+      modifiers={[restrictToVerticalAxis]}
+    >
       <SortableContext items={itemIds} strategy={verticalListSortingStrategy}>
         <div className={className}>
           {items.map((item, index) => {
