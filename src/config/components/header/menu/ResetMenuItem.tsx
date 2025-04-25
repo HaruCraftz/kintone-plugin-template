@@ -17,8 +17,8 @@ import { createConfig } from '@/lib/plugin';
 import { pluginConfigAtom } from '@/config/states/plugin';
 
 export const ResetMenuItem: FC<{ closeMenu: () => void }> = ({ closeMenu }) => {
-  const [openDialog, setOpenDialog] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const resetConfig = useAtomCallback(
     useCallback(
@@ -34,7 +34,6 @@ export const ResetMenuItem: FC<{ closeMenu: () => void }> = ({ closeMenu }) => {
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
-    closeMenu();
   };
 
   const handleCloseDialog = () => {
@@ -50,7 +49,6 @@ export const ResetMenuItem: FC<{ closeMenu: () => void }> = ({ closeMenu }) => {
         </ListItemIcon>
         <ListItemText>設定をリセット</ListItemText>
       </Box>
-      {/* ダイアログ部分 */}
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>設定のリセット</DialogTitle>
         <DialogContent>
