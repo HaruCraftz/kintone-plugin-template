@@ -19,7 +19,7 @@ interface MenuButtonProps {
 
 const DEFAULT_BUTTON_ID = 'generic-menu-button';
 
-export const MenuButton: FC<MenuButtonProps> = ({ items, disabled = false, buttonId = DEFAULT_BUTTON_ID }) => {
+export const MenuButton: FC<MenuButtonProps> = ({ items, buttonId = DEFAULT_BUTTON_ID }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -43,7 +43,6 @@ export const MenuButton: FC<MenuButtonProps> = ({ items, disabled = false, butto
       <IconButton
         id={buttonId}
         onClick={handleClick}
-        disabled={disabled}
         size='small'
         aria-controls={open ? 'menu-list' : undefined}
         aria-haspopup='true'
@@ -65,7 +64,7 @@ export const MenuButton: FC<MenuButtonProps> = ({ items, disabled = false, butto
         {items.map((item, index) => {
           if (item.renderContent) {
             return (
-              <MenuItem key={item.id ?? index} disabled={item.disabled} sx={{ padding: 0 }}>
+              <MenuItem key={item.id ?? index} disabled={item.disabled}>
                 {item.renderContent(handleClose)}
               </MenuItem>
             );

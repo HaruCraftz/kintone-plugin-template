@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import { activeTabIndexAtom } from '@/config/states/plugin';
 import { pluginTabs } from '@/config/model/header/tabs';
 
-const HeaderTabNavigation: FC = () => {
+export const TabNavigation: FC = () => {
   const [value, setValue] = useAtom(activeTabIndexAtom);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -34,8 +34,4 @@ const HeaderTabNavigation: FC = () => {
       </Tabs>
     </>
   );
-};
-
-export const TabNavigation: FC = () => {
-  return <HeaderTabNavigation />;
 };

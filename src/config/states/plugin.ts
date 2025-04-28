@@ -9,9 +9,6 @@ export const loadingAtom = atom(false);
 // アクティブなタブのインデックスを保持するatom
 export const activeTabIndexAtom = atom(0);
 
-// プラグインの設定リセット確認ダイアログの状態を保持するatom
-export const openResetConfirmationAtom = atom(false);
-
 // プラグイン設定のstate
 export const pluginConfigAtom = atom<PluginConfig>(restorePluginConfig());
 

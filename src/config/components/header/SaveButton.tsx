@@ -22,7 +22,7 @@ export const Component: FC<Props> = ({ loading }) => {
           set(loadingAtom, true);
           const pluginConfig = get(pluginConfigAtom);
           storePluginConfig(pluginConfig, {
-            callback: () => true,
+            callback: () => {},
             debug: true,
           });
           enqueueSnackbar('設定を保存しました', {

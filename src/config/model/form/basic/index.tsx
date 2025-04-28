@@ -4,7 +4,7 @@ import FieldsForm from './FieldMappingEditorContainer';
 
 export const PluginFormBasic: FC = () => {
   return (
-    <div className='p-4'>
+    <>
       <PluginFormSection>
         <PluginFormTitle>フィールドの設定</PluginFormTitle>
         <PluginFormDescription last>
@@ -12,6 +12,6 @@ export const PluginFormBasic: FC = () => {
         </PluginFormDescription>
         <FieldsForm />
       </PluginFormSection>
-    </div>
+    </>
   );
 };

@@ -5,12 +5,12 @@ import { PluginFormSection, PluginFormTitle, PluginFormDescription } from '@/con
 
 export const PluginFormDetail: FC = () => {
   return (
-    <div className='p-4'>
+    <>
       <PluginFormSection>
         <PluginFormTitle>レコード保存時の設定</PluginFormTitle>
         <PluginFormDescription last>レコード保存時に年齢計算を実行するか選択してください。</PluginFormDescription>
         <JotaiSwitch atom={getConditionPropertyAtom('isUpdateOnSave')} label='レコードを保存する度に年齢を更新する' />
       </PluginFormSection>
-    </div>
+    </>
   );
 };

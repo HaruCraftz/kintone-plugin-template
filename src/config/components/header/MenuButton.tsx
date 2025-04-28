@@ -17,7 +17,7 @@ const Component: FC<MenuProps> = ({ loading = false }) => {
     // 将来的に追加するメニューアイテムはここに追加
   ];
 
-  return <MenuButton items={menuItems} disabled={loading} />;
+  return <MenuButton items={menuItems} />;
 };
 
 export default Component;

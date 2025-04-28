@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import invariant from 'tiny-invariant';
-import App from './App';
+import App from './Container';
 
 const root = document.getElementById('settings');
 invariant(

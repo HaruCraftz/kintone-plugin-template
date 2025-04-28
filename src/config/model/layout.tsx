@@ -1,28 +1,24 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-
-const buildGridTemplate = (areas: string[][]) => {
-  const areaNames = areas.map(([name]) => name).join(' ');
-  const columnSizes = areas.map(([, size]) => size).join(' ');
-
-  return css`
-    grid-template:
-      'header' auto
-      '${areaNames}' minmax(400px, 1fr) /
-      ${columnSizes};
-  `;
-};
 
 export const PluginLayout = styled.div`
   display: grid;
   gap: 16px;
+  min-height: 100vh;
 
-  ${() => {
-    const baseAreas: string[][] = [['content', '1fr']];
-    const baseGrid = buildGridTemplate(baseAreas);
+  /*
+   * グリッドエリアの定義
+   */
+  grid-template-areas:
+    'header'
+    'content';
 
-    return css`
-      ${baseGrid}
-    `;
-  }}
+  /*
+   * 行の高さを定義
+   */
+  grid-template-rows: auto 1fr;
+
+  /*
+   * 列の幅を定義
+   */
+  grid-template-columns: 1fr;
 `;
