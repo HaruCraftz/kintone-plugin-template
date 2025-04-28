@@ -37,9 +37,7 @@ export const PluginForm: FC = () => {
     <FormArea>
       {pluginTabs.map((tab, index) => (
         <TabPanel key={index} value={activeTabIndex} index={index}>
-          <PluginErrorBoundary>
-            <div className='p-4'>{tab.content}</div>
-          </PluginErrorBoundary>
+          <PluginErrorBoundary>{tab.content}</PluginErrorBoundary>
         </TabPanel>
       ))}
     </FormArea>

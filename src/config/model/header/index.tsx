@@ -14,7 +14,7 @@ export const HeaderArea = styled.div`
   justify-content: space-between;
   position: sticky;
   top: 48px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   background-color: rgb(255, 255, 255);
   border-bottom: 1px solid rgb(238, 238, 238);
   z-index: 30;

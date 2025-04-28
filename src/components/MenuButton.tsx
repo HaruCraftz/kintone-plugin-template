@@ -4,7 +4,7 @@ import { MoreVert } from '@mui/icons-material';
 
 export interface MenuItemConfig {
   id?: string | number;
-  label: string;
+  label?: string;
   icon?: ReactNode;
   onClick?: () => void;
   renderContent?: (closeMenu: () => void) => ReactNode;

@@ -20,6 +20,15 @@ export const ResetMenuItem: FC<{ closeMenu: () => void }> = ({ closeMenu }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    closeMenu();
+  };
+
   const resetConfig = useAtomCallback(
     useCallback(
       (_, set) => {
@@ -31,15 +40,6 @@ export const ResetMenuItem: FC<{ closeMenu: () => void }> = ({ closeMenu }) => {
       [enqueueSnackbar, closeMenu]
     )
   );
-
-  const handleOpenDialog = () => {
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-    closeMenu();
-  };
 
   return (
     <>

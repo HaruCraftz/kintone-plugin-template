@@ -10,7 +10,6 @@ const Component: FC<MenuProps> = ({ loading = false }) => {
   const menuItems: MenuItemConfig[] = [
     {
       id: 'reset-settings',
-      label: '設定をリセット',
       renderContent: (closeMenu) => <ResetMenuItem closeMenu={closeMenu} />,
       disabled: loading,
     },
