@@ -3,7 +3,7 @@ import { type FC } from 'react';
 import { Tabs, Tab } from '@mui/material';
 import { useAtom } from 'jotai';
 import { activeTabIndexAtom } from '@/config/states/plugin';
-import { pluginTabs } from '@/config/model/header/tabs';
+import { tabs } from '@/config/model/tabs';
 
 export const TabNavigation: FC = () => {
   const [value, setValue] = useAtom(activeTabIndexAtom);
@@ -15,6 +15,7 @@ export const TabNavigation: FC = () => {
   const a11yProps = (index: number) => {
     return {
       id: `plugin-tab-${index}`,
+      // IDで指定した要素を操作するものとスクリーンリーダーに伝えるための属性
       'aria-controls': `plugin-tabpanel-${index}`,
     };
   };
@@ -28,7 +29,7 @@ export const TabNavigation: FC = () => {
         scrollButtons='auto'
         aria-label='プラグイン設定タブ'
       >
-        {pluginTabs.map((tab, index) => (
+        {tabs.map((tab, index) => (
           <Tab key={index} label={tab.label} {...a11yProps(index)} />
         ))}
       </Tabs>

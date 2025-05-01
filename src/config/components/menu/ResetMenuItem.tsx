@@ -43,7 +43,7 @@ export const ResetMenuItem: FC<{ closeMenu: () => void }> = ({ closeMenu }) => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', px: 2, py: 1 }} onClick={handleOpenDialog}>
+      <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }} onClick={handleOpenDialog}>
         <ListItemIcon>
           <RestartAlt fontSize='small' />
         </ListItemIcon>

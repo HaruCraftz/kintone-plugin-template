@@ -1,14 +1,13 @@
 import { type ReactNode } from 'react';
-import { PluginFormBasic } from '../form/basic';
-import { PluginFormDetail } from '../form/detail';
+import { PluginFormBasic } from './form/basic';
+import { PluginFormDetail } from './form/detail';
 
 export interface TabItem {
   label: string;
   content: ReactNode;
 }
 
-// タブの定義配列
-export const pluginTabs: TabItem[] = [
+export const tabs: TabItem[] = [
   {
     label: '基本設定',
     content: <PluginFormBasic />,

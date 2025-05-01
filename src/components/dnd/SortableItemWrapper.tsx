@@ -6,9 +6,9 @@ import { CSS } from '@dnd-kit/utilities';
 type UseSortableReturn = ReturnType<typeof useSortable>;
 
 export interface SortableItemRenderProps {
-  attributes: UseSortableReturn['attributes'];
-  listeners: UseSortableReturn['listeners'];
-  setNodeRef: UseSortableReturn['setNodeRef'];
+  attributes: UseSortableReturn['attributes']; // アクセシビリティ用の属性
+  listeners: UseSortableReturn['listeners']; // ドラッグ操作に必要なリスナー
+  setNodeRef: UseSortableReturn['setNodeRef']; // DOMノードをdndに関連付けるためのref
   style: React.CSSProperties;
   isDragging: boolean;
 }

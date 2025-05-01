@@ -13,7 +13,6 @@ export const Component: FC<Props> = ({ loading }) => {
     <Button
       variant='contained'
       color='inherit'
-      size='small'
       disabled={loading}
       onClick={onBackButtonClick}
       startIcon={loading ? <CircularProgress color='inherit' size={20} /> : <ExitToAppIcon />}

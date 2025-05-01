@@ -6,6 +6,7 @@ import { TabNavigation } from '@/config/components/header/TabNavigation';
 import SaveButton from '@/config/components/header/SaveButton';
 import BackButton from '@/config/components/header/BackButton';
 import MenuButton from '@/config/components/header/MenuButton';
+import { menuItems } from '../menuItems';
 
 // ヘッダーエリア用のスタイル
 export const HeaderArea = styled.div`
@@ -20,31 +21,19 @@ export const HeaderArea = styled.div`
   z-index: 30;
 `;
 
-type ComponentProps = {
-  loading: boolean;
-};
+export const PluginHeader: FC = () => {
+  const loading = useAtomValue(loadingAtom);
 
-const HeaderComponent: FC<ComponentProps> = ({ loading }) => {
   return (
-    <>
+    <HeaderArea className='py-2'>
       <div className='flex items-center gap-4'>
         <TabNavigation />
       </div>
       <div className='flex items-center gap-4'>
         <SaveButton loading={loading} />
         <BackButton loading={loading} />
-        <MenuButton loading={loading} />
+        <MenuButton loading={loading} items={menuItems} />
       </div>
-    </>
-  );
-};
-
-export const PluginHeader: FC = () => {
-  const loading = useAtomValue(loadingAtom);
-
-  return (
-    <HeaderArea className='py-2'>
-      <HeaderComponent loading={loading} />
     </HeaderArea>
   );
 };

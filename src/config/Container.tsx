@@ -13,12 +13,17 @@ const Container: FC = () => (
   <Suspense fallback={<LoaderWithLabel label='画面の描画を待機しています' />}>
     {/* Provider が jotai atom の状態をコンポーネントツリー全体で共有可能にする */}
     <Provider store={store}>
+      {/* ThemeProvider で全体のテーマを統一する */}
       <ThemeProvider>
         <PluginErrorBoundary>
+          {/* maxSnack は同時に表示できる Snackbar の最大数 */}
           <SnackbarProvider maxSnack={1}>
             <Suspense fallback={<LoaderWithLabel label='設定情報を取得しています' />}>
+              {/* プラグイン設定画面の全体のスタイルを適用する */}
               <PluginLayout>
+                {/* プラグイン設定画面のヘッダーコンポーネント */}
                 <PluginHeader />
+                {/* プラグイン設定画面のフォームコンポーネント */}
                 <PluginForm />
               </PluginLayout>
             </Suspense>
