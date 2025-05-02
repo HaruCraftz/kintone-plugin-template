@@ -10,6 +10,7 @@ import { PluginHeader } from './model/header';
 import { PluginForm } from './model/form';
 
 /**
+ * TODO: ディレクトリ整理
  * TODO: 正常に設定保存できるように修正
  * TODO: 入力項目を連動プルダウンに変更
  * TODO: 入力項目に必須チェックを実装
