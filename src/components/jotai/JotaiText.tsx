@@ -17,8 +17,8 @@ const JotaiTextComponent = forwardRef<HTMLDivElement, Props>(({ atom, ...props }
 
 export const JotaiText: FC<Props> = (props) => {
   const completed: Props = {
-    ...props,
     sx: { width: 400, ...props.sx },
+    ...props,
   };
 
   return (
