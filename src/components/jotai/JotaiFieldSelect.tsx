@@ -84,9 +84,9 @@ const JotaiFieldSelectPlaceHolder: FC<ContainerProps> = ({ label, placeholder, .
 
 export const JotaiFieldSelect: FC<ContainerProps> = (props) => {
   const completed: ContainerProps = {
-    ...props,
     placeholder: 'フィールドを選択してください',
     sx: { width: 350, ...props.sx },
+    ...props,
   };
 
   return (
