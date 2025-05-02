@@ -9,6 +9,12 @@ import { PluginLayout } from './model/layout';
 import { PluginHeader } from './model/header';
 import { PluginForm } from './model/form';
 
+/**
+ * TODO: 正常に設定保存できるように修正
+ * TODO: 入力項目を連動プルダウンに変更
+ * TODO: 入力項目に必須チェックを実装
+ * TODO: menu を追加
+ */
 const Container: FC = () => (
   <Suspense fallback={<LoaderWithLabel label='画面の描画を待機しています' />}>
     {/* Provider が jotai atom の状態をコンポーネントツリー全体で共有可能にする */}
