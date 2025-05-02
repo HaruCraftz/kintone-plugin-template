@@ -61,8 +61,8 @@ export const SortableFieldRow: FC<SortableFieldRowProps> = ({
         fieldCode={field.srcFieldCode}
         onChange={(srcFieldCode) =>
           updateItem({
-            index: index, // 親から受け取ったindexを渡す
             newItem: { ...field, srcFieldCode }, // 更新するフィールドのみ指定
+　　　　　　　　index,
           })
         }
       />
@@ -73,8 +73,8 @@ export const SortableFieldRow: FC<SortableFieldRowProps> = ({
         fieldCode={field.destFieldCode}
         onChange={(destFieldCode) =>
           updateItem({
-            index: index, // 親から受け取ったindexを渡す
             newItem: { ...field, destFieldCode }, // 更新するフィールドのみ指定
+            index,
           })
         }
       />
