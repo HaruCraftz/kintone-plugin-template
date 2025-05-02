@@ -5,9 +5,8 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import { IconButton, Tooltip } from '@mui/material';
 import { JotaiFieldSelect } from '@/components/jotai';
 import { type SortableItemRenderProps } from '@/components/dnd/SortableItemWrapper';
-import { appSingleLineTextFieldsAtom, appDateFieldsAtom } from '@/config/states/kintone';
+import { type AppFieldsAtom } from '@/config/states/kintone';
 
-// フィールドマッピング項目の型
 export interface FieldMappingItem {
   srcFieldCode: string;
   destFieldCode: string;
@@ -17,9 +16,13 @@ interface SortableFieldRowProps extends SortableItemRenderProps {
   index: number;
   field: FieldMappingItem;
   updateItem: (params: { index: number; newItem: FieldMappingItem }) => void;
-  deleteItem: (index: number) => void;
   addItem: (params: { newItem: FieldMappingItem; index?: number }) => void;
+  deleteItem: (index: number) => void;
   isDeleteEnabled: boolean;
+  srcLabel: string;
+  srcFieldPropertiesAtom: AppFieldsAtom;
+  destLabel: string;
+  destFieldPropertiesAtom: AppFieldsAtom;
 }
 
 /**
@@ -33,9 +36,13 @@ export const SortableFieldRow: FC<SortableFieldRowProps> = ({
   index,
   field,
   updateItem,
-  deleteItem,
   addItem,
+  deleteItem,
   isDeleteEnabled,
+  srcLabel,
+  srcFieldPropertiesAtom,
+  destLabel,
+  destFieldPropertiesAtom,
 }) => {
   return (
     <div
@@ -49,8 +56,8 @@ export const SortableFieldRow: FC<SortableFieldRowProps> = ({
       </div>
       {/* 生年月日フィールド選択 */}
       <JotaiFieldSelect
-        label='生年月日フィールド'
-        fieldPropertiesAtom={appDateFieldsAtom}
+        label={srcLabel}
+        fieldPropertiesAtom={srcFieldPropertiesAtom}
         fieldCode={field.srcFieldCode}
         onChange={(srcFieldCode) =>
           updateItem({
@@ -61,8 +68,8 @@ export const SortableFieldRow: FC<SortableFieldRowProps> = ({
       />
       {/* 年齢フィールド選択 */}
       <JotaiFieldSelect
-        label='年齢フィールド'
-        fieldPropertiesAtom={appSingleLineTextFieldsAtom}
+        label={destLabel}
+        fieldPropertiesAtom={destFieldPropertiesAtom}
         fieldCode={field.destFieldCode}
         onChange={(destFieldCode) =>
           updateItem({
@@ -88,14 +95,16 @@ export const SortableFieldRow: FC<SortableFieldRowProps> = ({
       </Tooltip>
       {/* 削除ボタン */}
       <Tooltip title='この行を削除'>
-        <IconButton
-          size='small'
-          onClick={() => deleteItem(index)} // indexを渡す
-          disabled={!isDeleteEnabled}
-          className={`text-gray-600 ${isDeleteEnabled ? 'hover:text-red-600' : 'opacity-50 cursor-not-allowed'}`}
-        >
-          <DeleteIcon fontSize='small' />
-        </IconButton>
+        <span>
+          <IconButton
+            size='small'
+            onClick={() => deleteItem(index)}
+            disabled={!isDeleteEnabled}
+            className={`text-gray-600 ${isDeleteEnabled ? 'hover:text-red-600' : 'opacity-50 cursor-not-allowed'}`}
+          >
+            <DeleteIcon fontSize='small' />
+          </IconButton>
+        </span>
       </Tooltip>
     </div>
   );

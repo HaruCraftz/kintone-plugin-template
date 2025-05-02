@@ -83,24 +83,5 @@ export const useArray = <T>(atom: PrimitiveAtom<T[]>) => {
     )
   );
 
-  /**
-   * 配列の要素を並べ替えます
-   *
-   * @example
-   * const arrayAtom = atom(["A", "B", "C"]);
-   * const { reorderItems } = useArray(arrayAtom);
-   *
-   * // 配列全体を新しい順序で更新
-   * reorderItems(["C", "A", "B"]); // ["C", "A", "B"]
-   */
-  const reorderItems = useAtomCallback(
-    useCallback(
-      (_, set, newItems: T[]) => {
-        set(atom, newItems);
-      },
-      [atom]
-    )
-  );
-
-  return { addItem, deleteItem, updateItem, reorderItems };
+  return { addItem, deleteItem, updateItem };
 };

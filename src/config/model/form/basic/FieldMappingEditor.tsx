@@ -6,20 +6,20 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { SortableList } from '@/components/dnd/SortableList';
 import { type SortableItemRenderProps } from '@/components/dnd/SortableItemWrapper';
 import { useArray } from '@/config/hooks/useArray';
-import { getConditionPropertyAtom } from '@/config/states/plugin';
+import { fieldMappingAtom } from '@/config/states/plugin';
+import { appSingleLineTextFieldsAtom, appDateFieldsAtom } from '@/config/states/kintone';
 import { SortableFieldRow, type FieldMappingItem } from './SortableFieldRow';
 
 /**
  * フィールドマッピング設定全体を管理・表示するコンポーネント。
  */
 export const FieldMappingEditor: FC = () => {
-  const fieldsAtom = getConditionPropertyAtom('fieldMapping');
-  const [fields, setFields] = useAtom(fieldsAtom);
-  const { addItem, deleteItem, updateItem } = useArray(fieldsAtom);
+  const [fields, setFields] = useAtom(fieldMappingAtom);
+  const { addItem, deleteItem, updateItem } = useArray(fieldMappingAtom);
 
   // SortableListの並び替え完了時の処理
   const handleSortEnd = (oldIndex: number, newIndex: number) => {
-    // Jotai Atomの状態を直接更新
+    // 並びのindexを更新
     setFields((currentFields) => arrayMove(currentFields, oldIndex, newIndex));
   };
 
@@ -29,13 +29,19 @@ export const FieldMappingEditor: FC = () => {
       index={index}
       field={item}
       updateItem={updateItem}
-      deleteItem={deleteItem}
       addItem={addItem}
+      deleteItem={deleteItem}
       isDeleteEnabled={fields.length > 1} // 項目が1つだけの時は削除不可
+      /** src field */
+      srcLabel='生年月日フィールド'
+      srcFieldPropertiesAtom={appDateFieldsAtom}
+      /** dest field */
+      destLabel='年齢フィールド'
+      destFieldPropertiesAtom={appSingleLineTextFieldsAtom}
     />
   );
 
-  // SortableListに渡すgetItemId関数 (インデックスを使用)
+  // SortableListに渡すgetItemId関数
   const getItemId = (_item: FieldMappingItem, index: number) => index;
 
   return (

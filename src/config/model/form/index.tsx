@@ -13,17 +13,17 @@ export interface TabPanelProps {
   children?: ReactNode;
   index: number; // このパネルが担当するタブのインデックス
   value: number; // 現在アクティブなタブのインデックス
-  key: number;
+  [key: string]: any;
 }
 
-export const TabPanel: FC<TabPanelProps> = ({ children, key, index, value }) => {
+export const TabPanel: FC<TabPanelProps> = ({ children, index, value, ...other }) => {
   return (
     <div
       role='tabpanel'
       hidden={value !== index}
       id={`plugin-tabpanel-${index}`}
       aria-labelledby={`plugin-tab-${index}`}
-      key={key}
+      {...other}
     >
       {value === index && children}
     </div>

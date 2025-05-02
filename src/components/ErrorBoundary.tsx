@@ -1,8 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { type FC, useState } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { Alert, AlertTitle, Button } from '@mui/material';
 import styled from '@emotion/styled';
 import { LoaderWithLabel } from './loader/withLabel';
+import { isProd } from '@/lib/global';
 
 const ErrorFallbackComponent: FC<FallbackProps & { className?: string }> = ({
   className,
@@ -16,7 +17,7 @@ const ErrorFallbackComponent: FC<FallbackProps & { className?: string }> = ({
     setTimeout(() => {
       resetErrorBoundary();
       setLoading(false);
-    }, 2000);
+    }, 3000);
   };
 
   if (loading) {
@@ -27,6 +28,13 @@ const ErrorFallbackComponent: FC<FallbackProps & { className?: string }> = ({
     <div className={className}>
       <Alert severity='error'>
         <AlertTitle title={error.message}>エラーが発生しました</AlertTitle>
+        {!isProd && (
+          <p>
+            エラー内容：
+            <br />
+            {error.message}
+          </p>
+        )}
         <h2>解決方法</h2>
         <ol>
           <li>
@@ -35,6 +43,8 @@ const ErrorFallbackComponent: FC<FallbackProps & { className?: string }> = ({
             <Button variant='contained' color='error' onClick={onRetry}>
               リトライ
             </Button>
+          </li>
+          <li>
             <h3>プラグイン設定を更新</h3>
             <p>アプリ設定からこのプラグインの設定を開き、再度保存した上でアプリを更新してください。</p>
           </li>
@@ -60,7 +70,6 @@ const StyledErrorFallback = styled(ErrorFallbackComponent)`
   p {
     margin: 0 0 8px;
   }
-
   ol {
     display: grid;
     gap: 32px;

@@ -13,6 +13,7 @@ const Component: FC<WithClassName<Props>> = ({ className, label, size }) => (
 );
 
 const StyledComponent = styled(Component)`
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;

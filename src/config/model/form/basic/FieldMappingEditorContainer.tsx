@@ -1,7 +1,10 @@
-import { type FC, memo, Suspense } from 'react';
+import { type FC, Suspense } from 'react';
 import { Skeleton } from '@mui/material';
 import { FieldMappingEditor } from './FieldMappingEditor';
 
+/**
+ *  Suspenseによる遅延ロードとプレースホルダー表示
+ */
 export const FieldMappingEditorPlaceholder: FC = () => (
   <div className='flex flex-col gap-1'>
     {/* FieldMappingEditorとgapを合わせる */}
@@ -29,4 +32,4 @@ const FieldMappingEditorContainer: FC = () => (
   </Suspense>
 );
 
-export default memo(FieldMappingEditorContainer);
+export default FieldMappingEditorContainer;

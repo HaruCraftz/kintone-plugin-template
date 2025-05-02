@@ -1,6 +1,7 @@
 import { produce } from 'immer';
 import { atom, type SetStateAction, type PrimitiveAtom } from 'jotai';
 import { restorePluginConfig } from '@/lib/plugin';
+import { isProd } from '@/lib/global';
 import type { PluginCondition, PluginConfig } from '@/schema/pluginConfig';
 
 // ローディングの状態を保持するatom
@@ -10,7 +11,7 @@ export const loadingAtom = atom(false);
 export const activeTabIndexAtom = atom(0);
 
 // プラグイン設定のstate
-export const pluginConfigAtom = atom<PluginConfig>(restorePluginConfig());
+export const pluginConfigAtom = atom<PluginConfig>(restorePluginConfig({ debug: !isProd }));
 
 // conditionプロパティを持つatom
 export const pluginConditionAtom = atom(
@@ -38,3 +39,9 @@ export const getConditionPropertyAtom = <T extends keyof PluginCondition>(
       );
     }
   );
+
+/**
+ * condition内の各設定プロパティのatomを定義
+ */
+export const fieldMappingAtom = getConditionPropertyAtom('fieldMapping');
+export const isUpdateOnSaveAtom = getConditionPropertyAtom('isUpdateOnSave');
