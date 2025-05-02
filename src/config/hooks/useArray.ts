@@ -71,7 +71,7 @@ export const useArray = <T>(atom: PrimitiveAtom<T[]>) => {
    */
   const updateItem = useAtomCallback(
     useCallback(
-      (get, set, params: { index: number; newItem: T }) => {
+      (get, set, params: { newItem: T index: number; }) => {
         const { index, newItem } = params;
         const current = get(atom);
         if (index < 0 || index >= current.length) {
