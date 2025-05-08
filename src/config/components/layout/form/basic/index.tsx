@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { PluginFormSection, PluginFormTitle, PluginFormDescription } from '@/config/components/form';
+import { PluginFormSection, PluginFormTitle, PluginFormDescription } from '@/config/style/form';
 import FieldsForm from './FieldMappingEditorContainer';
 
 export const PluginFormBasic: FC = () => {

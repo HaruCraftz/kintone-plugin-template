@@ -5,12 +5,11 @@ import { LoaderWithLabel } from '@/components/loader/withLabel';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { PluginErrorBoundary } from '@/components/ErrorBoundary';
 import { store } from '@/lib/store';
-import { PluginLayout } from './model/layout';
-import { PluginHeader } from './model/header';
-import { PluginForm } from './model/form';
+import { PluginLayout } from './style/layout';
+import { PluginHeader } from './components/layout/header';
+import { PluginForm } from './components/layout/form';
 
 /**
- * TODO: isProd→isDev
  * TODO: ディレクトリ整理
  * TODO: 正常に設定保存できるように修正
  * TODO: 入力項目を連動プルダウンに変更

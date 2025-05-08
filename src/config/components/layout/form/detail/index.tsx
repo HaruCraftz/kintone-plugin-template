@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { JotaiSwitch } from '@/components/jotai';
 import { isUpdateOnSaveAtom } from '@/config/states/plugin';
-import { PluginFormSection, PluginFormTitle, PluginFormDescription } from '@/config/components/form';
+import { PluginFormSection, PluginFormTitle, PluginFormDescription } from '@/config/style/form';
 
 export const PluginFormDetail: FC = () => {
   return (

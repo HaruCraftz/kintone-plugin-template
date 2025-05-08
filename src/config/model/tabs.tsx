@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
-import { PluginFormBasic } from './form/basic';
-import { PluginFormDetail } from './form/detail';
+import { PluginFormBasic } from '../components/layout/form/basic';
+import { PluginFormDetail } from '../components/layout/form/detail';
 
 export interface TabItem {
   label: string;

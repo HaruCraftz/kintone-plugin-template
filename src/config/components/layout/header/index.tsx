@@ -2,11 +2,11 @@ import { type FC } from 'react';
 import { useAtomValue } from 'jotai';
 import styled from '@emotion/styled';
 import { loadingAtom } from '@/config/states/plugin';
-import { TabNavigation } from '@/config/components/header/TabNavigation';
-import SaveButton from '@/config/components/header/SaveButton';
-import BackButton from '@/config/components/header/BackButton';
-import MenuButton from '@/config/components/header/MenuButton';
-import { menuItems } from '../menuItems';
+import { TabNavigation } from '@/config/components/ui/header/TabNavigation';
+import SaveButton from '@/config/components/ui/header/SaveButton';
+import BackButton from '@/config/components/ui/header/BackButton';
+import MenuButton from '@/config/components/ui/header/MenuButton';
+import { menuItems } from '../../../model/menuItems';
 
 // ヘッダーエリア用のスタイル
 export const HeaderArea = styled.div`

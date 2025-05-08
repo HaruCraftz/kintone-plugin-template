@@ -62,7 +62,7 @@ export const SortableFieldRow: FC<SortableFieldRowProps> = ({
         onChange={(srcFieldCode) =>
           updateItem({
             newItem: { ...field, srcFieldCode }, // 更新するフィールドのみ指定
-　　　　　　　　index,
+            index,
           })
         }
       />

@@ -1,5 +1,5 @@
-import { type MenuItemConfig } from '@/config/components/header/MenuButton';
-import { ResetMenuItem } from '@/config/components/menu/ResetMenuItem';
+import { type MenuItemConfig } from '@/config/components/ui/header/MenuButton';
+import { ResetMenuItem } from '@/config/components/ui/menu/ResetMenuItem';
 
 export const menuItems: MenuItemConfig[] = [
   {
