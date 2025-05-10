@@ -30,9 +30,11 @@ interface SortableListProps<T> {
  */
 export function SortableList<T>({ items, onSortEnd, renderItem, getItemId, className }: SortableListProps<T>) {
   const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        delay: 250,
+        distance: 5,
+      },
     })
   );
 
