@@ -15,8 +15,7 @@ export const TabNavigation: FC = () => {
   const a11yProps = (index: number) => {
     return {
       id: `plugin-tab-${index}`,
-      // IDで指定した要素を操作するものとスクリーンリーダーに伝えるための属性
-      'aria-controls': `plugin-tabpanel-${index}`,
+      'aria-controls': `plugin-tabpanel-${index}`, // IDで指定した要素を操作するものとスクリーンリーダーに伝えるための属性
     };
   };
 
