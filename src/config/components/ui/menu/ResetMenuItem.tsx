@@ -33,7 +33,7 @@ export const ResetMenuItem: FC<{ closeMenu: () => void }> = ({ closeMenu }) => {
     useCallback(
       (_, set) => {
         set(pluginConfigAtom, createConfig());
-        enqueueSnackbar('設定をリセットしました', { variant: 'success' });
+        enqueueSnackbar('設定をリセットしました', { variant: 'error' });
         setOpenDialog(false);
         closeMenu();
       },

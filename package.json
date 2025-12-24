@@ -6,7 +6,8 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "init": "node scripts/dotenv.js && node scripts/genkey.js",
+    "init": "node scripts/dotenv.js",
+    "genkey": "node scripts/genkey.js",
     "dev": "cross-env NODE_ENV=development webpack --config webpack.config.cjs",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.cjs",
     "upload": "node scripts/upload.js",
