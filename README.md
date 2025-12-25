@@ -1,4 +1,4 @@
-# kintone-simple-plugin-template
+# kintone-plugin-simple-template
 
 kintoneプラグインの開発テンプレート
 
