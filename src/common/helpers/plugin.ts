@@ -4,8 +4,8 @@ import {
   type AnyPluginConfig,
   type PluginConfig,
   type PluginCondition,
-} from '@/common/schema/pluginConfig';
-import { PLUGIN_ID } from './global';
+} from '@/common/config/schema_old';
+import { PLUGIN_ID } from '../constants/kintone';
 
 /**
  * 新しいプラグインの設定値を取得します
