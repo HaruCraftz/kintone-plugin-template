@@ -1,46 +1,35 @@
+import { PluginConfigSchema, type PluginConfig } from './schema';
 import { PLUGIN_ID } from '../constants/kintone';
-import { LatestConfigSchema, type PluginConfig } from './schema';
-import { migrateConfig } from './migrations';
 
 /**
- * 初期設定値の生成
+ * 保存: オブジェクトをJSON文字列に変換してkintoneに保存
  */
-export const createDefaultConfig = (): PluginConfig => LatestConfigSchema.parse({});
-
-/**
- * 設定の保存
- */
-export const storeConfig = (config: PluginConfig, callback?: () => void): void => {
-  const serialized = Object.entries(config).reduce<Record<string, string>>((acc, [key, value]) => {
-    acc[key] = JSON.stringify(value);
-    return acc;
-  }, {});
-
-  kintone.plugin.app.setConfig(serialized, callback);
+export const storeConfig = (config: PluginConfig): void => {
+  const rawValues = Object.fromEntries(Object.entries(config).map(([key, value]) => [key, JSON.stringify(value)]));
+  kintone.plugin.app.setConfig(rawValues);
 };
 
 /**
- * 設定の復元（移行処理を含む）
+ * 復元: kintoneから取得し、Zodで検証・補完して返す
  */
 export const restoreConfig = (): PluginConfig => {
-  const rawConfig = kintone.plugin.app.getConfig(PLUGIN_ID);
+  const raw = kintone.plugin.app.getConfig(PLUGIN_ID);
 
-  if (!rawConfig || Object.keys(rawConfig).length === 0) {
-    return createDefaultConfig();
+  if (!Object.keys(raw).length) {
+    return PluginConfigSchema.parse({});
   }
 
   try {
-    const parsed = Object.entries(rawConfig).reduce<any>((acc, [key, value]) => {
-      acc[key] = JSON.parse(value);
-      return acc;
-    }, {});
+    // string 以外（undefinedなど）を除外してパースする
+    const entries = Object.entries(raw)
+      .filter((item): item is [string, string] => typeof item[1] === 'string')
+      .map(([key, value]) => [key, JSON.parse(value)]);
 
-    return migrateConfig(parsed);
-  } catch (e) {
-    console.error('[Config] Failed to restore config:', e);
-    return createDefaultConfig();
+    const parsed = Object.fromEntries(entries);
+
+    return PluginConfigSchema.parse(parsed);
+  } catch (error) {
+    console.error('[Plugin] 設定の復元に失敗しました。', error);
+    return PluginConfigSchema.parse({});
   }
 };
-
-// schema で定義した型も再エクスポートしておくと便利
-export * from './schema';
