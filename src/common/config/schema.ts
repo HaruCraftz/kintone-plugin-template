@@ -1,17 +1,27 @@
 import { z } from 'zod';
 
-export const FieldMappingSchema = z.object({
+/** Version 1 */
+export const PluginConditionSchemaV1 = z.object({
   id: z.string().default(() => crypto.randomUUID()), // 各行に一意のIDを付与
   srcFieldCode: z.string().default(''),
   destFieldCode: z.string().default(''),
 });
 
-// 設定全体の定義
-export const PluginConfigSchema = z.object({
+export const PluginConfigSchemaV1 = z.object({
   version: z.number().default(1),
-  isUpdateOnSave: z.boolean().default(false),
-  fieldMappings: z.array(FieldMappingSchema).default([]),
+  common: z.object({
+    isUpdateOnSave: z.boolean().default(false), // 保存時に自動更新
+  }),
+  conditions: z.array(PluginConditionSchemaV1).default([]),
 });
 
-export type PluginConfig = z.infer<typeof PluginConfigSchema>;
-export type FieldMapping = z.infer<typeof FieldMappingSchema>;
+/** Version 2 */
+// add other version schemas
+
+/** Types */
+type PluginConfigV1 = z.infer<typeof PluginConfigSchemaV1>;
+export type AnyPluginConfig = PluginConfigV1; // | PluginConfigV2 | ...;
+
+/** Latest */
+export const LatestPluginConfigSchema = PluginConfigSchemaV1;
+export type LatestPluginConfig = z.infer<typeof LatestPluginConfigSchema>;
