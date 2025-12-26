@@ -9,7 +9,6 @@
     /* Modules */
     "module": "esnext", // モジュールシステムとして ESModules を使用
     "moduleResolution": "bundler", // バンドラーに最適なモジュール解決方法を使用
-    "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] },
     "resolveJsonModule": true, // Jsonの型検証
 
