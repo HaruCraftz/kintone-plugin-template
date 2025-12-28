@@ -1,25 +1,47 @@
-import { LatestPluginConfigSchema, type LatestPluginConfig, type AnyPluginConfig } from './schema';
-import { PLUGIN_ID } from '../constants/kintone';
+import {
+  LATEST_PLUGIN_VERSION,
+  PluginConfigSchema,
+  type PluginConfig,
+  type PluginCondition,
+  type AnyPluginConfig,
+} from './schema';
+import { PLUGIN_ID } from '../lib/kintone';
+import { nanoid } from 'nanoid';
+
+export * from './schema';
 
 /**
- * 初期化: デフォルトの設定を返す
+ * 初期化: デフォルトの設定値を取得
  */
-export const createConfig = (): LatestPluginConfig => {
-  return LatestPluginConfigSchema.parse({});
+export const getNewCondition = (): PluginCondition => ({
+  id: nanoid(),
+  srcFieldCode: '',
+  destFieldCode: '',
+});
+
+/**
+ * 初期化: デフォルトの設定情報を返す
+ */
+export const createConfig = (): PluginConfig => ({
+  version: LATEST_PLUGIN_VERSION,
+  common: {
+    isUpdateOnSave: false,
+  },
+  conditions: [getNewCondition()],
+});
+
+/**
+ * 保存: 設定情報をJSON文字列に変換してkintoneに保存
+ */
+export const storeConfig = (config: PluginConfig): void => {
+  const rawConfig = Object.fromEntries(Object.entries(config).map(([key, value]) => [key, JSON.stringify(value)]));
+  kintone.plugin.app.setConfig(rawConfig);
 };
 
 /**
- * 保存: オブジェクトをJSON文字列に変換してkintoneに保存
+ * 変換: 古い設定情報を新しい設定情報に変換
  */
-export const storeConfig = (config: LatestPluginConfig): void => {
-  const rawValues = Object.fromEntries(Object.entries(config).map(([key, value]) => [key, JSON.stringify(value)]));
-  kintone.plugin.app.setConfig(rawValues);
-};
-
-/**
- * 変換: 古い設定を新しい設定に変換
- */
-const migrateConfig = (anyConfig: AnyPluginConfig): LatestPluginConfig => {
+const migrateConfig = (anyConfig: AnyPluginConfig): PluginConfig => {
   const { version, ...other } = anyConfig;
   switch (version) {
     case undefined:
@@ -33,23 +55,18 @@ const migrateConfig = (anyConfig: AnyPluginConfig): LatestPluginConfig => {
 /**
  * 復元: kintoneから取得し、Zodで検証・補完して返す
  */
-export const restoreConfig = (): LatestPluginConfig => {
+export const restoreConfig = (): PluginConfig => {
   try {
-    const raw = kintone.plugin.app.getConfig(PLUGIN_ID);
+    const rawConfig: Record<string, string> = kintone.plugin.app.getConfig(PLUGIN_ID);
 
     // データが空なら初期値をパースして返す
-    if (!Object.keys(raw).length) return createConfig();
+    if (!Object.keys(rawConfig).length) return createConfig();
 
     // パース処理
-    const parsed = Object.fromEntries(
-      Object.entries(raw)
-        .filter((item): item is [string, string] => typeof item[1] === 'string')
-        .map(([k, v]) => [k, JSON.parse(v)])
-    );
+    const parsed = Object.fromEntries(Object.entries(rawConfig).map(([k, v]) => [k, JSON.parse(v)]));
 
     // 新しい設定に変換
-    const migrated = migrateConfig(parsed as AnyPluginConfig);
-    return LatestPluginConfigSchema.parse(migrated);
+    return PluginConfigSchema.parse(migrateConfig(parsed as AnyPluginConfig));
   } catch (error) {
     console.error('[Plugin] 設定の復元に失敗しました。', error);
     return createConfig();
