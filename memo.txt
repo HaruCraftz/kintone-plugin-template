@@ -1,3 +1,21 @@
+useAppFieldsでフィールドタイプをしていできるなら、appSingleLineTextFieldsAtomなどの特定の型のAtomは必要ないですか。
+
+###src/common/hooks/useAppFields.ts
+import { useAtomValue } from 'jotai';
+import { appFieldsAtom } from '@/common/states/kintoneState';
+
+/**
+ * kintoneのフィールド一覧を取得するフック
+ * すべてのフィールド、または指定した型でフィルタリングしたリストを返却する
+ */
+export const useAppFields = (filterTypes?: string[]) => {
+  const allFields = useAtomValue(appFieldsAtom);
+  const fields = filterTypes ? allFields.filter((f) => filterTypes.includes(f.type)) : allFields;
+  const options = fields.map((f) => ({ label: f.label, value: f.code }));
+  return { fields, options };
+};
+
+###src/common/states/kintoneState.ts
 import { atom } from 'jotai';
 import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 import { getAppId, GUEST_SPACE_ID } from '../lib/kintone';
