@@ -1,2 +1,2 @@
-export * from './LoadingView';
+export * from './Loader';
 export * from './WaveAnimation';

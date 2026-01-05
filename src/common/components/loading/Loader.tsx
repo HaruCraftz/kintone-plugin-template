@@ -7,7 +7,7 @@ type Props = {
   minHeight?: string | number;
 };
 
-export const LoadingView: FC<Props> = ({ label = '読み込み中...', minHeight = '400px' }) => (
+export const Loader: FC<Props> = ({ label = '読み込み中...', minHeight = '400px' }) => (
   <Box
     sx={{
       minHeight,

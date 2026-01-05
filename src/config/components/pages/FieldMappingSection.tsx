@@ -3,7 +3,7 @@ import { useFormContext, useFieldArray } from 'react-hook-form';
 import { nanoid } from 'nanoid';
 import type { PluginConfig } from '@/common/config';
 import { DynamicSortableList } from '@/common/components/dnd/DynamicSortableList';
-import { FormFieldAutocomplete } from '../form/FormFieldAutocomplete';
+import { FormFieldAutocomplete } from './FormFieldAutocomplete';
 
 export const FieldMappingSection: FC = () => {
   const { control } = useFormContext<PluginConfig>();

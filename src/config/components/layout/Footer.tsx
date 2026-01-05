@@ -9,7 +9,7 @@ type Props = {
   isSaving: boolean;
 };
 
-export const StickyFooter: FC<Props> = ({ onSave, onCancel, isSaving }) => {
+export const Footer: FC<Props> = ({ onSave, onCancel, isSaving }) => {
   const { isDirty, isValid } = useFormState(); // 親のFormProviderから状態を取得
 
   return (
