@@ -2,12 +2,9 @@ import { z } from 'zod';
 
 /** Version 1 */
 export const PluginConditionSchemaV1 = z.object({
-  /** 行ID */
   id: z.string(), // 各行に一意のIDを付与
-  /** 参照先フィールドコード */
-  srcFieldCode: z.string(),
-  /** 更新先フィールドコード */
-  destFieldCode: z.string(),
+  srcFieldCode: z.string(), // 参照先フィールドコード
+  destFieldCode: z.string(), // 更新先フィールドコード
 });
 
 export const PluginConfigSchemaV1 = z.object({

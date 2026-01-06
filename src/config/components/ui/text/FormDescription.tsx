@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 type Props = { last?: boolean };
 
-export const PluginFormDescription = styled.p<Props>`
+export const FormDescription = styled.p<Props>`
   font-size: 13px;
   line-height: 1.5;
   color: #666;

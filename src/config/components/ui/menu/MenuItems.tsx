@@ -1,10 +1,19 @@
-import { type MenuItemConfig } from '../button/MenuButton';
-import { ResetMenuItem } from './ResetMenuItem';
+import { type ReactNode } from 'react';
+import { RestartAlt } from '@mui/icons-material';
+import { useResetConfig } from '@/config/hooks/useResetConfig';
 
-export const menuItems: MenuItemConfig[] = [
+export type MenuItemConfig = {
+  id: string;
+  label: string;
+  icon?: ReactNode;
+  onSelect: () => void;
+};
+
+export const useMenuItems = (): MenuItemConfig[] => [
   {
     id: 'reset-settings',
-    renderContent: (closeMenu) => <ResetMenuItem closeMenu={closeMenu} />,
+    label: '設定をリセット',
+    icon: <RestartAlt fontSize="small" />,
+    onSelect: useResetConfig(),
   },
-  // 将来的に追加するメニューアイテムはここに追加
 ];

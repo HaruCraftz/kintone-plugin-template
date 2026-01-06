@@ -1,21 +1,80 @@
-import type { FC } from 'react';
-import { Box, Typography, Button, Divider } from '@mui/material';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import { type FC } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
+import { Box, Tabs, Tab, Stack } from '@mui/material';
+import { loadingAtom, activeTabIndexAtom } from '@/config/states/plugin';
+import { useDiscardConfirm } from '@/config/hooks/useDiscardConfirm';
+import { FormTabs } from '@/config/components/layout/FormTabs';
+import { SaveButton } from '@/config/components/ui/button/SaveButton';
+import { CancelButton } from '@/config/components/ui/button/CancelButton';
+import { DiscardConfirmDialog } from '@/config/components/ui/dialog/DiscardConfirmDialog';
+import { MenuButton } from '@/config/components/ui/button/MenuButton';
+import { useMenuItems } from '@/config/components/ui/menu/MenuItems';
 
-type Props = {
-  onReset: () => void;
-};
+export const Header: FC = () => {
+  const loading = useAtomValue(loadingAtom);
 
-export const Header: FC<Props> = ({ onReset }) => (
-  <Box sx={{ mb: 3 }}>
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-      <Typography variant="h5" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-        プラグインの設定
-      </Typography>
-      <Button variant="text" size="small" startIcon={<RestartAltIcon />} onClick={onReset} color="inherit">
-        設定をリセット
-      </Button>
+  /** タブ関連 */
+  const [value, setValue] = useAtom(activeTabIndexAtom);
+
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const getTabA11yProps = (index: number) => {
+    return {
+      id: `scrollable-auto-tab-${index}`,
+      'aria-controls': `scrollable-auto-tabpanel-${index}`, // IDで指定した要素を操作するものとスクリーンリーダーに伝えるための属性
+    };
+  };
+
+  /** キャンセル関連 */
+  const handleCancel = () => history.back();
+
+  const { open, requestDiscard, confirmDiscard, closeDialog } = useDiscardConfirm(handleCancel);
+
+  /** メニュー関連 */
+  const menuItems = useMenuItems();
+
+  return (
+    <Box
+      component="header"
+      sx={{
+        // レイアウト設定
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+
+        // 配置・固定設定
+        position: 'sticky',
+        top: 48, // kintoneヘッダーの高さを考慮
+        zIndex: 30,
+
+        // スタイル設定
+        bgcolor: 'background.paper',
+        borderBottom: 1,
+        borderColor: 'divider',
+      }}
+    >
+      {/* 左側コンテンツ：タブ */}
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        variant="scrollable"
+        scrollButtons="auto"
+        aria-label="scrollable-auto-tabs"
+      >
+        {FormTabs.map((tab, index) => (
+          <Tab label={tab.label} key={index} {...getTabA11yProps(index)} />
+        ))}
+      </Tabs>
+
+      {/* 右側コンテンツ：アクションボタン群 */}
+      <Stack direction="row" alignItems="center" spacing={2}>
+        <SaveButton loading={loading} />
+        <CancelButton loading={loading} onClick={requestDiscard} />
+        <DiscardConfirmDialog open={open} onClose={closeDialog} onConfirm={confirmDiscard} />
+        <MenuButton loading={loading} items={menuItems} />
+      </Stack>
     </Box>
-    <Divider />
-  </Box>
-);
+  );
+};

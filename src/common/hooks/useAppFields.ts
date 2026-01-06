@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import type { KintoneFieldType } from '@/types/kintone';
-import { appFieldsAtom } from '@/common/states/kintone';
+import { appFieldsAtom } from '@/config/states/kintone';
 
 const fieldTypeMap: Record<string, KintoneFieldType> = {
   recordNumber: 'RECORD_NUMBER',

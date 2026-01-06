@@ -1,25 +1,22 @@
-import { type FC, useCallback, memo } from 'react';
+import { type FC, memo } from 'react';
 import { Button, CircularProgress } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 type Props = {
   loading: boolean;
+  onClick: () => void;
 };
 
-export const Component: FC<Props> = ({ loading }) => {
-  const onBackButtonClick = useCallback(() => history.back(), []);
-
+export const CancelButton: FC<Props> = memo(function CancelButton({ loading, onClick }) {
   return (
     <Button
       variant="contained"
       color="inherit"
       disabled={loading}
-      onClick={onBackButtonClick}
       startIcon={loading ? <CircularProgress color="inherit" size={20} /> : <ExitToAppIcon />}
+      onClick={onClick}
     >
-      一覧へ戻る
+      キャンセル
     </Button>
   );
-};
-
-export default memo(Component);
+});

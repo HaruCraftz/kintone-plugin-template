@@ -1,64 +1,48 @@
-import { type FC, useCallback, useState } from 'react';
-import { RestartAlt } from '@mui/icons-material';
-import { useAtomCallback } from 'jotai/utils';
-import { useSnackbar } from 'notistack';
+import { type FC, useState } from 'react';
 import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
+  MenuItem,
   ListItemIcon,
   ListItemText,
-  Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
 } from '@mui/material';
-import { createConfig } from '@/lib/plugin';
-import { pluginConfigAtom } from '@/config/states/plugin';
+import { RestartAlt } from '@mui/icons-material';
 
-export const ResetMenuItem: FC<{ closeMenu: () => void }> = ({ closeMenu }) => {
-  const { enqueueSnackbar } = useSnackbar();
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
+type Props = {
+  onConfirm: () => void;
+};
 
-  const handleOpenDialog = () => {
-    setOpenDialog(true);
+export const ResetMenuItem: FC<Props> = ({ onConfirm }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleConfirm = () => {
+    onConfirm();
+    setOpen(false);
   };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-    closeMenu();
-  };
-
-  const resetConfig = useAtomCallback(
-    useCallback(
-      (_, set) => {
-        set(pluginConfigAtom, createConfig());
-        enqueueSnackbar('設定をリセットしました', { variant: 'error' });
-        setOpenDialog(false);
-        closeMenu();
-      },
-      [enqueueSnackbar, closeMenu]
-    )
-  );
 
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }} onClick={handleOpenDialog}>
+      <MenuItem onClick={() => setOpen(true)}>
         <ListItemIcon>
-          <RestartAlt fontSize='small' />
+          <RestartAlt fontSize="small" />
         </ListItemIcon>
         <ListItemText>設定をリセット</ListItemText>
-      </Box>
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
+      </MenuItem>
+
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>設定のリセット</DialogTitle>
         <DialogContent>
           <DialogContentText>このプラグインの設定を初期状態に戻します。よろしいですか？</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button color='error' variant='contained' onClick={resetConfig}>
+          <Button color="error" variant="contained" onClick={handleConfirm}>
             リセット
           </Button>
-          <Button color='inherit' variant='contained' onClick={handleCloseDialog}>
+          <Button variant="contained" onClick={() => setOpen(false)}>
             キャンセル
           </Button>
         </DialogActions>

@@ -1,56 +1,24 @@
-import { type FC, useCallback, memo } from 'react';
-import { useAtomCallback } from 'jotai/utils';
-import { useSnackbar } from 'notistack';
+import { type FC, memo } from 'react';
 import { Button, CircularProgress } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
-import { storeConfig } from '@/common/config';
+import { useFormState } from 'react-hook-form';
 
 type Props = {
   loading: boolean;
 };
 
-export const Component: FC<Props> = ({ loading }) => {
-  const { enqueueSnackbar } = useSnackbar();
-
-  const onBackButtonClick = useCallback(() => history.back(), []);
-
-  const onSaveButtonClick = useAtomCallback(
-    useCallback(
-      async (get, set) => {
-        try {
-          set(loadingAtom, true);
-          const pluginConfig = get(pluginConfigAtom);
-          storePluginConfig(pluginConfig, {
-            callback: () => {},
-            debug: true,
-          });
-          enqueueSnackbar('設定を保存しました', {
-            variant: 'success',
-            action: (
-              <Button color="inherit" size="small" variant="outlined" onClick={onBackButtonClick}>
-                プラグイン一覧に戻る
-              </Button>
-            ),
-          });
-        } finally {
-          set(loadingAtom, false);
-        }
-      },
-      [enqueueSnackbar, onBackButtonClick]
-    )
-  );
+export const SaveButton: FC<Props> = memo(function SaveButton({ loading }) {
+  const { isDirty, isValid, isSubmitting } = useFormState();
 
   return (
     <Button
+      type="submit"
       variant="contained"
       color="primary"
-      disabled={loading}
-      onClick={onSaveButtonClick}
-      startIcon={loading ? <CircularProgress color="inherit" size={20} /> : <SaveIcon />}
+      startIcon={loading ? <CircularProgress color="inherit" size={18} /> : <SaveIcon />}
+      disabled={loading || !isDirty || !isValid || isSubmitting}
     >
       設定を保存
     </Button>
   );
-};
-
-export default memo(Component);
+});
