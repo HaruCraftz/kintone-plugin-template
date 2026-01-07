@@ -1,8 +1,7 @@
 import type { FC } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
-import { nanoid } from 'nanoid';
 import { Stack } from '@mui/material';
-import type { PluginConfig } from '@/shared/config';
+import { type PluginConfig, getNewCondition } from '@/shared/config';
 import { FormSection, FormTitle, FormDescription } from '@/config/style';
 import { DynamicSortableList } from '@/config/components/core/ui/fields/DynamicSortableList';
 import { FormAutocomplete } from '@/config/components/core/ui/fields/FormAutocomplete';
@@ -20,7 +19,7 @@ export const FieldMappingSection: FC = () => {
         onMove={move}
         onRemove={remove}
         onAdd={(index) => {
-          const row = { id: nanoid(), srcFieldCode: '', destFieldCode: '' };
+          const row = getNewCondition();
           index !== undefined ? insert(index, row) : append(row);
         }}
         addButtonLabel="新しい設定を追加"
