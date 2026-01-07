@@ -1,7 +1,7 @@
 import { type FC, type MouseEvent, memo, useState } from 'react';
 import { IconButton, Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
 import { MoreVert } from '@mui/icons-material';
-import { type MenuItemConfig } from '@/config/components/ui/menu/MenuItems';
+import { type MenuItemConfig } from '@/config/components/core/_registry/MenuItems';
 
 type Props = {
   items: MenuItemConfig[];

@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
-import { PluginFormBasic } from '../components/layout/form/basic';
-import { PluginFormDetail } from '../components/layout/form/detail';
+
+// TODO: 機能が増えたらここに追加
+import { FieldMappingSection } from '@/config/components/features/general/FieldMappingSection';
 
 export interface TabItem {
   label: string;
@@ -10,12 +11,12 @@ export interface TabItem {
 export const FormTabs: TabItem[] = [
   {
     label: '基本設定',
-    content: <PluginFormBasic />,
+    content: <FieldMappingSection />,
   },
-  {
-    label: '詳細設定',
-    content: <PluginFormDetail />,
-  },
+  // {
+  //   label: '詳細設定',
+  //   content: <PluginFormDetail />,
+  // },
   // 必要に応じて他のタブを追加
   // {
   //   label: 'その他設定',

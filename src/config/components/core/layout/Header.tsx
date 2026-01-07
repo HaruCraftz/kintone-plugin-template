@@ -3,12 +3,12 @@ import { useAtom, useAtomValue } from 'jotai';
 import { Box, Tabs, Tab, Stack } from '@mui/material';
 import { loadingAtom, activeTabIndexAtom } from '@/config/states/plugin';
 import { useDiscardConfirm } from '@/config/hooks/useDiscardConfirm';
-import { FormTabs } from '@/config/components/layout/FormTabs';
-import { SaveButton } from '@/config/components/ui/button/SaveButton';
-import { CancelButton } from '@/config/components/ui/button/CancelButton';
-import { DiscardConfirmDialog } from '@/config/components/ui/dialog/DiscardConfirmDialog';
-import { MenuButton } from '@/config/components/ui/button/MenuButton';
-import { useMenuItems } from '@/config/components/ui/menu/MenuItems';
+import { FormTabs } from '@/config/components/core/_registry/FormTabs';
+import { SaveButton } from '@/config/components/core/ui/button/SaveButton';
+import { CancelButton } from '@/config/components/core/ui/button/CancelButton';
+import { DiscardConfirmDialog } from '@/config/components/core/ui/feedback/DiscardConfirmDialog';
+import { MenuButton } from '@/config/components/core/ui/button/MenuButton';
+import { useMenuItems } from '@/config/components/core/_registry/MenuItems';
 
 export const Header: FC = () => {
   const loading = useAtomValue(loadingAtom);
