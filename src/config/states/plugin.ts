@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { restoreConfig, type PluginConfig } from '@/common/config';
+import { restoreConfig, type PluginConfig } from '@/shared/config';
 
 // ローディングの状態を保持するatom
 export const loadingAtom = atom(false);

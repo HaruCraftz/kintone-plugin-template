@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 type Props = {
-  id: string; // useFieldArrayのfield.id
+  id: string;
   index: number;
   onAdd: (index: number) => void;
   onDelete: (index: number) => void;

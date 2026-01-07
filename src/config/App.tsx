@@ -3,9 +3,9 @@ import { Provider as JotaiProvider } from 'jotai';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { SnackbarProvider } from 'notistack';
-import { Loader } from '@/common/components/loading';
-import { store } from '@/common/lib/jotai';
-import { theme } from '@/common/lib/mui';
+import { Loader } from '@/config/components/core/ui/loading';
+import { store } from '@/shared/lib/jotai';
+import { theme } from '@/shared/lib/mui';
 import { PluginErrorBoundary } from './components/PluginErrorBoundary';
 import { PluginContent } from './components/PluginContent';
 

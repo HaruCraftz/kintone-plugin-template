@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAtomValue } from 'jotai';
 import { pluginConfigAtom } from '@/config/states/plugin';
-import { PluginConfigSchema, type PluginConfig } from '@/common/config';
+import { PluginConfigSchema, type PluginConfig } from '@/shared/config';
 
 /** プラグイン設定フォームのカスタムフック */
 export const usePluginForm = () => {

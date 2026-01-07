@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
-import type { KintoneFieldType } from '@/types/kintone';
 import { appFieldsAtom } from '@/config/states/kintone';
+import type { KintoneFieldType } from '@/types/kintone';
 
 const fieldTypeMap: Record<string, KintoneFieldType> = {
   recordNumber: 'RECORD_NUMBER',
@@ -41,6 +41,6 @@ type FieldTypeKeyword = keyof typeof fieldTypeMap;
 export const useAppFields = (filterTypes?: FieldTypeKeyword[]) => {
   const allFields = useAtomValue(appFieldsAtom);
   const fields = filterTypes ? allFields.filter((f) => filterTypes.includes(f.type)) : allFields;
-  const options = fields.map((f) => ({ label: f.label, value: f.code }));
+  const options = fields.map((f) => ({ label: f.label, code: f.code }));
   return { fields, options };
 };

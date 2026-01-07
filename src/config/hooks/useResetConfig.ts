@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useAtomCallback } from 'jotai/utils';
 import { useSnackbar } from 'notistack';
-import { createConfig } from '@/common/config';
+import { createConfig } from '@/shared/config';
 import { pluginConfigAtom } from '@/config/states/plugin';
 
 /** プラグイン設定情報をリセットするカスタムフック */

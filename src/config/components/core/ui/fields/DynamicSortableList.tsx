@@ -3,7 +3,7 @@ import { DndContext, closestCenter, PointerSensor, useSensor, useSensors, type D
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { SortableRowContainer } from './SortableRowContainer';
+import { SortableRowContainer } from '@/config/components/core/ui/fields/SortableRowContainer';
 
 type Props<T extends { id: string }> = {
   items: T[];

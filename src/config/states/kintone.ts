@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { KintoneRestAPIClient } from '@kintone/rest-api-client';
-import { getAppId, GUEST_SPACE_ID } from '@/common/lib/kintone';
+import { getAppId, GUEST_SPACE_ID } from '@/shared/lib/kintone';
 
 type ClientParams = {
   baseUrl: string;

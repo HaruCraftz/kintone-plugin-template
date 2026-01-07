@@ -2,10 +2,10 @@ import type { FC } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { nanoid } from 'nanoid';
 import { Stack } from '@mui/material';
-import type { PluginConfig } from '@/common/config';
-import { DynamicSortableList } from '@/common/components/dnd/DynamicSortableList';
-import { FormSection, FormTitle, FormDescription } from '@/config/components/core/ui/text';
-import { FormFieldAutocomplete } from './FormFieldAutocomplete';
+import type { PluginConfig } from '@/shared/config';
+import { FormSection, FormTitle, FormDescription } from '@/config/style';
+import { DynamicSortableList } from '@/config/components/core/ui/fields/DynamicSortableList';
+import { FormAutocomplete } from '@/config/components/core/ui/fields/FormAutocomplete';
 
 export const FieldMappingSection: FC = () => {
   const { control } = useFormContext<PluginConfig>();
@@ -26,8 +26,18 @@ export const FieldMappingSection: FC = () => {
         addButtonLabel="新しい設定を追加"
         renderItem={(_, index) => (
           <Stack direction="row" spacing={2} alignItems="center">
-            <FormFieldAutocomplete name={`conditions.${index}.srcFieldCode`} label="生年月日フィールド" />
-            <FormFieldAutocomplete name={`conditions.${index}.destFieldCode`} label="年齢フィールド" />
+            <FormAutocomplete
+              name={`conditions.${index}.srcFieldCode`}
+              label="生年月日フィールド"
+              placeholder="フィールドを選択してください"
+              typeFilter={['DATE']}
+            />
+            <FormAutocomplete
+              name={`conditions.${index}.destFieldCode`}
+              label="年齢フィールド"
+              placeholder="フィールドを選択してください"
+              typeFilter={['SINGLE_LINE_TEXT']}
+            />
           </Stack>
         )}
       />

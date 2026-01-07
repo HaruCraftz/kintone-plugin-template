@@ -1,7 +1,7 @@
 import React, { type FC, useState } from 'react';
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
 import { Alert, AlertTitle, Button, Typography, Box, Stack, Paper } from '@mui/material';
-import { LoadingView } from '@/common/components/loading';
+import { LoadingView } from '@/config/components/core/ui/loading';
 
 const ErrorFallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
   const [isRetrying, setIsRetrying] = useState(false);
