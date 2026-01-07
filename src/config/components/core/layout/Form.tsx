@@ -2,7 +2,7 @@ import { type FC } from 'react';
 import { useAtomValue } from 'jotai';
 import { Box } from '@mui/material';
 import { activeTabIndexAtom } from '@/config/states/plugin';
-import { FormTabs } from '@/config/components/core/_registry/FormTabs';
+import { FormTabs } from '@/config/components/features/FormTabs';
 
 export const Form: FC = () => {
   const activeTabIndex = useAtomValue(activeTabIndexAtom);

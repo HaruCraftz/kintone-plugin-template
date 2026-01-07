@@ -6,7 +6,7 @@ import { useSnackbar } from 'notistack';
 import { usePluginForm } from '@/config/hooks/usePluginForm';
 import { activeTabIndexAtom } from '@/config/states/plugin';
 import { Header } from '@/config/components/core/layout/Header';
-import { FormTabs } from '@/config/components/core/_registry/FormTabs';
+import { FormTabs } from '@/config/components/features/FormTabs';
 import { storeConfig, type PluginConfig } from '@/shared/config';
 
 export const PluginContent: FC = () => {
