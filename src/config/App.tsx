@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { SnackbarProvider } from 'notistack';
 import { Loader } from '@/common/components/loading';
 import { store } from '@/common/lib/jotai';
-import { theme } from '@/styles/themes';
+import { theme } from '@/common/lib/mui';
 import { PluginErrorBoundary } from './components/PluginErrorBoundary';
 import { PluginContent } from './components/PluginContent';
 
