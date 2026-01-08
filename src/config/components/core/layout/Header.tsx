@@ -8,7 +8,7 @@ import { SaveButton } from '@/config/components/core/ui/button/SaveButton';
 import { CancelButton } from '@/config/components/core/ui/button/CancelButton';
 import { DiscardConfirmDialog } from '@/config/components/core/ui/feedback/DiscardConfirmDialog';
 import { MenuButton } from '@/config/components/core/ui/button/MenuButton';
-import { useMenuItems } from '@/config/components/core/ui/menu/MenuItems';
+import { ResetMenuItem } from '@/config/components/core/ui/menu/ResetMenuItem';
 
 type Props = {
   activeTab: number;
@@ -18,7 +18,6 @@ type Props = {
 
 export const Header: FC<Props> = ({ activeTab, onTabChange, onCancel }) => {
   const loading = useAtomValue(loadingAtom);
-  const menuItems = useMenuItems();
 
   /** タブ */
   const handleTabChange = (_: React.SyntheticEvent, index: number) => {
@@ -73,7 +72,9 @@ export const Header: FC<Props> = ({ activeTab, onTabChange, onCancel }) => {
         <SaveButton loading={loading} />
         <CancelButton loading={loading} onClick={requestDiscard} />
         <DiscardConfirmDialog open={open} onConfirm={confirmDiscard} onClose={closeDialog} />
-        <MenuButton loading={loading} items={menuItems} />
+        <MenuButton loading={loading}>
+          <ResetMenuItem />
+        </MenuButton>
       </Stack>
     </Box>
   );

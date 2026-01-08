@@ -1,26 +1,15 @@
 import { type FC, useState } from 'react';
-import {
-  MenuItem,
-  ListItemIcon,
-  ListItemText,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  Button,
-} from '@mui/material';
+import { MenuItem, ListItemIcon, ListItemText } from '@mui/material';
 import { RestartAlt } from '@mui/icons-material';
+import { useResetConfig } from '@/config/hooks/useResetConfig';
+import { ResetConfirmDialog } from '@/config/components/core/ui/feedback/ResetConfirmDialog';
 
-type Props = {
-  onConfirm: () => void;
-};
-
-export const ResetMenuItem: FC<Props> = ({ onConfirm }) => {
+export const ResetMenuItem: FC = () => {
   const [open, setOpen] = useState(false);
+  const resetConfig = useResetConfig();
 
   const handleConfirm = () => {
-    onConfirm();
+    resetConfig();
     setOpen(false);
   };
 
@@ -32,21 +21,7 @@ export const ResetMenuItem: FC<Props> = ({ onConfirm }) => {
         </ListItemIcon>
         <ListItemText>設定をリセット</ListItemText>
       </MenuItem>
-
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>設定のリセット</DialogTitle>
-        <DialogContent>
-          <DialogContentText>このプラグインの設定を初期状態に戻します。よろしいですか？</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button color="error" variant="contained" onClick={handleConfirm}>
-            リセット
-          </Button>
-          <Button variant="contained" onClick={() => setOpen(false)}>
-            キャンセル
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <ResetConfirmDialog open={open} onConfirm={handleConfirm} onClose={() => setOpen(false)} />
     </>
   );
 };

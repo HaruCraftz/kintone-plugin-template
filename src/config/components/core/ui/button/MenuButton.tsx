@@ -1,17 +1,16 @@
-import { type FC, type MouseEvent, memo, useState } from 'react';
-import { IconButton, Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
+import { type FC, type MouseEvent, type ReactNode, memo, useState } from 'react';
+import { IconButton, Menu } from '@mui/material';
 import { MoreVert } from '@mui/icons-material';
-import { type MenuItemConfig } from '@/config/components/core/ui/menu/MenuItems';
 
 type Props = {
-  items: MenuItemConfig[];
   loading?: boolean;
+  children?: ReactNode;
   buttonId?: string;
 };
 
 const DEFAULT_BUTTON_ID = 'generic-menu-button';
 
-export const MenuButton: FC<Props> = memo(function MenuButton({ items, loading, buttonId = DEFAULT_BUTTON_ID }) {
+export const MenuButton: FC<Props> = memo(function MenuButton({ loading, children, buttonId = DEFAULT_BUTTON_ID }) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
@@ -32,6 +31,7 @@ export const MenuButton: FC<Props> = memo(function MenuButton({ items, loading, 
         aria-controls={open ? 'menu-list' : undefined}
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
+        disabled={loading}
       >
         <MoreVert />
       </IconButton>
@@ -41,23 +41,13 @@ export const MenuButton: FC<Props> = memo(function MenuButton({ items, loading, 
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        onClick={handleClose}
+        keepMounted
         slotProps={{
           list: { 'aria-labelledby': buttonId },
         }}
       >
-        {items.map((item) => (
-          <MenuItem
-            key={item.id}
-            disabled={loading}
-            onClick={() => {
-              item.onSelect();
-              handleClose();
-            }}
-          >
-            {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
-            <ListItemText>{item.label}</ListItemText>
-          </MenuItem>
-        ))}
+        {children}
       </Menu>
     </>
   );
