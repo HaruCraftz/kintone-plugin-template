@@ -1,7 +1,7 @@
 import { type FC } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { Box, Tabs, Tab, Stack } from '@mui/material';
-import { loadingAtom, activeTabIndexAtom } from '@/config/states/plugin';
+import { loadingAtom } from '@/config/states/plugin';
 import { useDiscardConfirm } from '@/config/hooks/useDiscardConfirm';
 import { FormTabs } from '@/config/components/features/FormTabs';
 import { SaveButton } from '@/config/components/core/ui/button/SaveButton';
@@ -10,14 +10,19 @@ import { DiscardConfirmDialog } from '@/config/components/core/ui/feedback/Disca
 import { MenuButton } from '@/config/components/core/ui/button/MenuButton';
 import { useMenuItems } from '@/config/components/core/ui/menu/MenuItems';
 
-export const Header: FC = () => {
+type Props = {
+  activeTab: number;
+  onTabChange: (index: number) => void;
+  onCancel: () => void;
+};
+
+export const Header: FC<Props> = ({ activeTab, onTabChange, onCancel }) => {
   const loading = useAtomValue(loadingAtom);
+  const menuItems = useMenuItems();
 
-  /** タブ関連 */
-  const [value, setValue] = useAtom(activeTabIndexAtom);
-
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  /** タブ */
+  const handleTabChange = (_: React.SyntheticEvent, index: number) => {
+    onTabChange(index);
   };
 
   const getTabA11yProps = (index: number) => {
@@ -27,13 +32,8 @@ export const Header: FC = () => {
     };
   };
 
-  /** キャンセル関連 */
-  const handleCancel = () => history.back();
-
-  const { open, requestDiscard, confirmDiscard, closeDialog } = useDiscardConfirm(handleCancel);
-
-  /** メニュー関連 */
-  const menuItems = useMenuItems();
+  /** キャンセル */
+  const { open, requestDiscard, confirmDiscard, closeDialog } = useDiscardConfirm(onCancel);
 
   return (
     <Box
@@ -57,8 +57,8 @@ export const Header: FC = () => {
     >
       {/* 左側コンテンツ：タブ */}
       <Tabs
-        value={value}
-        onChange={handleChange}
+        value={activeTab}
+        onChange={handleTabChange}
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable-auto-tabs"

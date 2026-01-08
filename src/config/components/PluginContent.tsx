@@ -1,42 +1,25 @@
 import { type FC } from 'react';
-import { useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { FormProvider } from 'react-hook-form';
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import { usePluginForm } from '@/config/hooks/usePluginForm';
-import { activeTabIndexAtom } from '@/config/states/plugin';
-import { Header } from '@/config/components/core/layout/Header';
-import { FormTabs } from '@/config/components/features/FormTabs';
 import { storeConfig, type PluginConfig } from '@/shared/config';
+import { activeTabIndexAtom } from '@/config/states/plugin';
+import { usePluginForm } from '@/config/hooks/usePluginForm';
+import { Header } from '@/config/components/core/layout/Header';
+import { Form } from './core/layout/Form';
 
 export const PluginContent: FC = () => {
   const { methods, handleReset } = usePluginForm();
-  const activeTabIndex = useAtomValue(activeTabIndexAtom);
   const { enqueueSnackbar } = useSnackbar();
+  const [activeTab, setActiveTab] = useAtom(activeTabIndexAtom);
 
-  // --- 離脱防止ガード (HeaderのDiscardConfirmDialogでカバーされているか？) ---
-  // Headerは「キャンセルボタン押下時」のダイアログ。
-  // ブラウザバックやリロードに対するガードは別途必要。
-  // copy.tsxにあった useEffect を移植する。
-  const { isDirty } = methods.formState;
+  /** タブ変更 */
+  const onTabChange = (index: number) => {
+    setActiveTab(index);
+  };
 
-  // React 19 / Modern browsers usually require event listener for beforeunload
-  // copy.tsx logic:
-  /*
-  useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      if (isDirty) {
-        e.preventDefault();
-        e.returnValue = '';
-      }
-    };
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-  }, [isDirty]);
-  */
-  // I will include this logic in PluginContent or a hook. useDiscardConfirm hook might handle it?
-  // Let's check useDiscardConfirm later or just inline it for safety as in copy.tsx.
-
+  /** 保存 */
   const onSave = methods.handleSubmit(async (data: PluginConfig) => {
     try {
       await storeConfig(data);
@@ -48,14 +31,14 @@ export const PluginContent: FC = () => {
     }
   });
 
+  /** キャンセル */
+  const onCancel = () => history.back();
+
   return (
     <FormProvider {...methods}>
-      <Box component="form" onSubmit={onSave} sx={{ pb: 12, bgcolor: '#f9fafb', minHeight: '100vh' }}>
-        <Header />
-
-        <Container maxWidth="lg" sx={{ py: 4 }}>
-          {FormTabs[activeTabIndex]?.content}
-        </Container>
+      <Box component="form" onSubmit={onSave}>
+        <Header activeTab={activeTab} onTabChange={onTabChange} onCancel={onCancel} />
+        <Form />
       </Box>
     </FormProvider>
   );
