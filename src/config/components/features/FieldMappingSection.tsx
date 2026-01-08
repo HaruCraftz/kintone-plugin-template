@@ -1,10 +1,34 @@
 import type { FC } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { Stack } from '@mui/material';
-import { type PluginConfig, getNewCondition } from '@/shared/config';
+import { type PluginConfig, type PluginCondition, getNewCondition } from '@/shared/config';
 import { FormSection, FormTitle, FormDescription } from '@/config/style';
 import { DynamicSortableList } from '@/config/components/core/ui/fields/DynamicSortableList';
 import { FormAutocomplete } from '@/config/components/core/ui/fields/FormAutocomplete';
+import { useDuplicateCheck } from '@/config/hooks/useDuplicateCheck';
+
+const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
+  const { isDuplicate } = useDuplicateCheck(index);
+
+  return (
+    <Stack direction="row" spacing={2} alignItems="center">
+      <FormAutocomplete
+        name={`conditions.${index}.srcFieldCode`}
+        label="生年月日フィールド"
+        placeholder="フィールドを選択してください"
+        typeFilter={['DATE']}
+        shouldShowOption={(field) => !isDuplicate(field.code, 'srcFieldCode')}
+      />
+      <FormAutocomplete
+        name={`conditions.${index}.destFieldCode`}
+        label="年齢フィールド"
+        placeholder="フィールドを選択してください"
+        typeFilter={['SINGLE_LINE_TEXT']}
+        shouldShowOption={(field) => !isDuplicate(field.code, 'destFieldCode')}
+      />
+    </Stack>
+  );
+};
 
 export const FieldMappingSection: FC = () => {
   const { control } = useFormContext<PluginConfig>();
@@ -23,22 +47,7 @@ export const FieldMappingSection: FC = () => {
           index !== undefined ? insert(index, row) : append(row);
         }}
         addButtonLabel="新しい設定を追加"
-        renderItem={(_, index) => (
-          <Stack direction="row" spacing={2} alignItems="center">
-            <FormAutocomplete
-              name={`conditions.${index}.srcFieldCode`}
-              label="生年月日フィールド"
-              placeholder="フィールドを選択してください"
-              typeFilter={['DATE']}
-            />
-            <FormAutocomplete
-              name={`conditions.${index}.destFieldCode`}
-              label="年齢フィールド"
-              placeholder="フィールドを選択してください"
-              typeFilter={['SINGLE_LINE_TEXT']}
-            />
-          </Stack>
-        )}
+        renderItem={(_, index) => <FieldMappingRow index={index} />}
       />
     </FormSection>
   );

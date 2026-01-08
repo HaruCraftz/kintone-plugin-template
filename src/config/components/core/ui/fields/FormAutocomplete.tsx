@@ -2,17 +2,21 @@ import type { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Autocomplete, Box, TextField, Typography } from '@mui/material';
 import { useAppFields } from '@/shared/hooks/useAppFields';
+import type { FieldType } from '@/types/kintone';
 
 type Props = {
   name: string;
   label: string;
   placeholder?: string;
-  typeFilter?: string[];
+  typeFilter?: FieldType[];
+  shouldShowOption?: (field: { label: string; code: string }) => boolean;
 };
 
-export const FormAutocomplete: FC<Props> = ({ name, label, placeholder, typeFilter }) => {
+export const FormAutocomplete: FC<Props> = ({ name, label, placeholder, typeFilter, shouldShowOption }) => {
   const { control } = useFormContext();
-  const { options } = useAppFields(typeFilter);
+  const { fields: fieldOptions } = useAppFields(typeFilter);
+  // fieldOptionsをフィルタリング
+  const filteredOptions = shouldShowOption ? fieldOptions.filter(shouldShowOption) : fieldOptions;
 
   return (
     <Controller
@@ -20,8 +24,8 @@ export const FormAutocomplete: FC<Props> = ({ name, label, placeholder, typeFilt
       control={control}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <Autocomplete
-          options={options}
-          value={options.find((opt) => opt.code === value) ?? null}
+          options={filteredOptions}
+          value={filteredOptions.find((opt) => opt.code === value) ?? null}
           getOptionLabel={(opt) => opt.label}
           isOptionEqualToValue={(opt, v) => opt.code === v.code}
           onChange={(_, newValue) => onChange(newValue?.code ?? '')}
