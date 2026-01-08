@@ -5,6 +5,7 @@ import { useAtomValue } from 'jotai';
 import { pluginConfigAtom } from '@/config/states/plugin';
 import { type PluginConfig, createConfigSchema } from '@/shared/config';
 import { useAppFields } from '@/shared/hooks/useAppFields';
+import { useUnsavedChanges } from '@/config/hooks/useUnsavedChanges';
 
 /** プラグイン設定フォームのカスタムフック */
 export const usePluginForm = () => {
@@ -22,6 +23,9 @@ export const usePluginForm = () => {
     defaultValues: config,
     mode: 'onChange',
   });
+
+  // 未保存時のブラウザ離脱防止
+  useUnsavedChanges(methods.formState.isDirty);
 
   return { methods };
 };
