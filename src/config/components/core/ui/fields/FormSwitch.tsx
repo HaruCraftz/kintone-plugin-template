@@ -8,9 +8,6 @@ type Props = {
   label?: string;
 } & Omit<SwitchProps, 'checked'>;
 
-/**
- * React Hook Form と連動するスイッチコンポーネントです。
- */
 export const FormSwitch: FC<Props> = ({ name, label, ...switchProps }) => {
   const { control } = useFormContext();
 
@@ -21,7 +18,7 @@ export const FormSwitch: FC<Props> = ({ name, label, ...switchProps }) => {
       render={({ field: { value, onChange } }) => (
         <FormControlLabel
           control={
-            <Switch {...switchProps} checked={!!value} onChange={(e) => onChange(e.target.checked)} size="small" />
+            <Switch {...switchProps} size="small" checked={!!value} onChange={(e) => onChange(e.target.checked)} />
           }
           label={label}
         />
