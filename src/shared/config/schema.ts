@@ -3,8 +3,8 @@ import { z } from 'zod';
 /** Version 1 */
 export const PluginConditionSchemaV1 = z.object({
   id: z.string(), // 各行に一意のIDを付与
-  srcFieldCode: z.string(), // 参照先フィールドコード
-  destFieldCode: z.string(), // 更新先フィールドコード
+  srcFieldCode: z.string().min(1, { message: '選択必須です' }), // 参照先フィールドコード
+  destFieldCode: z.string().min(1, { message: '選択必須です' }), // 更新先フィールドコード
 });
 
 export const PluginConfigSchemaV1 = z.object({
@@ -29,10 +29,6 @@ export type AnyPluginConfig = PluginConfigV1; // | PluginConfigV2 | ...;
 export type PluginConfig = z.infer<typeof PluginConfigSchema>;
 export type PluginCondition = PluginConfig['conditions'][number];
 
-/**
- * 検証対象のフィールドキー
- * プラグインの要件に合わせてここに追加・削除する
- */
 const TARGET_FIELDS: Array<keyof PluginCondition> = ['srcFieldCode', 'destFieldCode'];
 
 /**
@@ -40,16 +36,17 @@ const TARGET_FIELDS: Array<keyof PluginCondition> = ['srcFieldCode', 'destFieldC
  * @param fieldCodes アプリに存在するフィールドコードのリスト
  */
 export const createConfigSchema = (fieldCodes: string[]) => {
-  return PluginConfigSchema.superRefine((data, ctx) => {
-    data.conditions.forEach((condition, index) => {
-      // 指定された各フィールドについて存在チェックを行う
-      TARGET_FIELDS.forEach((fieldKey) => {
-        const value = condition[fieldKey];
-        if (value && !fieldCodes.includes(value)) {
+  const fieldCodeSet = new Set(fieldCodes);
+  return PluginConfigSchema.superRefine(({ conditions }, ctx) => {
+    conditions.forEach((condition, index) => {
+      // 1. 存在チェック
+      TARGET_FIELDS.forEach((key) => {
+        const value = condition[key]; // 設定情報
+        if (value && !fieldCodeSet.has(value)) {
           ctx.addIssue({
             code: 'custom',
-            message: '指定されたフィールドが見つかりません',
-            path: ['conditions', index, fieldKey],
+            message: '指定されたフィールドがアプリ内に見つかりません',
+            path: ['conditions', index, key],
           });
         }
       });
