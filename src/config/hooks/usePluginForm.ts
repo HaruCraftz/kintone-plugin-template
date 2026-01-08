@@ -23,7 +23,5 @@ export const usePluginForm = () => {
     mode: 'onChange',
   });
 
-  const handleReset = () => methods.reset(config);
-
-  return { methods, handleReset };
+  return { methods };
 };
