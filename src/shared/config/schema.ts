@@ -28,3 +28,31 @@ export const PluginConfigSchema = PluginConfigSchemaV1;
 export type AnyPluginConfig = PluginConfigV1; // | PluginConfigV2 | ...;
 export type PluginConfig = z.infer<typeof PluginConfigSchema>;
 export type PluginCondition = PluginConfig['conditions'][number];
+
+/**
+ * 検証対象のフィールドキー
+ * プラグインの要件に合わせてここに追加・削除する
+ */
+const TARGET_FIELDS: Array<keyof PluginCondition> = ['srcFieldCode', 'destFieldCode'];
+
+/**
+ * 動的な検証を含むスキーマを生成する
+ * @param fieldCodes アプリに存在するフィールドコードのリスト
+ */
+export const createConfigSchema = (fieldCodes: string[]) => {
+  return PluginConfigSchema.superRefine((data, ctx) => {
+    data.conditions.forEach((condition, index) => {
+      // 指定された各フィールドについて存在チェックを行う
+      TARGET_FIELDS.forEach((fieldKey) => {
+        const value = condition[fieldKey];
+        if (value && !fieldCodes.includes(value)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: '指定されたフィールドが見つかりません',
+            path: ['conditions', index, fieldKey],
+          });
+        }
+      });
+    });
+  });
+};
