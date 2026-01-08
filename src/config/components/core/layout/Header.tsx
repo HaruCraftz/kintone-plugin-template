@@ -72,7 +72,7 @@ export const Header: FC = () => {
       <Stack direction="row" alignItems="center" spacing={2}>
         <SaveButton loading={loading} />
         <CancelButton loading={loading} onClick={requestDiscard} />
-        <DiscardConfirmDialog open={open} onClose={closeDialog} onConfirm={confirmDiscard} />
+        <DiscardConfirmDialog open={open} onConfirm={confirmDiscard} onClose={closeDialog} />
         <MenuButton loading={loading} items={menuItems} />
       </Stack>
     </Box>

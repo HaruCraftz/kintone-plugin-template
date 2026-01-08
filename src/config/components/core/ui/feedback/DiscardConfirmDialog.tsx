@@ -3,11 +3,11 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 
 type Props = {
   open: boolean;
-  onClose: () => void;
   onConfirm: () => void;
+  onClose: () => void;
 };
 
-export const DiscardConfirmDialog: FC<Props> = ({ open, onClose, onConfirm }) => (
+export const DiscardConfirmDialog: FC<Props> = ({ open, onConfirm, onClose }) => (
   <Dialog open={open} onClose={onClose}>
     <DialogTitle>設定の破棄</DialogTitle>
     <DialogContent>
