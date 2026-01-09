@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { Stack } from '@mui/material';
-import { type PluginConfig, type PluginCondition, getNewCondition } from '@/shared/config';
-import { FormSection, FormTitle, FormDescription } from '@/config/style';
+import { type PluginConfig, getNewCondition } from '@/shared/config';
+import { FormSection, FormTitle, FormDescription } from '@/config/components/core/ui/form';
 import { DynamicSortableList } from '@/config/components/core/ui/fields/DynamicSortableList';
 import { FormAutocomplete } from '@/config/components/core/ui/fields/FormAutocomplete';
 import { useDuplicateCheck } from '@/config/hooks/useDuplicateCheck';
 
 const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
-  const { isDuplicate } = useDuplicateCheck(index);
+  const { isDuplicate } = useDuplicateCheck(index, 'conditions');
 
   return (
     <Stack direction="row" spacing={2} alignItems="center">
