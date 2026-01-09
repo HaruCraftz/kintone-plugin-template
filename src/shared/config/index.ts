@@ -5,7 +5,7 @@ import {
   type PluginCondition,
   type AnyPluginConfig,
 } from './schema';
-import { PLUGIN_ID } from '../lib/kintone';
+import { PLUGIN_ID } from '@/shared/lib/kintone';
 import { nanoid } from 'nanoid';
 
 export * from './schema';
