@@ -3,7 +3,7 @@ import { useSetAtom } from 'jotai';
 import { useSnackbar } from 'notistack';
 import type { UseFormReset } from 'react-hook-form';
 import { storeConfig, type PluginConfig } from '@/shared/config';
-import { pluginConfigAtom } from '@/config/states/plugin';
+import { loadingAtom, pluginConfigAtom } from '@/config/states/plugin';
 
 type UsePluginSubmitProps = {
   reset: UseFormReset<PluginConfig>;
@@ -19,11 +19,14 @@ export const usePluginSubmit = ({
   successAction,
 }: UsePluginSubmitProps) => {
   const { enqueueSnackbar } = useSnackbar();
+  const setLoading = useSetAtom(loadingAtom);
   const setConfig = useSetAtom(pluginConfigAtom);
 
   const onSubmit = useCallback(
     async (data: PluginConfig) => {
       try {
+        setLoading(true);
+
         // kintoneへ保存
         storeConfig(data, () => {});
 
@@ -43,9 +46,11 @@ export const usePluginSubmit = ({
         console.error(e);
         enqueueSnackbar('保存に失敗しました。', { variant: 'error' });
         onError?.();
+      } finally {
+        setLoading(false);
       }
     },
-    [reset, setConfig, enqueueSnackbar, onSuccess, onError, successAction]
+    [reset, setConfig, setLoading, enqueueSnackbar, onSuccess, onError, successAction]
   );
 
   return { onSubmit };
