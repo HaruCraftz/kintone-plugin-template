@@ -59,12 +59,12 @@ export const SortableRowContainer: FC<Props> = ({
       <Box sx={{ flex: 1, display: 'flex', gap: 2, alignItems: 'center' }}>{children}</Box>
 
       <Box sx={{ display: 'flex' }}>
-        <Tooltip title="追加">
+        <Tooltip title="下に新しい行を追加">
           <IconButton size="small" onClick={() => onAdd(index + 1)}>
             <AddIcon fontSize="small" />
           </IconButton>
         </Tooltip>
-        <Tooltip title="削除">
+        <Tooltip title="この行を削除">
           <IconButton
             size="small"
             onClick={() => onDelete(index)}

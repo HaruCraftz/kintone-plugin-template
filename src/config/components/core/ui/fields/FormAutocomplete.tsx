@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Autocomplete, Box, TextField, Typography } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material';
 import { useAppFields } from '@/shared/hooks/useAppFields';
 import type { FieldType } from '@/types/kintone';
 
@@ -10,6 +11,8 @@ type Props = {
   placeholder?: string;
   typeFilter?: FieldType[];
   shouldShowOption?: (field: { label: string; code: string }) => boolean;
+  width?: string | number;
+  sx?: SxProps<Theme>;
 };
 
 export const FormAutocomplete: FC<Props> = ({
@@ -18,6 +21,8 @@ export const FormAutocomplete: FC<Props> = ({
   placeholder,
   typeFilter,
   shouldShowOption,
+  width,
+  sx,
 }) => {
   const { control } = useFormContext();
   const { fields: fieldOptions } = useAppFields(typeFilter);
@@ -37,6 +42,10 @@ export const FormAutocomplete: FC<Props> = ({
           onChange={(_, newValue) => onChange(newValue?.code ?? '')}
           fullWidth
           size="small"
+          sx={{
+            maxWidth: width ?? { xs: '100%', sm: 400 },
+            ...sx,
+          }}
           renderOption={(props, option) => {
             const { key, ...rest } = props;
             return (

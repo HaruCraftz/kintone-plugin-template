@@ -11,7 +11,11 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
   const { isDuplicate } = useDuplicateCheck(index, 'conditions');
 
   return (
-    <Stack direction="row" spacing={2} alignItems="center">
+    <Stack
+      direction={{ xs: 'column', sm: 'row' }}
+      spacing={2}
+      alignItems={{ xs: 'stretch', sm: 'center' }}
+    >
       <FormAutocomplete
         name={`conditions.${index}.srcFieldCode`}
         label="生年月日フィールド"
