@@ -3,7 +3,7 @@
   "manifest_version": 1,
   "version": "0.0.1",
   "type": "APP",
-  "icon": "contents/icon.png",
+  "icon": "image/icon.png",
   "name": {
     "en": "kintone-plugin-template",
     "ja": "kintoneプラグイン開発テンプレート"
@@ -18,16 +18,16 @@
   },
   "desktop": {
     "js": ["js/desktop.js"],
-    "css": ["css/desktop.css"]
+    "css": []
   },
   "mobile": {
     "js": ["js/mobile.js"],
-    "css": ["css/mobile.css"]
+    "css": []
   },
   "config": {
-    "html": "contents/config.html",
+    "html": "html/config.html",
     "js": ["js/config.js"],
-    "css": ["css/config.css"],
+    "css": [],
     "required_params": []
   }
 }
