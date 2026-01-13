@@ -48,6 +48,9 @@ export const Header: FC<Props> = ({ activeTab, onTabChange, onCancel }) => {
         top: 48, // kintoneヘッダーの高さを考慮
         zIndex: 30,
 
+        // スペーシング設定
+        px: 2, // 水平方向のパディング
+
         // スタイル設定
         bgcolor: 'background.paper',
         borderBottom: 1,
