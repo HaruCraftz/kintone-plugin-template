@@ -12,9 +12,10 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
 
   return (
     <Stack
-      direction={{ xs: 'column', sm: 'row' }}
+      direction={{ xs: 'column', sm: 'row' }} // mobile: column, desktop: row
+      alignItems={{ xs: 'stretch', sm: 'center' }} // mobile: stretch, desktop: center
       spacing={2}
-      alignItems={{ xs: 'stretch', sm: 'center' }}
+      sx={{ width: '100%' }}
     >
       <FormAutocomplete
         name={`conditions.${index}.srcFieldCode`}

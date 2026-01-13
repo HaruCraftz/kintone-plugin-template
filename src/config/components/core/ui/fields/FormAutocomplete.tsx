@@ -11,7 +11,6 @@ type Props = {
   placeholder?: string;
   typeFilter?: FieldType[];
   shouldShowOption?: (field: { label: string; code: string }) => boolean;
-  width?: string | number;
   sx?: SxProps<Theme>;
 };
 
@@ -21,7 +20,6 @@ export const FormAutocomplete: FC<Props> = ({
   placeholder,
   typeFilter,
   shouldShowOption,
-  width,
   sx,
 }) => {
   const { control } = useFormContext();
@@ -39,11 +37,11 @@ export const FormAutocomplete: FC<Props> = ({
           value={filteredOptions.find((opt) => opt.code === value) ?? null}
           getOptionLabel={(opt) => opt.label}
           isOptionEqualToValue={(opt, v) => opt.code === v.code}
-          onChange={(_, newValue) => onChange(newValue?.code ?? '')}
+          onChange={(_, field) => onChange(field?.code ?? '')}
           fullWidth
-          size="small"
           sx={{
-            maxWidth: width ?? { xs: '100%', sm: 400 },
+            flex: 1,
+            maxWidth: { xs: '100%', sm: 400 },
             ...sx,
           }}
           renderOption={(props, option) => {

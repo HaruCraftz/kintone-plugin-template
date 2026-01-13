@@ -52,13 +52,23 @@ export const SortableRowContainer: FC<Props> = ({
         '&:hover': { borderColor: 'divider', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' },
       }}
     >
-      <Box {...attributes} {...listeners} sx={{ cursor: 'grab', color: 'text.disabled', px: 0.5 }}>
+      <Box
+        {...attributes}
+        {...listeners}
+        sx={{
+          cursor: 'grab',
+          color: 'text.disabled',
+          px: 0.5,
+          mt: '9px', // ラベルの浮き分を考慮して入力ボックスの中央に寄せる
+        }}
+      >
         <DragIndicatorIcon fontSize="small" />
       </Box>
 
       <Box sx={{ flex: 1, display: 'flex', gap: 2, alignItems: 'center' }}>{children}</Box>
 
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', mt: '4px' }}>
+        {/* ボタンはIconButtonのパディングがあるため控えめに調整 */}
         <Tooltip title="下に新しい行を追加">
           <IconButton size="small" onClick={() => onAdd(index + 1)}>
             <AddIcon fontSize="small" />
