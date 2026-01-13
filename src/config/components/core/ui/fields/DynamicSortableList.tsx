@@ -58,11 +58,16 @@ export function DynamicSortableList<T extends { id: string }>({
         ))}
       </SortableContext>
       <Button
-        fullWidth
         variant="outlined"
         startIcon={<AddIcon />}
         onClick={() => onAdd()}
-        sx={{ mt: 1, borderStyle: 'dashed' }}
+        sx={{
+          mt: 1,
+          borderStyle: 'dashed',
+          width: { xs: '100%', sm: 816 },
+          justifyContent: 'center',
+          py: 1,
+        }}
       >
         {addButtonLabel}
       </Button>

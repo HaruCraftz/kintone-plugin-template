@@ -40,8 +40,7 @@ export const FormAutocomplete: FC<Props> = ({
           onChange={(_, field) => onChange(field?.code ?? '')}
           fullWidth
           sx={{
-            flex: 1,
-            maxWidth: { xs: '100%', sm: 400 },
+            width: { xs: '100%', sm: 400 },
             ...sx,
           }}
           renderOption={(props, option) => {

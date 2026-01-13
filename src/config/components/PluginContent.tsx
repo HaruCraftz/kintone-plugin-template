@@ -8,6 +8,12 @@ import { usePluginSubmit } from '@/config/hooks/usePluginSubmit';
 import { Header } from '@/config/components/core/layout/Header';
 import { Form } from './core/layout/Form';
 
+/**
+ * TODO: 設定追加バーの幅調整
+ * TODO: 画面の高さ調整
+ * TODO: 選択肢の文字サイズの調整
+ * TODO: 設定リセットロジックの修正
+ */
 export const PluginContent: FC = () => {
   const { methods } = usePluginForm();
   const [activeTab, setActiveTab] = useAtom(activeTabIndexAtom);
@@ -37,7 +43,7 @@ export const PluginContent: FC = () => {
 
   return (
     <FormProvider {...methods}>
-      <Box component="form" onSubmit={handleSubmit}>
+      <Box component="form" onSubmit={handleSubmit} sx={{ minHeight: 'calc(100vh - 64px)' }}>
         <Header activeTab={activeTab} onTabChange={handleTabChange} onCancel={handleCancel} />
         <Form />
       </Box>

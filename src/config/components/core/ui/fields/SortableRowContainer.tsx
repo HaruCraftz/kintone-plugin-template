@@ -65,8 +65,7 @@ export const SortableRowContainer: FC<Props> = ({
         <DragIndicatorIcon fontSize="small" />
       </Box>
 
-      <Box sx={{ flex: 1, display: 'flex', gap: 2, alignItems: 'center' }}>{children}</Box>
-
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>{children}</Box>
       <Box sx={{ display: 'flex', mt: '4px' }}>
         {/* ボタンはIconButtonのパディングがあるため控えめに調整 */}
         <Tooltip title="下に新しい行を追加">
