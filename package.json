@@ -1,5 +1,5 @@
 {
-  "name": "kintone-simple-plugin-template",
+  "name": "kintone-plugin-template",
   "version": "1.0.0",
   "description": "kintoneプラグインテンプレート",
   "author": "Masanobu Sunohara",
@@ -40,6 +40,7 @@
     "zod": "^4.2.1"
   },
   "devDependencies": {
+    "@clack/prompts": "^0.11.0",
     "@cybozu/eslint-config": "^25.0.0",
     "@kintone/dts-gen": "^9.0.0",
     "@kintone/plugin-packer": "^9.0.0",
