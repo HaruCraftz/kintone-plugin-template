@@ -17,7 +17,7 @@ export default defineConfig({
   },
   output: {
     distPath: {
-      root: 'dist',
+      root: 'lib',
       html: './',
       js: 'js',
       jsAsync: 'js',

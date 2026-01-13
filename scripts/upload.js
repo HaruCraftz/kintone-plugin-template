@@ -7,7 +7,7 @@ import 'dotenv/config';
 async function main() {
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const rootDir = path.resolve(__dirname, '..');
-  const pluginPath = path.join(rootDir, 'plugin', 'plugin.zip');
+  const pluginPath = path.join(rootDir, 'dist', 'plugin.zip');
 
   const requiredEnvVars = ['KINTONE_BASE_URL', 'KINTONE_USERNAME', 'KINTONE_PASSWORD'];
 
