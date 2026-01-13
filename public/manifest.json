@@ -3,27 +3,31 @@
   "manifest_version": 1,
   "version": "0.0.1",
   "type": "APP",
+  "icon": "contents/icon.png",
   "name": {
-    "en": "Age Calculation Plugin",
-    "ja": "年齢計算プラグイン"
+    "en": "kintone-plugin-template",
+    "ja": "kintoneプラグイン開発テンプレート"
   },
   "description": {
-    "en": "This plugin calculates age from date of birth.",
-    "ja": "生年月日から年齢を計算するプラグインです。"
+    "en": "Template for kintone plugin",
+    "ja": "kintoneプラグインの開発テンプレートです。"
   },
-  "icon": "dist/contents/icon.png",
-  "config": {
-    "html": "dist/contents/config.html",
-    "js": ["dist/js/config.js"],
-    "css": ["dist/css/config.css"],
-    "required_params": []
+  "homepage_url": {
+    "en": "https://github.com/HaruCraftz/kintone-plugin-simple-template",
+    "ja": "https://github.com/HaruCraftz/kintone-plugin-simple-template"
   },
   "desktop": {
-    "js": ["dist/js/desktop.js"],
-    "css": ["dist/css/desktop.css"]
+    "js": ["js/desktop.js"],
+    "css": ["css/desktop.css"]
   },
   "mobile": {
-    "js": [],
-    "css": []
+    "js": ["js/mobile.js"],
+    "css": ["css/mobile.css"]
+  },
+  "config": {
+    "html": "contents/config.html",
+    "js": ["js/config.js"],
+    "css": ["css/config.css"],
+    "required_params": []
   }
 }
