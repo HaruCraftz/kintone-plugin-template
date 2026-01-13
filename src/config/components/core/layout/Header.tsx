@@ -2,11 +2,9 @@ import { type FC } from 'react';
 import { useAtomValue } from 'jotai';
 import { Box, Tabs, Tab, Stack } from '@mui/material';
 import { loadingAtom } from '@/config/states/plugin';
-import { useDiscardConfirm } from '@/config/hooks/useDiscardConfirm';
 import { FormTabs } from '@/config/components/features/FormTabs';
 import { SaveButton } from '@/config/components/core/ui/button/SaveButton';
 import { CancelButton } from '@/config/components/core/ui/button/CancelButton';
-import { DiscardConfirmDialog } from '@/config/components/core/ui/feedback/DiscardConfirmDialog';
 import { MenuButton } from '@/config/components/core/ui/button/MenuButton';
 import { ResetMenuItem } from '@/config/components/core/ui/menu/ResetMenuItem';
 
@@ -30,9 +28,6 @@ export const Header: FC<Props> = ({ activeTab, onTabChange, onCancel }) => {
       'aria-controls': `scrollable-auto-tabpanel-${index}`, // IDで指定した要素を操作するものとスクリーンリーダーに伝えるための属性
     };
   };
-
-  /** キャンセル */
-  const { open, requestDiscard, confirmDiscard, closeDialog } = useDiscardConfirm(onCancel);
 
   return (
     <Box
@@ -73,8 +68,7 @@ export const Header: FC<Props> = ({ activeTab, onTabChange, onCancel }) => {
       {/* 右側コンテンツ：アクションボタン群 */}
       <Stack direction="row" alignItems="center" spacing={2}>
         <SaveButton loading={loading} />
-        <CancelButton loading={loading} onClick={requestDiscard} />
-        <DiscardConfirmDialog open={open} onConfirm={confirmDiscard} onClose={closeDialog} />
+        <CancelButton loading={loading} onClick={onCancel} />
         <MenuButton loading={loading}>
           <ResetMenuItem />
         </MenuButton>
