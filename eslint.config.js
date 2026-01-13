@@ -13,6 +13,7 @@ export default defineConfig([
     },
     rules: {
       '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-empty-function': 'off',
     },
   },
 ]);
