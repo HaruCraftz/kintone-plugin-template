@@ -10,7 +10,11 @@ type Props = {
 
 const DEFAULT_BUTTON_ID = 'generic-menu-button';
 
-export const MenuButton: FC<Props> = memo(function MenuButton({ loading, children, buttonId = DEFAULT_BUTTON_ID }) {
+export const MenuButton: FC<Props> = memo(function MenuButton({
+  loading,
+  children,
+  buttonId = DEFAULT_BUTTON_ID,
+}) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 

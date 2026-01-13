@@ -18,7 +18,12 @@ export const FormSwitch: FC<Props> = ({ name, label, ...switchProps }) => {
       render={({ field: { value, onChange } }) => (
         <FormControlLabel
           control={
-            <Switch {...switchProps} size="small" checked={!!value} onChange={(e) => onChange(e.target.checked)} />
+            <Switch
+              {...switchProps}
+              size="small"
+              checked={!!value}
+              onChange={(e) => onChange(e.target.checked)}
+            />
           }
           label={label}
         />

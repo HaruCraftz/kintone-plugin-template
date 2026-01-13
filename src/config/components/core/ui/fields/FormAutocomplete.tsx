@@ -12,7 +12,13 @@ type Props = {
   shouldShowOption?: (field: { label: string; code: string }) => boolean;
 };
 
-export const FormAutocomplete: FC<Props> = ({ name, label, placeholder, typeFilter, shouldShowOption }) => {
+export const FormAutocomplete: FC<Props> = ({
+  name,
+  label,
+  placeholder,
+  typeFilter,
+  shouldShowOption,
+}) => {
   const { control } = useFormContext();
   const { fields: fieldOptions } = useAppFields(typeFilter);
   // fieldOptionsをフィルタリング

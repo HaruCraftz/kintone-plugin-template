@@ -37,7 +37,9 @@ export const FieldMappingSection: FC = () => {
   return (
     <FormSection>
       <FormTitle>フィールドの設定</FormTitle>
-      <FormDescription last>生年月日フィールドと年齢を表示するフィールドを選択してください。</FormDescription>
+      <FormDescription last>
+        生年月日フィールドと年齢を表示するフィールドを選択してください。
+      </FormDescription>
       <DynamicSortableList
         items={fields}
         onMove={move}

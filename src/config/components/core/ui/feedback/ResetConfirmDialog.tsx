@@ -1,5 +1,12 @@
 import { type FC } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+} from '@mui/material';
 
 type Props = {
   open: boolean;
@@ -12,7 +19,9 @@ export const ResetConfirmDialog: FC<Props> = ({ open, onConfirm, onClose }) => {
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>設定のリセット</DialogTitle>
       <DialogContent>
-        <DialogContentText>このプラグインの設定を初期状態に戻します。よろしいですか？</DialogContentText>
+        <DialogContentText>
+          このプラグインの設定を初期状態に戻します。よろしいですか？
+        </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button color="error" variant="contained" onClick={onConfirm}>

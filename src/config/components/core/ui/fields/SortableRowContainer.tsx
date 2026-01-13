@@ -15,8 +15,17 @@ type Props = {
   children: ReactNode;
 };
 
-export const SortableRowContainer: FC<Props> = ({ id, index, onAdd, onDelete, isDeleteDisabled, children }) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+export const SortableRowContainer: FC<Props> = ({
+  id,
+  index,
+  onAdd,
+  onDelete,
+  isDeleteDisabled,
+  children,
+}) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -56,7 +65,12 @@ export const SortableRowContainer: FC<Props> = ({ id, index, onAdd, onDelete, is
           </IconButton>
         </Tooltip>
         <Tooltip title="削除">
-          <IconButton size="small" onClick={() => onDelete(index)} disabled={isDeleteDisabled} color="error">
+          <IconButton
+            size="small"
+            onClick={() => onDelete(index)}
+            disabled={isDeleteDisabled}
+            color="error"
+          >
             <DeleteIcon fontSize="small" />
           </IconButton>
         </Tooltip>

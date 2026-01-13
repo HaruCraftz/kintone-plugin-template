@@ -12,7 +12,12 @@ type UsePluginSubmitProps = {
   successAction?: React.ReactNode; // 保存成功時のSnackbarに表示するアクション
 };
 
-export const usePluginSubmit = ({ reset, onSuccess, onError, successAction }: UsePluginSubmitProps) => {
+export const usePluginSubmit = ({
+  reset,
+  onSuccess,
+  onError,
+  successAction,
+}: UsePluginSubmitProps) => {
   const { enqueueSnackbar } = useSnackbar();
   const setConfig = useSetAtom(pluginConfigAtom);
 

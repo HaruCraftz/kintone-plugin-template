@@ -91,7 +91,10 @@ export type SubtableRow<T extends Record<string, InSubtable>> = {
   value: T;
 };
 
-export type Subtable<T extends Record<string, InSubtable>> = FieldWith<'SUBTABLE', Array<SubtableRow<T>>>;
+export type Subtable<T extends Record<string, InSubtable>> = FieldWith<
+  'SUBTABLE',
+  Array<SubtableRow<T>>
+>;
 
 // --- 全フィールドの Union ---
 export type OneOf =

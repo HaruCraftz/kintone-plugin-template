@@ -34,7 +34,9 @@ export const createConfig = (): PluginConfig => ({
  * 保存: 設定情報をJSON文字列に変換してkintoneに保存
  */
 export const storeConfig = (config: PluginConfig): void => {
-  const rawConfig = Object.fromEntries(Object.entries(config).map(([key, value]) => [key, JSON.stringify(value)]));
+  const rawConfig = Object.fromEntries(
+    Object.entries(config).map(([key, value]) => [key, JSON.stringify(value)])
+  );
   kintone.plugin.app.setConfig(rawConfig);
 };
 
@@ -63,7 +65,9 @@ export const restoreConfig = (): PluginConfig => {
     if (!Object.keys(rawConfig).length) return createConfig();
 
     // パース処理
-    const parsed = Object.fromEntries(Object.entries(rawConfig).map(([k, v]) => [k, JSON.parse(v)]));
+    const parsed = Object.fromEntries(
+      Object.entries(rawConfig).map(([k, v]) => [k, JSON.parse(v)])
+    );
 
     // 新しい設定に変換
     return PluginConfigSchema.parse(migrateConfig(parsed as AnyPluginConfig));
