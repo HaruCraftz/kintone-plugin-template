@@ -19,6 +19,7 @@
 
     /* Type Checking */
     "strict": true,
+    "noImplicitAny": true,
 
     /* Completeness */
     "skipLibCheck": true // 外部ライブラリの型チェックをスキップ
