@@ -16,8 +16,8 @@
     "lint:eslint": "eslint \"src/**/*.{js,ts,jsx,tsx}\"",
     "lint:prettier": "prettier --check  \"src/**/*.{js,ts,jsx,tsx}\" --cache",
     "fix": "run-p fix:*",
-    "fix:eslint": "run-s 'lint:eslint -- --fix'",
-    "fix:prettier": "run-s 'lint:prettier -- --write'",
+    "fix:eslint": "eslint --fix \"src/**/*.{js,ts,jsx,tsx}\"",
+    "fix:prettier": "prettier --write \"src/**/*.{js,ts,jsx,tsx}\"",
     "upload": "node scripts/upload.js",
     "watch": "kintone-plugin-uploader dist/plugin.zip --waiting-dialog-ms 3000 --watch"
   },
