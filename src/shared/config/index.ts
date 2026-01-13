@@ -33,11 +33,11 @@ export const createConfig = (): PluginConfig => ({
 /**
  * 保存: 設定情報をJSON文字列に変換してkintoneに保存
  */
-export const storeConfig = (config: PluginConfig): void => {
+export const storeConfig = (config: PluginConfig, callback?: () => void): void => {
   const rawConfig = Object.fromEntries(
     Object.entries(config).map(([key, value]) => [key, JSON.stringify(value)])
   );
-  kintone.plugin.app.setConfig(rawConfig);
+  kintone.plugin.app.setConfig(rawConfig, callback);
 };
 
 /**

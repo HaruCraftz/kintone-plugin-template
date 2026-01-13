@@ -24,7 +24,7 @@ export const PluginContent: FC = () => {
   const { onSubmit } = usePluginSubmit({
     reset: methods.reset,
     successAction: (
-      <Button color="inherit" size="small" variant="outlined" onClick={handleBack}>
+      <Button type="button" color="inherit" size="small" variant="outlined" onClick={handleBack}>
         プラグイン一覧に戻る
       </Button>
     ),

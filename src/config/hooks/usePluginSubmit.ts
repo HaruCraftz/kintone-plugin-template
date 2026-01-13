@@ -25,7 +25,7 @@ export const usePluginSubmit = ({
     async (data: PluginConfig) => {
       try {
         // kintoneへ保存
-        storeConfig(data);
+        storeConfig(data, () => {});
 
         // Jotai Atomの更新
         setConfig(data);
