@@ -12,7 +12,7 @@ export const useResetConfig = () => {
     useCallback(
       (_, set) => {
         set(pluginConfigAtom, createConfig());
-        enqueueSnackbar('設定をリセットしました', { variant: 'error' });
+        enqueueSnackbar('設定をリセットしました', { variant: 'success' });
       },
       [enqueueSnackbar]
     )

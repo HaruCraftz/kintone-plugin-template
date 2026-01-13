@@ -24,10 +24,10 @@ export const ResetConfirmDialog: FC<Props> = ({ open, onConfirm, onClose }) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button color="error" variant="contained" onClick={onConfirm}>
+        <Button variant="contained" color="error" onClick={onConfirm}>
           リセット
         </Button>
-        <Button variant="contained" onClick={onClose}>
+        <Button variant="contained" color="inherit" onClick={onClose}>
           キャンセル
         </Button>
       </DialogActions>

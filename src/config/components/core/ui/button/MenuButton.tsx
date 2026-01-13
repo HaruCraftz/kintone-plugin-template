@@ -39,7 +39,6 @@ export const MenuButton: FC<Props> = memo(function MenuButton({
       >
         <MoreVert />
       </IconButton>
-
       <Menu
         id="menu-list"
         anchorEl={anchorEl}
