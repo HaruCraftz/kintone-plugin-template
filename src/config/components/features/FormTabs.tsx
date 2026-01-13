@@ -9,11 +9,11 @@ export interface TabItem {
 
 export const FormTabs: TabItem[] = [
   {
-    label: '共通設定',
-    content: <CommonSettingsSection />,
-  },
-  {
     label: '基本設定',
     content: <FieldMappingSection />,
+  },
+  {
+    label: '共通設定',
+    content: <CommonSettingsSection />,
   },
 ];
