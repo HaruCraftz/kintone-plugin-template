@@ -1,5 +1,10 @@
 import { type FC } from 'react';
-import { Box, keyframes } from '@mui/material';
+import { type SxProps, type Theme, Box, keyframes, Typography } from '@mui/material';
+
+type Props = {
+  label?: string;
+  sx?: SxProps<Theme>;
+};
 
 const wave = keyframes`
   0%, 100% { transform: scaleY(0.5); }
@@ -22,5 +27,24 @@ export const WaveAnimation: FC = () => (
         }}
       />
     ))}
+  </Box>
+);
+
+export const WaveLoader: FC<Props> = ({ label = '読み込み中...', sx }) => (
+  <Box
+    sx={{
+      minHeight: '400px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 4,
+      ...sx,
+    }}
+  >
+    <WaveAnimation />
+    <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 'medium' }}>
+      {label}
+    </Typography>
   </Box>
 );

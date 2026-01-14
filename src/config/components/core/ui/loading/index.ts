@@ -1,2 +1,2 @@
-export * from './Loader';
-export * from './WaveAnimation';
+export * from './WaveLoader';
+export * from './GeometryLoader';
