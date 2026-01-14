@@ -59,15 +59,15 @@ export const SortableRowContainer: FC<Props> = ({
           cursor: 'grab',
           color: 'text.disabled',
           px: 0.5,
-          mt: '9px', // ラベルの浮き分を考慮して入力ボックスの中央に寄せる
+          mt: '9px',
         }}
       >
         <DragIndicatorIcon fontSize="small" />
       </Box>
 
-      <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>{children}</Box>
+      <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', minWidth: 0 }}>{children}</Box>
+
       <Box sx={{ display: 'flex', mt: '4px' }}>
-        {/* ボタンはIconButtonのパディングがあるため控えめに調整 */}
         <Tooltip title="下に新しい行を追加">
           <IconButton size="small" onClick={() => onAdd(index + 1)}>
             <AddIcon fontSize="small" />

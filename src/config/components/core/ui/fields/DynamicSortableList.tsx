@@ -64,7 +64,7 @@ export function DynamicSortableList<T extends { id: string }>({
         sx={{
           mt: 1,
           borderStyle: 'dashed',
-          width: { xs: '100%', sm: 816 },
+          width: '100%',
           justifyContent: 'center',
           py: 1,
         }}

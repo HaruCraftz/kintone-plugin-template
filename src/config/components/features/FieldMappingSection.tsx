@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
-import { Stack } from '@mui/material';
+import { Stack, Box } from '@mui/material';
 import { type PluginConfig, getNewCondition } from '@/shared/config';
 import { FormSection, FormTitle, FormDescription } from '@/config/components/core/ui/form';
 import { DynamicSortableList } from '@/config/components/core/ui/fields/DynamicSortableList';
@@ -12,8 +12,8 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
 
   return (
     <Stack
-      direction={{ xs: 'column', sm: 'row' }} // mobile: column, desktop: row
-      alignItems={{ xs: 'stretch', sm: 'center' }} // mobile: stretch, desktop: center
+      direction={{ xs: 'column', sm: 'row' }}
+      alignItems={{ xs: 'stretch', sm: 'center' }}
       spacing={2}
       sx={{ width: '100%' }}
     >
@@ -23,6 +23,7 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
         placeholder="フィールドを選択してください"
         typeFilter={['DATE']}
         shouldShowOption={(field) => !isDuplicate(field.code, 'srcFieldCode')}
+        sx={{ flex: 1, minWidth: 0 }}
       />
       <FormAutocomplete
         name={`conditions.${index}.destFieldCode`}
@@ -30,6 +31,7 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
         placeholder="フィールドを選択してください"
         typeFilter={['SINGLE_LINE_TEXT']}
         shouldShowOption={(field) => !isDuplicate(field.code, 'destFieldCode')}
+        sx={{ flex: 1, minWidth: 0 }}
       />
     </Stack>
   );
@@ -45,17 +47,19 @@ export const FieldMappingSection: FC = () => {
       <FormDescription last>
         生年月日フィールドと年齢を表示するフィールドを選択してください。
       </FormDescription>
-      <DynamicSortableList
-        items={fields}
-        onMove={move}
-        onRemove={remove}
-        onAdd={(index) => {
-          const row = getNewCondition();
-          index !== undefined ? insert(index, row) : append(row);
-        }}
-        addButtonLabel="新しい設定を追加"
-        renderItem={(_, index) => <FieldMappingRow index={index} />}
-      />
+      <Box sx={{ maxWidth: 840 }}>
+        <DynamicSortableList
+          items={fields}
+          onMove={move}
+          onRemove={remove}
+          onAdd={(index) => {
+            const row = getNewCondition();
+            index !== undefined ? insert(index, row) : append(row);
+          }}
+          addButtonLabel="新しい設定を追加"
+          renderItem={(_, index) => <FieldMappingRow index={index} />}
+        />
+      </Box>
     </FormSection>
   );
 };
