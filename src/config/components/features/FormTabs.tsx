@@ -2,10 +2,10 @@ import { type ReactNode } from 'react';
 import { CommonSettingsSection } from '@/config/components/features/CommonSettingsSection';
 import { FieldMappingSection } from '@/config/components/features/FieldMappingSection';
 
-export interface TabItem {
+export type TabItem = {
   label: string;
   content: ReactNode;
-}
+};
 
 export const FormTabs: TabItem[] = [
   {

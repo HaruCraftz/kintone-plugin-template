@@ -39,7 +39,7 @@ export const createConfigSchema = (fieldCodes: string[]) => {
   const fieldCodeSet = new Set(fieldCodes);
   return PluginConfigSchema.superRefine(({ conditions }, ctx) => {
     conditions.forEach((condition, index) => {
-      // 1. 存在チェック
+      // 存在チェック
       TARGET_FIELDS.forEach((key) => {
         const value = condition[key]; // 設定情報
         if (value && !fieldCodeSet.has(value)) {
