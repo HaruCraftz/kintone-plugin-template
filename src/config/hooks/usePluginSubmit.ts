@@ -1,26 +1,20 @@
 import { useCallback } from 'react';
 import { useSetAtom } from 'jotai';
 import { useSnackbar } from 'notistack';
-import type { UseFormReset } from 'react-hook-form';
 import { storeConfig, type PluginConfig } from '@/shared/config';
-import { loadingAtom, pluginConfigAtom } from '@/config/states/plugin';
+import { loadingAtom } from '@/config/states/plugin';
+import { useSyncPluginConfig } from './useSyncPluginConfig';
 
 type UsePluginSubmitProps = {
-  reset: UseFormReset<PluginConfig>;
   onSuccess?: () => void;
   onError?: () => void;
   successAction?: React.ReactNode; // 保存成功時のSnackbarに表示するアクション
 };
 
-export const usePluginSubmit = ({
-  reset,
-  onSuccess,
-  onError,
-  successAction,
-}: UsePluginSubmitProps) => {
-  const { enqueueSnackbar } = useSnackbar();
+export const usePluginSubmit = ({ onSuccess, onError, successAction }: UsePluginSubmitProps) => {
   const setLoading = useSetAtom(loadingAtom);
-  const setConfig = useSetAtom(pluginConfigAtom);
+  const { syncConfig } = useSyncPluginConfig();
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = useCallback(
     async (data: PluginConfig) => {
@@ -30,11 +24,8 @@ export const usePluginSubmit = ({
         // kintoneへ保存
         storeConfig(data, () => {});
 
-        // Jotai Atomの更新
-        setConfig(data);
-
-        // RHFの状態をリセット（isDirtyをクリア、現在の値を初期値とする）
-        reset(data);
+        // 状態の同期更新 (Jotai & RHF)
+        syncConfig(data);
 
         enqueueSnackbar('設定を保存しました。', {
           variant: 'success',
@@ -50,7 +41,7 @@ export const usePluginSubmit = ({
         setLoading(false);
       }
     },
-    [reset, setConfig, setLoading, enqueueSnackbar, onSuccess, onError, successAction]
+    [syncConfig, setLoading, enqueueSnackbar, onSuccess, onError, successAction]
   );
 
   return { onSubmit };

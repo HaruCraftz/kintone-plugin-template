@@ -2,14 +2,18 @@ import { type FC } from 'react';
 import { useAtomValue } from 'jotai';
 import { Box } from '@mui/material';
 import { activeTabIndexAtom } from '@/config/states/plugin';
-import { FormTabs } from '@/config/components/features/FormTabs';
+import { type TabItem } from '@/config/components/features/FormTabs';
 
-export const Form: FC = () => {
+type Props = {
+  tabs: TabItem[];
+};
+
+export const Form: FC<Props> = ({ tabs }) => {
   const activeTabIndex = useAtomValue(activeTabIndexAtom);
 
   return (
     <Box sx={{ gridArea: 'content' }}>
-      {FormTabs.map((tab, index) => (
+      {tabs.map((tab, index) => (
         <Box
           key={index}
           role="tabpanel"

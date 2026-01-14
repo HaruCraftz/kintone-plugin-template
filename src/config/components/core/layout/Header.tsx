@@ -2,19 +2,20 @@ import { type FC } from 'react';
 import { useAtomValue } from 'jotai';
 import { Box, Tabs, Tab, Stack } from '@mui/material';
 import { loadingAtom } from '@/config/states/plugin';
-import { FormTabs } from '@/config/components/features/FormTabs';
+import { type TabItem } from '@/config/components/features/FormTabs';
 import { SaveButton } from '@/config/components/core/ui/button/SaveButton';
 import { CancelButton } from '@/config/components/core/ui/button/CancelButton';
 import { MenuButton } from '@/config/components/core/ui/button/MenuButton';
 import { ResetMenuItem } from '@/config/components/core/ui/menu/ResetMenuItem';
 
 type Props = {
+  tabs: TabItem[];
   activeTab: number;
   onTabChange: (index: number) => void;
   onCancel: () => void;
 };
 
-export const Header: FC<Props> = ({ activeTab, onTabChange, onCancel }) => {
+export const Header: FC<Props> = ({ tabs, activeTab, onTabChange, onCancel }) => {
   const loading = useAtomValue(loadingAtom);
 
   /** タブ */
@@ -60,7 +61,7 @@ export const Header: FC<Props> = ({ activeTab, onTabChange, onCancel }) => {
         scrollButtons="auto"
         aria-label="scrollable-auto-tabs"
       >
-        {FormTabs.map((tab, index) => (
+        {tabs.map((tab, index) => (
           <Tab label={tab.label} key={index} {...getTabA11yProps(index)} />
         ))}
       </Tabs>
