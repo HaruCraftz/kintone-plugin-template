@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const SaveButton: FC<Props> = memo(function SaveButton({ loading }) {
-  const { isDirty, isValid, isSubmitting } = useFormState();
+  const { isDirty, isSubmitting } = useFormState();
 
   return (
     <Button
@@ -16,7 +16,7 @@ export const SaveButton: FC<Props> = memo(function SaveButton({ loading }) {
       variant="contained"
       color="primary"
       startIcon={loading ? <CircularProgress color="inherit" size={18} /> : <SaveIcon />}
-      disabled={loading || !isDirty || !isValid || isSubmitting}
+      disabled={loading || !isDirty || isSubmitting}
     >
       設定を保存
     </Button>
