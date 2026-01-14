@@ -12,7 +12,15 @@ export const Form: FC<Props> = ({ tabs }) => {
   const activeTabIndex = useAtomValue(activeTabIndexAtom);
 
   return (
-    <Box sx={{ gridArea: 'content' }}>
+    <Box
+      sx={{
+        gridArea: 'content',
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        bgcolor: 'background.paper',
+      }}
+    >
       {tabs.map((tab, index) => (
         <Box
           key={index}
@@ -20,7 +28,12 @@ export const Form: FC<Props> = ({ tabs }) => {
           hidden={activeTabIndex !== index}
           id={`plugin-tabpanel-${index}`}
           aria-labelledby={`plugin-tab-${index}`}
-          sx={{ py: 3 }}
+          sx={{
+            p: 4,
+            flexGrow: 1,
+            display: activeTabIndex === index ? 'flex' : 'none',
+            flexDirection: 'column',
+          }}
         >
           {activeTabIndex === index && tab.content}
         </Box>

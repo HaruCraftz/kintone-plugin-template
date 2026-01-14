@@ -33,7 +33,7 @@ export const WaveAnimation: FC = () => (
 export const WaveLoader: FC<Props> = ({ label = '読み込み中...', sx }) => (
   <Box
     sx={{
-      minHeight: '400px',
+      minHeight: 'calc(100vh - 200px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',

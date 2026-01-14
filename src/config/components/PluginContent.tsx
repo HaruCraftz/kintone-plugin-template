@@ -48,7 +48,7 @@ const PluginContentForm: FC = () => {
     <Box
       component="form"
       onSubmit={handleFormSubmit}
-      sx={{ height: '100%', display: 'flex', flexDirection: 'column', flexGrow: 1 }}
+      sx={{ minHeight: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}
     >
       <Header
         tabs={FormTabs}
