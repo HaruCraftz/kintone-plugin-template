@@ -10,8 +10,6 @@ export const useUnsavedChanges = (isDirty: boolean) => {
       if (isDirty) {
         // 標準的なブラウザでの警告表示
         event.preventDefault();
-        // Chromeなどの特定のブラウザで警告を出すために必要
-        event.returnValue = '変更が保存されない可能性があります。';
       }
     };
 
