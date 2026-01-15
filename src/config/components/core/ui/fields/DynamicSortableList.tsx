@@ -63,10 +63,10 @@ export function DynamicSortableList<T extends { id: string }>({
         onClick={() => onAdd()}
         sx={{
           mt: 1,
+          py: 1,
           borderStyle: 'dashed',
           width: '100%',
           justifyContent: 'center',
-          py: 1,
         }}
       >
         {addButtonLabel}

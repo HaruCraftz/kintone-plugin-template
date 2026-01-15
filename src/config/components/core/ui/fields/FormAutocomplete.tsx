@@ -50,7 +50,11 @@ export const FormAutocomplete: FC<Props> = ({
                 key={key}
                 component="li"
                 {...rest}
-                sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start !important',
+                }}
               >
                 <Typography variant="caption" color="text.secondary" sx={{ fontSize: '10px' }}>
                   コード: {option.code}

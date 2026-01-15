@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { AdvancedSettingsSection } from '@/config/components/features/AdvancedSettingsSection';
+import { AdvancedSettings } from '@/config/components/features/AdvancedSettings';
 import { FieldMappingSection } from '@/config/components/features/FieldMappingSection';
 
 export type TabItem = {
@@ -14,6 +14,6 @@ export const FormTabs: TabItem[] = [
   },
   {
     label: '詳細設定',
-    content: <AdvancedSettingsSection />,
+    content: <AdvancedSettings />,
   },
 ];

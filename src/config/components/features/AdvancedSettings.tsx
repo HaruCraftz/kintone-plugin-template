@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { FormSection, FormTitle, FormDescription } from '@/config/components/core/ui/form';
 import { FormSwitch } from '@/config/components/core/ui/fields/FormSwitch';
 
-export const AdvancedSettingsSection: FC = () => {
+export const AdvancedSettings: FC = () => {
   return (
     <FormSection>
       <FormTitle>レコード保存時の設定</FormTitle>
