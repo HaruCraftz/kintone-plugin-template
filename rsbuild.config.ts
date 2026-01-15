@@ -16,6 +16,9 @@ export default defineConfig({
     chunkSplit: { strategy: 'all-in-one' }, // Disable chunk splitting
   },
   output: {
+    sourceMap: {
+      js: process.env.NODE_ENV === 'development' ? 'source-map' : false,
+    },
     distPath: {
       root: 'lib',
       html: './',
