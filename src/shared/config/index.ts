@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import {
   LATEST_PLUGIN_VERSION,
   PluginConfigSchema,
@@ -6,7 +7,7 @@ import {
   type AnyPluginConfig,
 } from './schema';
 import { PLUGIN_ID } from '@/shared/lib/kintone';
-import { nanoid } from 'nanoid';
+import { logger } from '@/shared/lib/logger';
 
 export * from './schema';
 
@@ -72,7 +73,7 @@ export const restoreConfig = (): PluginConfig => {
     // 新しい設定に変換
     return PluginConfigSchema.parse(migrateConfig(parsed as AnyPluginConfig));
   } catch (error) {
-    console.error('[Plugin] 設定の復元に失敗しました。', error);
+    logger.error('設定の復元に失敗しました。', error);
     return createConfig();
   }
 };

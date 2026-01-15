@@ -3,7 +3,10 @@ import { useSetAtom } from 'jotai';
 import { useSnackbar } from 'notistack';
 import { storeConfig, type PluginConfig } from '@/shared/config';
 import { loadingAtom } from '@/config/states/plugin';
+import { PluginLogger } from '@/shared/lib/logger';
 import { useSyncPluginConfig } from './useSyncPluginConfig';
+
+const logger = new PluginLogger('Config');
 
 type UsePluginSubmitProps = {
   onSuccess?: () => void;
@@ -21,8 +24,13 @@ export const usePluginSubmit = ({ onSuccess, onError, successAction }: UsePlugin
       try {
         setLoading(true);
 
+        logger.group('kintone Plugin Config Save');
+        logger.log('Saving Data:', data);
+
         // kintoneへ保存
-        storeConfig(data, () => {});
+        storeConfig(data, () => {
+          logger.log('kintone.plugin.app.setConfig: Success');
+        });
 
         // 状態の同期更新 (Jotai & RHF)
         syncConfig(data);
@@ -32,12 +40,14 @@ export const usePluginSubmit = ({ onSuccess, onError, successAction }: UsePlugin
           action: successAction,
         });
 
+        logger.info('Save Process Completed Successfully');
         onSuccess?.();
       } catch (e) {
-        console.error(e);
+        logger.error('Save Process Failed:', e);
         enqueueSnackbar('保存に失敗しました。', { variant: 'error' });
         onError?.();
       } finally {
+        logger.groupEnd();
         setLoading(false);
       }
     },

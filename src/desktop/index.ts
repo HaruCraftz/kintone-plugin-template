@@ -1,5 +1,8 @@
 import { restoreConfig } from '@/shared/config';
 import { calculateAge } from '@/shared/lib/calculate-age';
+import { PluginLogger } from '@/shared/lib/logger';
+
+const logger = new PluginLogger('Desktop');
 
 /**
  * レコード画面表示時
@@ -11,10 +14,10 @@ kintone.events.on(
     const pluginConfig = restoreConfig();
 
     // デバッグ用ログ（開発者ツールのConsoleで確認）
-    console.group('[Plugin] レコード画面表示');
-    console.log('設定情報:', pluginConfig);
-    console.log('レコード:', record);
-    console.groupEnd();
+    logger.group('レコード画面表示');
+    logger.log('設定情報:', pluginConfig);
+    logger.log('レコード:', record);
+    logger.groupEnd();
 
     pluginConfig.conditions.forEach(({ srcFieldCode, destFieldCode }) => {
       const srcField = record[srcFieldCode];
@@ -39,17 +42,17 @@ kintone.events.on(
     const isUpdateOnSave = pluginConfig.advanced.isUpdateOnSave;
 
     // デバッグ用ログ（開発者ツールのConsoleで確認）
-    console.group('[Plugin] レコード保存');
-    console.log('設定情報:', pluginConfig);
-    console.log('isUpdateOnSave:', isUpdateOnSave);
-    console.log('レコード (保存前):', JSON.parse(JSON.stringify(record)));
+    logger.group('レコード保存');
+    logger.log('設定情報:', pluginConfig);
+    logger.log('isUpdateOnSave:', isUpdateOnSave);
+    logger.log('レコード (保存前):', JSON.parse(JSON.stringify(record)));
 
     pluginConfig.conditions.forEach(({ srcFieldCode, destFieldCode }, index) => {
       const srcField = record[srcFieldCode];
       const destField = record[destFieldCode];
-      const isInvalid = !srcFieldCode || !destFieldCode || !srcField || !destField;
+      const isInvalid = !srcField || !destField;
 
-      console.log(`条件[${index}]:`, {
+      logger.log(`条件[${index}]:`, {
         srcFieldCode,
         destFieldCode,
         isInvalid,
@@ -60,13 +63,13 @@ kintone.events.on(
       if (destField.value && !isUpdateOnSave) return;
 
       const age = calculateAge(srcField.value);
-      console.log(`条件[${index}] 計算結果:`, { 入力: srcField.value, 年齢: age });
+      logger.log(`条件[${index}] 計算結果:`, { 入力: srcField.value, 年齢: age });
 
       destField.value = age;
     });
 
-    console.log('レコード (保存後):', record);
-    console.groupEnd();
+    logger.log('レコード (保存後):', record);
+    logger.groupEnd();
 
     return event;
   }
