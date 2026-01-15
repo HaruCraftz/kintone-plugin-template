@@ -2,14 +2,12 @@ import type { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Autocomplete, Box, TextField, Typography } from '@mui/material';
 import type { SxProps, Theme } from '@mui/material';
-import { useAppFields } from '@/shared/hooks/useAppFields';
-import type { FieldType } from '@/types/kintone';
 
 type Props = {
   name: string;
   label: string;
   placeholder?: string;
-  typeFilter?: FieldType[];
+  options: Array<{ label: string; code: string }>;
   shouldShowOption?: (field: { label: string; code: string }) => boolean;
   sx?: SxProps<Theme>;
 };
@@ -18,14 +16,13 @@ export const FormAutocomplete: FC<Props> = ({
   name,
   label,
   placeholder,
-  typeFilter,
+  options,
   shouldShowOption,
   sx,
 }) => {
   const { control } = useFormContext();
-  const { fields: fieldOptions } = useAppFields(typeFilter);
-  // fieldOptionsをフィルタリング
-  const filteredOptions = shouldShowOption ? fieldOptions.filter(shouldShowOption) : fieldOptions;
+  // optionsをフィルタリング
+  const filteredOptions = shouldShowOption ? options.filter(shouldShowOption) : options;
 
   return (
     <Controller

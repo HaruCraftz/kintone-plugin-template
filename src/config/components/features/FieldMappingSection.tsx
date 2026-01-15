@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { Stack, Box } from '@mui/material';
 import { type PluginConfig, getNewCondition } from '@/shared/config';
+import { useAppFields } from '@/shared/hooks/useAppFields';
 import { FormSection, FormTitle, FormDescription } from '@/config/components/core/ui/form';
 import { DynamicSortableList } from '@/config/components/core/ui/fields/DynamicSortableList';
 import { FormAutocomplete } from '@/config/components/core/ui/fields/FormAutocomplete';
@@ -9,6 +10,10 @@ import { useDuplicateCheck } from '@/config/hooks/useDuplicateCheck';
 
 const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
   const { isDuplicate } = useDuplicateCheck(index, 'conditions');
+
+  // 選択肢を取得
+  const { fields: dateFields } = useAppFields(['DATE']);
+  const { fields: ageFields } = useAppFields(['SINGLE_LINE_TEXT']);
 
   return (
     <Stack
@@ -21,7 +26,7 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
         name={`conditions.${index}.srcFieldCode`}
         label="生年月日フィールド"
         placeholder="フィールドを選択してください"
-        typeFilter={['DATE']}
+        options={dateFields}
         shouldShowOption={(field) => !isDuplicate(field.code, 'srcFieldCode')}
         sx={{ flex: 1, minWidth: 0 }}
       />
@@ -29,7 +34,7 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
         name={`conditions.${index}.destFieldCode`}
         label="年齢フィールド"
         placeholder="フィールドを選択してください"
-        typeFilter={['SINGLE_LINE_TEXT']}
+        options={ageFields}
         shouldShowOption={(field) => !isDuplicate(field.code, 'destFieldCode')}
         sx={{ flex: 1, minWidth: 0 }}
       />
