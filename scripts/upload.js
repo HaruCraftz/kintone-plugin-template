@@ -8,6 +8,10 @@ async function main() {
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const rootDir = path.resolve(__dirname, '..');
   const pluginPath = path.join(rootDir, 'dist', 'plugin.zip');
+  const distPath = path.join(rootDir, 'dist');
+
+  const args = process.argv.slice(2);
+  const isWatch = args.includes('--watch');
 
   const requiredEnvVars = ['KINTONE_BASE_URL', 'KINTONE_USERNAME', 'KINTONE_PASSWORD'];
 
@@ -15,14 +19,32 @@ async function main() {
     // 検証
     const missingEnvVars = requiredEnvVars.filter((name) => !process.env[name]);
     if (missingEnvVars.length > 0) {
-      throw new Error(`Missing required environment variables: ${missingEnvVars.join(', ')}`);
+      throw new Error(`環境変数が不足しています: ${missingEnvVars.join(', ')}`);
+    }
+
+    if (isWatch) {
+      console.log(`👀 Watching for changes in dist directory...`);
+      const uploaderArgs = ['--watch', distPath];
+
+      const uploaderProcess = spawn('kintone-plugin-uploader', uploaderArgs, { shell: true });
+      uploaderProcess.stdout.on('data', (data) => process.stdout.write(data.toString()));
+      uploaderProcess.stderr.on('data', (data) => process.stderr.write(data.toString()));
+
+      return new Promise((_, reject) => {
+        uploaderProcess.on('error', reject);
+        uploaderProcess.on('close', (code) => {
+          if (code !== 0) reject(new Error(`Uploader exited with code ${code}`));
+        });
+      });
     }
 
     if (!fs.existsSync(pluginPath)) {
-      throw new Error(`Plugin file not found: ${pluginPath}`);
+      throw new Error(
+        `プラグインファイルが見つかりません: ${pluginPath}\n先に 'npm run build' を実行してください。`
+      );
     }
 
-    console.log(`🚀 Uploading new plugin...`);
+    console.log(`🚀 Uploading plugin...`);
 
     // kintone-plugin-uploader の実行
     await new Promise((resolve, reject) => {
@@ -41,6 +63,7 @@ async function main() {
     console.error(`Error: ${error.message}`);
     process.exit(1);
   }
+  return Promise.resolve();
 }
 
 main();
