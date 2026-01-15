@@ -3,8 +3,8 @@ import { z } from 'zod';
 /** Version 1 */
 export const PluginConditionSchemaV1 = z.object({
   id: z.string(), // 各行に一意のIDを付与
-  srcFieldCode: z.string().min(1, { message: '選択必須です' }), // 参照先フィールドコード
-  destFieldCode: z.string().min(1, { message: '選択必須です' }), // 更新先フィールドコード
+  srcFieldCode: z.string(), // 参照先フィールドコード
+  destFieldCode: z.string(), // 更新先フィールドコード
 });
 
 export const PluginConfigSchemaV1 = z.object({
