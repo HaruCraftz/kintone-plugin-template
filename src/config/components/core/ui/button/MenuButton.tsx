@@ -1,9 +1,10 @@
 import { type FC, type MouseEvent, type ReactNode, memo, useState } from 'react';
+import { useAtomValue } from 'jotai';
 import { IconButton, Menu } from '@mui/material';
 import { MoreVert } from '@mui/icons-material';
+import { loadingAtom } from '@/config/states/plugin';
 
 type Props = {
-  loading?: boolean;
   children?: ReactNode;
   buttonId?: string;
 };
@@ -11,10 +12,10 @@ type Props = {
 const DEFAULT_BUTTON_ID = 'generic-menu-button';
 
 export const MenuButton: FC<Props> = memo(function MenuButton({
-  loading,
   children,
   buttonId = DEFAULT_BUTTON_ID,
 }) {
+  const loading = useAtomValue(loadingAtom);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 

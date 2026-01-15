@@ -1,13 +1,16 @@
 import { type FC, memo } from 'react';
 import { Button, CircularProgress } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useAtomValue } from 'jotai';
+import { loadingAtom } from '@/config/states/plugin';
 
 type Props = {
-  loading: boolean;
   onClick: () => void;
 };
 
-export const CancelButton: FC<Props> = memo(function CancelButton({ loading, onClick }) {
+export const CancelButton: FC<Props> = memo(function CancelButton({ onClick }) {
+  const loading = useAtomValue(loadingAtom);
+
   return (
     <Button
       variant="contained"

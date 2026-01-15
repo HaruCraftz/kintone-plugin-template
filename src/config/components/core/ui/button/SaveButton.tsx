@@ -1,13 +1,12 @@
 import { type FC, memo } from 'react';
+import { useAtomValue } from 'jotai';
+import { useFormState } from 'react-hook-form';
 import { Button, CircularProgress } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
-import { useFormState } from 'react-hook-form';
+import { loadingAtom } from '@/config/states/plugin';
 
-type Props = {
-  loading: boolean;
-};
-
-export const SaveButton: FC<Props> = memo(function SaveButton({ loading }) {
+export const SaveButton: FC = memo(function SaveButton() {
+  const loading = useAtomValue(loadingAtom);
   const { isDirty, isSubmitting } = useFormState();
 
   return (

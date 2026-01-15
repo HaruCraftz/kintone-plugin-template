@@ -1,7 +1,5 @@
 import { type FC } from 'react';
-import { useAtomValue } from 'jotai';
 import { Box, Tabs, Tab, Stack } from '@mui/material';
-import { loadingAtom } from '@/config/states/plugin';
 import { type TabItem } from '@/config/components/features/FormTabs';
 import { SaveButton } from '@/config/components/core/ui/button/SaveButton';
 import { CancelButton } from '@/config/components/core/ui/button/CancelButton';
@@ -16,8 +14,6 @@ type Props = {
 };
 
 export const Header: FC<Props> = ({ tabs, activeTab, onTabChange, onCancel }) => {
-  const loading = useAtomValue(loadingAtom);
-
   /** タブ */
   const handleTabChange = (_: React.SyntheticEvent, index: number) => {
     onTabChange(index);
@@ -68,9 +64,9 @@ export const Header: FC<Props> = ({ tabs, activeTab, onTabChange, onCancel }) =>
 
       {/* 右側コンテンツ：アクションボタン群 */}
       <Stack direction="row" alignItems="center" spacing={2}>
-        <SaveButton loading={loading} />
-        <CancelButton loading={loading} onClick={onCancel} />
-        <MenuButton loading={loading}>
+        <SaveButton />
+        <CancelButton onClick={onCancel} />
+        <MenuButton>
           <ResetMenuItem />
         </MenuButton>
       </Stack>
