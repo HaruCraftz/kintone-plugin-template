@@ -17,7 +17,7 @@ export default defineConfig({
   },
   output: {
     sourceMap: {
-      js: process.env.NODE_ENV === 'development' ? 'source-map' : false,
+      js: process.env.NODE_ENV === 'development' ? 'eval-source-map' : false,
     },
     distPath: {
       root: 'lib',
