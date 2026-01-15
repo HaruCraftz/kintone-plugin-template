@@ -9,7 +9,6 @@ import { type PluginConfig } from '@/shared/config';
 import { Header } from '@/config/components/core/layout/Header';
 import { Form } from './core/layout/Form';
 import { FormTabs } from '@/config/components/features/FormTabs';
-import { ErrorBomb } from '../../shared/components/ErrorBomb';
 
 /**
  * 実際のフォーム内容とロジックを管理する内部コンポーネント
@@ -50,9 +49,6 @@ const PluginContentForm: FC = () => {
       onSubmit={handleFormSubmit}
       sx={{ minHeight: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}
     >
-      {/* 動作確認が終わったら削除してください */}
-      <ErrorBomb />
-
       <Header
         tabs={FormTabs}
         activeTab={activeTab}
