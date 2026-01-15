@@ -29,7 +29,7 @@ export const Form: FC<Props> = ({ tabs }) => {
           id={`plugin-tabpanel-${index}`}
           aria-labelledby={`plugin-tab-${index}`}
           sx={{
-            p: 4,
+            p: 3,
             flexGrow: 1,
             display: activeTabIndex === index ? 'flex' : 'none',
             flexDirection: 'column',
