@@ -41,7 +41,8 @@ export const Header: FC<Props> = ({ tabs, activeTab, onTabChange, onCancel }) =>
         zIndex: 30,
 
         // スペーシング設定
-        px: 2, // 水平方向のパディング
+        pt: 1, // 上方向のパディング
+        pr: 2, // 水平方向のパディング
 
         // スタイル設定
         bgcolor: 'background.paper',
@@ -63,7 +64,7 @@ export const Header: FC<Props> = ({ tabs, activeTab, onTabChange, onCancel }) =>
       </Tabs>
 
       {/* 右側コンテンツ：アクションボタン群 */}
-      <Stack direction="row" alignItems="center" spacing={2}>
+      <Stack direction="row" alignItems="center" spacing={3} sx={{ mb: 1 }}>
         <SaveButton />
         <CancelButton onClick={onCancel} />
         <MenuButton>
