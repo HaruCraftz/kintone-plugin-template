@@ -14,7 +14,7 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
 
   // 選択肢を取得
   const { fields: dateFields } = useAppFields(['DATE']);
-  const { fields: ageFields } = useAppFields(['SINGLE_LINE_TEXT']);
+  const { fields: ageFields } = useAppFields(['SINGLE_LINE_TEXT', 'NUMBER']);
 
   return (
     <Stack
