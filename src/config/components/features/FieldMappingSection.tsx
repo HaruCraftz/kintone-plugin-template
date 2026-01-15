@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { Stack, Box } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { type PluginConfig, getNewCondition } from '@/shared/config';
 import { useAppFields } from '@/shared/hooks/useAppFields';
 import { FormSection, FormTitle, FormDescription } from '@/config/components/core/ui/form';
@@ -30,6 +31,7 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
         shouldShowOption={(field) => !isDuplicate(field.code, 'srcFieldCode')}
         sx={{ flex: 1, minWidth: 0 }}
       />
+      <ArrowForwardIosIcon sx={{ color: '#757575' }} />
       <FormAutocomplete
         name={`conditions.${index}.destFieldCode`}
         label="年齢フィールド"
