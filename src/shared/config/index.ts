@@ -24,10 +24,10 @@ export const getNewCondition = (): PluginCondition => ({
  */
 export const createConfig = (): PluginConfig => ({
   version: LATEST_PLUGIN_VERSION,
-  common: {
+  conditions: [getNewCondition()],
+  advanced: {
     isUpdateOnSave: false,
   },
-  conditions: [getNewCondition()],
 });
 
 /**

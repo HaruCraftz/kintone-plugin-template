@@ -29,7 +29,7 @@ kintone.events.on(
     const { record } = event;
 
     const pluginConfig = restoreConfig();
-    const isUpdateOnSave = pluginConfig.common.isUpdateOnSave;
+    const isUpdateOnSave = pluginConfig.advanced.isUpdateOnSave;
 
     pluginConfig.conditions.forEach(({ srcFieldCode, destFieldCode }) => {
       const srcFieldValue: string | undefined = record[srcFieldCode]?.value;

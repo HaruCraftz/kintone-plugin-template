@@ -9,10 +9,10 @@ export const PluginConditionSchemaV1 = z.object({
 
 export const PluginConfigSchemaV1 = z.object({
   version: z.literal(1),
-  common: z.object({
+  conditions: z.array(PluginConditionSchemaV1),
+  advanced: z.object({
     isUpdateOnSave: z.boolean(), // 保存時に自動更新
   }),
-  conditions: z.array(PluginConditionSchemaV1),
 });
 
 type PluginConfigV1 = z.infer<typeof PluginConfigSchemaV1>;
