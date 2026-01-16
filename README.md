@@ -1,4 +1,4 @@
-# kintone Plugin Simple Template
+# kintone Plugin Template
 
 MUI (Material UI)、Jotai、React Hook Form、Zod を使用した kintone プラグイン開発用のテンプレートです。
 Rsbuild（Rspack ベース）を採用し、高速なビルドと開発体験を提供します。
