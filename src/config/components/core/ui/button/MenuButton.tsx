@@ -31,17 +31,17 @@ export const MenuButton: FC<Props> = memo(function MenuButton({
     <>
       <IconButton
         id={buttonId}
-        size="small"
+        size='small'
         onClick={handleOpen}
         aria-controls={open ? 'menu-list' : undefined}
         aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
+        aria-haspopup='true'
         disabled={loading}
       >
         <MoreVert />
       </IconButton>
       <Menu
-        id="menu-list"
+        id='menu-list'
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}

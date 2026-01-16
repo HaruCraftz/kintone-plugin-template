@@ -13,10 +13,10 @@ export const CancelButton: FC<Props> = memo(function CancelButton({ onClick }) {
 
   return (
     <Button
-      variant="contained"
-      color="inherit"
+      variant='contained'
+      color='inherit'
       disabled={loading}
-      startIcon={loading ? <CircularProgress color="inherit" size={20} /> : <ExitToAppIcon />}
+      startIcon={loading ? <CircularProgress color='inherit' size={20} /> : <ExitToAppIcon />}
       onClick={onClick}
     >
       キャンセル

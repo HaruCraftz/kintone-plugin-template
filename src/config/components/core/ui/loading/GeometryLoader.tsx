@@ -50,7 +50,7 @@ export const GeometryLoader: FC<Props> = ({ label = '読み込み中...', sx }) 
     }}
   >
     <GeometricMorph />
-    <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 'medium' }}>
+    <Typography variant='body2' sx={{ color: 'text.secondary', fontWeight: 'medium' }}>
       {label}
     </Typography>
   </Box>

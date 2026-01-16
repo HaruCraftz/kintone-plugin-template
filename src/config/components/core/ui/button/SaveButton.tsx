@@ -11,10 +11,10 @@ export const SaveButton: FC = memo(function SaveButton() {
 
   return (
     <Button
-      type="submit"
-      variant="contained"
-      color="primary"
-      startIcon={loading ? <CircularProgress color="inherit" size={18} /> : <SaveIcon />}
+      type='submit'
+      variant='contained'
+      color='primary'
+      startIcon={loading ? <CircularProgress color='inherit' size={18} /> : <SaveIcon />}
       disabled={loading || !isDirty || isSubmitting}
     >
       設定を保存

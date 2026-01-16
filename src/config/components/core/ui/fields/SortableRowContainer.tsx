@@ -62,25 +62,25 @@ export const SortableRowContainer: FC<Props> = ({
           mt: '9px',
         }}
       >
-        <DragIndicatorIcon fontSize="small" />
+        <DragIndicatorIcon fontSize='small' />
       </Box>
 
       <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', minWidth: 0 }}>{children}</Box>
 
       <Box sx={{ display: 'flex', mt: '4px' }}>
-        <Tooltip title="下に新しい行を追加">
-          <IconButton size="small" onClick={() => onAdd(index + 1)}>
-            <AddIcon fontSize="small" />
+        <Tooltip title='下に新しい行を追加'>
+          <IconButton size='small' onClick={() => onAdd(index + 1)}>
+            <AddIcon fontSize='small' />
           </IconButton>
         </Tooltip>
-        <Tooltip title="この行を削除">
+        <Tooltip title='この行を削除'>
           <IconButton
-            size="small"
+            size='small'
             onClick={() => onDelete(index)}
             disabled={isDeleteDisabled}
-            color="error"
+            color='error'
           >
-            <DeleteIcon fontSize="small" />
+            <DeleteIcon fontSize='small' />
           </IconButton>
         </Tooltip>
       </Box>

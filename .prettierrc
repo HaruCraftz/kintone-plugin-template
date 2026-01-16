@@ -1,8 +1,10 @@
 {
-  "tabWidth": 2,
   "printWidth": 100,
+  "tabWidth": 2,
   "singleQuote": true,
-  "quoteProps": "preserve",
+  "jsxSingleQuote": true,
+  "quoteProps": "as-needed",
+  "arrowParens": "always",
   "trailingComma": "es5",
   "endOfLine": "lf"
 }

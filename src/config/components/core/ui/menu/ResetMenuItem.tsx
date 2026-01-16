@@ -17,7 +17,7 @@ export const ResetMenuItem: FC = () => {
     <>
       <MenuItem onClick={() => setOpen(true)}>
         <ListItemIcon>
-          <RestartAlt fontSize="small" />
+          <RestartAlt fontSize='small' />
         </ListItemIcon>
         <ListItemText>設定をリセット</ListItemText>
       </MenuItem>

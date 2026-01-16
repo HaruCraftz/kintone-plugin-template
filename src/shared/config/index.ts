@@ -16,8 +16,8 @@ export * from './schema';
  */
 export const getNewCondition = (): PluginCondition => ({
   id: nanoid(),
-  srcFieldCode: '',
-  destFieldCode: '',
+  fieldCode: '',
+  message: '',
 });
 
 /**

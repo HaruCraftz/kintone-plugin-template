@@ -28,7 +28,7 @@ export const Header: FC<Props> = ({ tabs, activeTab, onTabChange, onCancel }) =>
 
   return (
     <Box
-      component="header"
+      component='header'
       sx={{
         // レイアウト設定
         display: 'flex',
@@ -54,9 +54,9 @@ export const Header: FC<Props> = ({ tabs, activeTab, onTabChange, onCancel }) =>
       <Tabs
         value={activeTab}
         onChange={handleTabChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        aria-label="scrollable-auto-tabs"
+        variant='scrollable'
+        scrollButtons='auto'
+        aria-label='scrollable-auto-tabs'
       >
         {tabs.map((tab, index) => (
           <Tab label={tab.label} key={index} {...getTabA11yProps(index)} />
@@ -64,7 +64,7 @@ export const Header: FC<Props> = ({ tabs, activeTab, onTabChange, onCancel }) =>
       </Tabs>
 
       {/* 右側コンテンツ：アクションボタン群 */}
-      <Stack direction="row" alignItems="center" spacing={3} sx={{ mb: 1 }}>
+      <Stack direction='row' alignItems='center' spacing={3} sx={{ mb: 1 }}>
         <SaveButton />
         <CancelButton onClick={onCancel} />
         <MenuButton>

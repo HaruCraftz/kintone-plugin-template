@@ -58,7 +58,7 @@ export function DynamicSortableList<T extends { id: string }>({
         ))}
       </SortableContext>
       <Button
-        variant="outlined"
+        variant='outlined'
         startIcon={<AddIcon />}
         onClick={() => onAdd()}
         sx={{

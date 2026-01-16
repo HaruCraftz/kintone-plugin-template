@@ -20,7 +20,7 @@ export const FormSwitch: FC<Props> = ({ name, label, ...switchProps }) => {
           control={
             <Switch
               {...switchProps}
-              size="small"
+              size='small'
               checked={!!value}
               onChange={(e) => onChange(e.target.checked)}
             />

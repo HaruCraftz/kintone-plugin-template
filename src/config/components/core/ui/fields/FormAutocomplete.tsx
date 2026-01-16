@@ -45,7 +45,7 @@ export const FormAutocomplete: FC<Props> = ({
             return (
               <Box
                 key={key}
-                component="li"
+                component='li'
                 {...rest}
                 sx={{
                   display: 'flex',
@@ -53,10 +53,10 @@ export const FormAutocomplete: FC<Props> = ({
                   alignItems: 'flex-start !important',
                 }}
               >
-                <Typography variant="caption" color="text.secondary" sx={{ fontSize: '10px' }}>
+                <Typography variant='caption' color='text.secondary' sx={{ fontSize: '10px' }}>
                   コード: {option.code}
                 </Typography>
-                <Typography variant="body2">{option.label}</Typography>
+                <Typography variant='body2'>{option.label}</Typography>
               </Box>
             );
           }}
@@ -65,8 +65,8 @@ export const FormAutocomplete: FC<Props> = ({
               {...params}
               label={label}
               placeholder={placeholder}
-              variant="outlined"
-              color="primary"
+              variant='outlined'
+              color='primary'
               error={!!error}
               helperText={error?.message}
             />

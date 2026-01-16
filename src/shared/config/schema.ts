@@ -3,15 +3,15 @@ import { z } from 'zod';
 /** Version 1 */
 export const PluginConditionSchemaV1 = z.object({
   id: z.string(), // 各行に一意のIDを付与
-  srcFieldCode: z.string(), // 参照先フィールドコード
-  destFieldCode: z.string(), // 更新先フィールドコード
+  fieldCode: z.string(), // 対象フィールドコード
+  message: z.string(), // メッセージなどのテキスト設定
 });
 
 export const PluginConfigSchemaV1 = z.object({
   version: z.literal(1),
   conditions: z.array(PluginConditionSchemaV1),
   advanced: z.object({
-    isUpdateOnSave: z.boolean(), // 保存時に自動更新
+    isUpdateOnSave: z.boolean(), // 保存時に自動更新するかどうか
   }),
 });
 
@@ -29,7 +29,7 @@ export type AnyPluginConfig = PluginConfigV1; // | PluginConfigV2 | ...;
 export type PluginConfig = z.infer<typeof PluginConfigSchema>;
 export type PluginCondition = PluginConfig['conditions'][number];
 
-const TARGET_FIELDS: Array<keyof PluginCondition> = ['srcFieldCode', 'destFieldCode'];
+const TARGET_FIELDS: Array<keyof PluginCondition> = ['fieldCode'];
 
 /**
  * 動的な検証を含むスキーマを生成する
@@ -37,12 +37,15 @@ const TARGET_FIELDS: Array<keyof PluginCondition> = ['srcFieldCode', 'destFieldC
  */
 export const createConfigSchema = (fieldCodes: string[]) => {
   const fieldCodeSet = new Set(fieldCodes);
+
   return PluginConfigSchema.superRefine(({ conditions }, ctx) => {
     conditions.forEach((condition, index) => {
-      // 存在チェック
+      // 存在チェック（設定されているコードが現在のアプリに存在するか確認）
       TARGET_FIELDS.forEach((key) => {
-        const value = condition[key]; // 設定情報
-        if (value && !fieldCodeSet.has(value)) {
+        const fieldCode = condition[key];
+
+        // 値が設定されており、かつアプリのフィールドコード一覧に含まれていない場合
+        if (fieldCode && !fieldCodeSet.has(fieldCode)) {
           ctx.addIssue({
             code: 'custom',
             message: '指定されたフィールドがアプリ内に見つかりません',

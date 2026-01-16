@@ -7,14 +7,14 @@ import { useAppFields } from '@/shared/hooks/useAppFields';
 import { FormSection, FormTitle, FormDescription } from '@/config/components/core/ui/form';
 import { DynamicSortableList } from '@/config/components/core/ui/fields/DynamicSortableList';
 import { FormAutocomplete } from '@/config/components/core/ui/fields/FormAutocomplete';
+import { FormTextField } from '@/config/components/core/ui/fields/FormTextField';
 import { useDuplicateCheck } from '@/config/hooks/useDuplicateCheck';
 
-const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
+const SettingRow: FC<{ index: number }> = ({ index }) => {
   const { isDuplicate } = useDuplicateCheck(index, 'conditions');
 
-  // 選択肢を取得
-  const { fields: dateFields } = useAppFields(['DATE']);
-  const { fields: ageFields } = useAppFields(['SINGLE_LINE_TEXT', 'NUMBER']);
+  // アプリ内の全フィールドを選択候補にする
+  const { fields } = useAppFields();
 
   return (
     <Stack
@@ -24,35 +24,33 @@ const FieldMappingRow: FC<{ index: number }> = ({ index }) => {
       sx={{ width: '100%' }}
     >
       <FormAutocomplete
-        name={`conditions.${index}.srcFieldCode`}
-        label="生年月日フィールド"
-        placeholder="フィールドを選択してください"
-        options={dateFields}
-        shouldShowOption={(field) => !isDuplicate(field.code, 'srcFieldCode')}
+        name={`conditions.${index}.fieldCode`}
+        label='対象フィールド'
+        placeholder='フィールドを選択してください'
+        options={fields}
+        shouldShowOption={(field) => !isDuplicate(field.code, 'fieldCode')}
         sx={{ flex: 1, minWidth: 0 }}
       />
-      <ArrowForwardIosIcon sx={{ color: '#757575' }} />
-      <FormAutocomplete
-        name={`conditions.${index}.destFieldCode`}
-        label="年齢フィールド"
-        placeholder="フィールドを選択してください"
-        options={ageFields}
-        shouldShowOption={(field) => !isDuplicate(field.code, 'destFieldCode')}
+      <ArrowForwardIosIcon sx={{ color: '#757575', display: { xs: 'none', sm: 'block' } }} />
+      <FormTextField
+        name={`conditions.${index}.message`}
+        label='メッセージ'
+        placeholder='任意のテキストを入力してください'
         sx={{ flex: 1, minWidth: 0 }}
       />
     </Stack>
   );
 };
 
-export const FieldMappingSection: FC = () => {
+export const SettingsForm: FC = () => {
   const { control } = useFormContext<PluginConfig>();
   const { fields, append, remove, insert, move } = useFieldArray({ control, name: 'conditions' });
 
   return (
     <FormSection>
-      <FormTitle>フィールドの設定</FormTitle>
+      <FormTitle>プラグイン設定</FormTitle>
       <FormDescription last>
-        生年月日フィールドと年齢を表示するフィールドを選択してください。
+        対象フィールドと、それに関連付けるメッセージを設定してください。
       </FormDescription>
       <Box sx={{ maxWidth: 840 }}>
         <DynamicSortableList
@@ -63,8 +61,8 @@ export const FieldMappingSection: FC = () => {
             const row = getNewCondition();
             index !== undefined ? insert(index, row) : append(row);
           }}
-          addButtonLabel="新しい設定を追加"
-          renderItem={(_, index) => <FieldMappingRow index={index} />}
+          addButtonLabel='新しい設定を追加'
+          renderItem={(_, index) => <SettingRow index={index} />}
         />
       </Box>
     </FormSection>

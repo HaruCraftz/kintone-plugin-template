@@ -29,10 +29,10 @@ const PluginContentForm: FC = () => {
   const { onSubmit } = usePluginSubmit({
     successAction: (
       <Button
-        type="button"
-        color="inherit"
-        size="small"
-        variant="outlined"
+        type='button'
+        color='inherit'
+        size='small'
+        variant='outlined'
         onClick={handleNavigateBack}
       >
         プラグイン一覧に戻る
@@ -45,7 +45,7 @@ const PluginContentForm: FC = () => {
 
   return (
     <Box
-      component="form"
+      component='form'
       onSubmit={handleFormSubmit}
       sx={{ minHeight: 'calc(100vh - 200px)', display: 'flex', flexDirection: 'column' }}
     >

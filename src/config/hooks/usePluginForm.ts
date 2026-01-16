@@ -21,7 +21,7 @@ export const usePluginForm = () => {
   const methods = useForm<PluginConfig>({
     resolver: zodResolver(schema),
     defaultValues: config,
-    mode: 'onChange',
+    mode: 'all',
   });
 
   // 未保存時のブラウザ離脱防止

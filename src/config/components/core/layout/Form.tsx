@@ -24,7 +24,7 @@ export const Form: FC<Props> = ({ tabs }) => {
       {tabs.map((tab, index) => (
         <Box
           key={index}
-          role="tabpanel"
+          role='tabpanel'
           hidden={activeTabIndex !== index}
           id={`plugin-tabpanel-${index}`}
           aria-labelledby={`plugin-tab-${index}`}
